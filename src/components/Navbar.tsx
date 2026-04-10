@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const links = ["Home", "About", "Work", "Principles", "Writing", "Contact"];
+const links = ["Home", "About", "Work", "Principles", "Passions", "Writing", "Contact"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollTo = (id: string) => {
     setOpen(false);
+    if (location.pathname !== "/") {
+      navigate(`/#${id.toLowerCase()}`);
+      return;
+    }
     const el = document.getElementById(id.toLowerCase());
     el?.scrollIntoView({ behavior: "smooth" });
   };
@@ -19,7 +26,6 @@ const Navbar = () => {
           Ombachi Enock
         </button>
 
-        {/* Desktop */}
         <ul className="hidden md:flex gap-8">
           {links.map((l) => (
             <li key={l}>
@@ -33,13 +39,11 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden bg-background border-b border-border">
           <ul className="section-container py-4 space-y-3">

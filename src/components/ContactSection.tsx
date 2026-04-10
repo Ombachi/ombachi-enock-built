@@ -7,7 +7,6 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, wire to an API
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
     setForm({ name: "", email: "", message: "" });
@@ -25,20 +24,19 @@ const ContactSection = () => {
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Links */}
           <div className="space-y-4 animate-on-scroll">
             <a
-              href="mailto:ombachienock@gmail.com"
+              href="mailto:ombachienock5@outlook.com"
               className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
             >
               <Mail size={20} className="text-secondary" />
               <div>
                 <p className="font-medium text-foreground text-sm">Email</p>
-                <p className="text-muted-foreground text-xs">ombachienock@gmail.com</p>
+                <p className="text-muted-foreground text-xs">ombachienock5@outlook.com</p>
               </div>
             </a>
             <a
-              href="https://linkedin.com/in/ombachienock"
+              href="https://www.linkedin.com/in/ombachi-enock"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
@@ -46,11 +44,11 @@ const ContactSection = () => {
               <Linkedin size={20} className="text-secondary" />
               <div>
                 <p className="font-medium text-foreground text-sm">LinkedIn</p>
-                <p className="text-muted-foreground text-xs">linkedin.com/in/ombachienock</p>
+                <p className="text-muted-foreground text-xs">linkedin.com/in/ombachi-enock</p>
               </div>
             </a>
             <a
-              href="https://wa.me/254700000000"
+              href="https://wa.me/254729304337"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
@@ -58,7 +56,7 @@ const ContactSection = () => {
               <MessageCircle size={20} className="text-secondary" />
               <div>
                 <p className="font-medium text-foreground text-sm">WhatsApp</p>
-                <p className="text-muted-foreground text-xs">Send a message</p>
+                <p className="text-muted-foreground text-xs">+254 729 304 337</p>
               </div>
             </a>
             <button className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors w-full text-left">
@@ -70,7 +68,6 @@ const ContactSection = () => {
             </button>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4 animate-on-scroll">
             <div>
               <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">Name</label>
