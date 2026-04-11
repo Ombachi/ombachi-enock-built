@@ -72,6 +72,7 @@ const ContactSection = () => {
               <div>
                 <p className="font-medium text-foreground text-sm">X (Twitter)</p>
                 <p className="text-muted-foreground text-xs">@ombachi_enock</p>
+              </div>
             </a>
             <a
               href="https://wa.me/254729304337"
