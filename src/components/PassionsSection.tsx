@@ -93,10 +93,10 @@ const PassionsSection = () => {
           {passions.map((p) => (
             <div
               key={p.name}
-              className="flip-card aspect-square"
+              className={`flip-card aspect-square ${flipped === p.name ? "flipped" : ""}`}
               onClick={() => setFlipped(flipped === p.name ? null : p.name)}
             >
-              <div className={`flip-card-inner ${flipped === p.name ? "flipped" : ""}`}
+              <div className="flip-card-inner"
                    style={{ transformStyle: "preserve-3d" }}>
                 {/* Front */}
                 <div className="flip-card-front rounded-2xl overflow-hidden shadow-md">
