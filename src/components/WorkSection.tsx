@@ -22,6 +22,7 @@ const projects: Project[] = [
     title: "EcoSwarm",
     summary: "Climate-health innovation linking environmental data to diagnostic preparedness.",
     icon: Leaf,
+    link: "https://ecoswarm.co.ke",
   },
   {
     slug: "mount-kenya-university",

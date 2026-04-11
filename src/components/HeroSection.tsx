@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { ArrowDown, Briefcase, Mail } from "lucide-react";
 import heroFlip1 from "@/assets/hero-flip-1.jpg";
 import heroFlip2 from "@/assets/hero-flip-2.jpg";
 import heroFlip3 from "@/assets/hero-flip-3.jpg";
@@ -12,8 +11,22 @@ const flipImages = [
   { src: heroFlip4, alt: "Community gathering — inspiration" },
 ];
 
+const coreValues = [
+  { word: "Integrity", color: "text-emerald-400" },
+  { word: "Equity", color: "text-sky-400" },
+  { word: "Dignity", color: "text-amber-400" },
+  { word: "Love", color: "text-rose-400" },
+  { word: "Kindness", color: "text-violet-400" },
+  { word: "Excellence", color: "text-teal-300" },
+  { word: "Honor", color: "text-orange-400" },
+  { word: "Hope", color: "text-cyan-300" },
+  { word: "Justice", color: "text-pink-400" },
+  { word: "Courage", color: "text-lime-300" },
+];
+
 const HeroSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [visibleValues, setVisibleValues] = useState<number[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,9 +35,13 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  // Stagger core values appearance
+  useEffect(() => {
+    const timers = coreValues.map((_, i) =>
+      setTimeout(() => setVisibleValues((prev) => [...prev, i]), 200 + i * 300)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
@@ -38,35 +55,27 @@ const HeroSection = () => {
           <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
         </div>
       ))}
-      <div className="absolute inset-0 bg-primary/80" />
+      <div className="absolute inset-0 bg-primary/85" />
 
-      <div className="section-container relative z-10 py-32">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-primary-foreground leading-[1.1] mb-6 animate-fade-up">
-            Ombachi Enock
-          </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 leading-relaxed mb-8 max-w-xl animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Building stronger diagnostic systems, advancing climate-resilient healthcare, and mentoring the next generation of laboratory professionals across East Africa.
-          </p>
-
-          <div className="flex flex-wrap gap-4 mb-12 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <button
-              onClick={() => scrollTo("work")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-card text-foreground font-medium rounded-lg hover:shadow-lg transition-all"
+      <div className="section-container relative z-10 py-32 flex flex-col items-center text-center">
+        {/* Animated core values */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-5 max-w-3xl">
+          {coreValues.map((v, i) => (
+            <span
+              key={v.word}
+              className={`font-serif font-bold transition-all duration-700 ease-out ${v.color} ${
+                visibleValues.includes(i)
+                  ? "opacity-100 translate-y-0 scale-100"
+                  : "opacity-0 translate-y-8 scale-75"
+              }`}
+              style={{
+                fontSize: `clamp(1.5rem, ${2 + (i % 3) * 0.8}vw, ${2.5 + (i % 3) * 0.6}rem)`,
+                textShadow: "0 2px 20px rgba(0,0,0,0.3)",
+              }}
             >
-              <Briefcase size={18} /> View Work
-            </button>
-            <button
-              onClick={() => scrollTo("contact")}
-              className="inline-flex items-center gap-2 px-6 py-3 border border-primary-foreground/30 text-primary-foreground font-medium rounded-lg hover:bg-primary-foreground/10 transition-all"
-            >
-              <Mail size={18} /> Contact Me
-            </button>
-          </div>
-
-          <blockquote className="border-l-2 border-secondary pl-4 text-primary-foreground/70 italic text-sm max-w-md animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            "The strongest health systems are built at the intersection of science, technology, and human commitment."
-          </blockquote>
+              {v.word}
+            </span>
+          ))}
         </div>
 
         {/* Image indicators */}
@@ -79,13 +88,6 @@ const HeroSection = () => {
             />
           ))}
         </div>
-
-        <button
-          onClick={() => scrollTo("about")}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-primary-foreground/50 animate-bounce"
-        >
-          <ArrowDown size={24} />
-        </button>
       </div>
     </section>
   );
