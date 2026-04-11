@@ -1,15 +1,30 @@
 import { useState } from "react";
 import { Mail, Linkedin, MessageCircle, Download, Send } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setForm({ name: "", email: "", message: "" });
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("Contact form error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -107,9 +122,10 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity"
+              disabled={loading}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              <Send size={16} /> Send Message
+              <Send size={16} /> {loading ? "Sending..." : "Send Message"}
             </button>
             {submitted && (
               <p className="text-secondary text-sm font-medium">Thank you! I'll get back to you soon.</p>
