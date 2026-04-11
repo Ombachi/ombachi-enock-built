@@ -63,6 +63,18 @@ const ContactSection = () => {
               </div>
             </a>
             <a
+              href="https://x.com/ombachi_enock"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
+            >
+              <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <div>
+                <p className="font-medium text-foreground text-sm">X (Twitter)</p>
+                <p className="text-muted-foreground text-xs">@ombachi_enock</p>
+              </div>
+            </a>
+            <a
               href="https://wa.me/254729304337"
               target="_blank"
               rel="noopener noreferrer"

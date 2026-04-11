@@ -26,6 +26,7 @@ const projectsData: Record<string, {
   "ecoswarm": {
     title: "EcoSwarm",
     icon: Leaf,
+    link: "https://ecoswarm.co.ke",
     problem: "Climate change is shifting disease patterns, but health systems aren't adapting their diagnostic capacity accordingly.",
     role: "Co-creator — research, systems architecture, and climate-health integration.",
     tools: "Environmental monitoring, epidemiological data, AI-driven dashboards, predictive analytics.",
@@ -76,7 +77,6 @@ const ProjectPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero */}
       <section className="pt-28 pb-16 bg-primary">
         <div className="section-container">
           <button
@@ -104,7 +104,6 @@ const ProjectPage = () => {
         </div>
       </section>
 
-      {/* Content */}
       <section className="section-padding">
         <div className="section-container">
           <p className="text-muted-foreground leading-relaxed text-lg mb-12 max-w-3xl">
@@ -112,22 +111,17 @@ const ProjectPage = () => {
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="font-semibold text-foreground text-xs uppercase tracking-wide mb-3 text-secondary">Problem</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.problem}</p>
-            </div>
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="font-semibold text-foreground text-xs uppercase tracking-wide mb-3 text-secondary">My Role</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.role}</p>
-            </div>
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="font-semibold text-foreground text-xs uppercase tracking-wide mb-3 text-secondary">Tools & Systems</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.tools}</p>
-            </div>
-            <div className="bg-card rounded-xl p-8 border border-border">
-              <h3 className="font-semibold text-foreground text-xs uppercase tracking-wide mb-3 text-secondary">Outcome</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.outcome}</p>
-            </div>
+            {[
+              { label: "Problem", text: project.problem },
+              { label: "My Role", text: project.role },
+              { label: "Tools & Systems", text: project.tools },
+              { label: "Outcome", text: project.outcome },
+            ].map((item) => (
+              <div key={item.label} className="bg-card rounded-xl p-8 border border-border">
+                <h3 className="font-semibold text-xs uppercase tracking-wide mb-3 text-secondary">{item.label}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.text}</p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-12 text-center">

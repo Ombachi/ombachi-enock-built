@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const links = ["Home", "About", "Work", "Principles", "Passions", "Writing", "Contact"];
 
@@ -26,22 +27,28 @@ const Navbar = () => {
           Ombachi Enock
         </button>
 
-        <ul className="hidden md:flex gap-8">
-          {links.map((l) => (
-            <li key={l}>
-              <button
-                onClick={() => scrollTo(l)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {l}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex gap-8">
+            {links.map((l) => (
+              <li key={l}>
+                <button
+                  onClick={() => scrollTo(l)}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {l}
+                </button>
+              </li>
+            ))}
+          </ul>
+          <DarkModeToggle />
+        </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <DarkModeToggle />
+          <button className="text-foreground" onClick={() => setOpen(!open)}>
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {open && (
