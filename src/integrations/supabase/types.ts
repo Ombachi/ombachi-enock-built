@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      article_comments: {
+        Row: {
+          article_slug: string
+          comment_text: string
+          commenter_name: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          article_slug: string
+          comment_text: string
+          commenter_name: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          article_slug?: string
+          comment_text?: string
+          commenter_name?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      article_likes: {
+        Row: {
+          article_slug: string
+          created_at: string
+          id: string
+          session_id: string
+        }
+        Insert: {
+          article_slug: string
+          created_at?: string
+          id?: string
+          session_id: string
+        }
+        Update: {
+          article_slug?: string
+          created_at?: string
+          id?: string
+          session_id?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
