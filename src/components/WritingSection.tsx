@@ -33,7 +33,7 @@ const articles = [
     excerpt: "How democratic systems evolve from the ground up — and what that means for governance, participation, and power.",
     tag: "Governance",
     date: "2024",
-    mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048929",
+    mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048729",
   },
   {
     slug: "emergent-logic-of-systems",
