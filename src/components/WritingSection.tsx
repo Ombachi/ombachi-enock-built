@@ -33,7 +33,7 @@ const articles = [
     excerpt: "How democratic systems evolve from the ground up — and what that means for governance, participation, and power.",
     tag: "Governance",
     date: "2024",
-    mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048929",
+    mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048729",
   },
   {
     slug: "emergent-logic-of-systems",
@@ -129,14 +129,8 @@ const WritingSection = () => {
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
           Thinking Out Loud
         </h2>
-        <p className="text-muted-foreground mb-4 max-w-xl animate-on-scroll">
+        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
           Short reflections on diagnostics, climate-health, leadership, and the systems that shape healthcare.
-        </p>
-        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll text-sm">
-          Author of <a href="https://medium.com/@litusoja" target="_blank" rel="noopener noreferrer" className="font-medium text-secondary hover:underline">Litu Musings</a> — a space for deeper thinking on health, science, and systems.
-          <a href="https://medium.com/@litusoja" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 ml-2 text-secondary hover:underline">
-            <ExternalLink size={12} /> Read more on Medium
-          </a>
         </p>
 
         <div className="space-y-4 animate-on-scroll">
@@ -226,6 +220,17 @@ const WritingSection = () => {
               )}
             </article>
           ))}
+        </div>
+
+        <div className="mt-8 text-center animate-on-scroll">
+          <a
+            href="https://medium.com/@litusoja"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-bold text-secondary hover:underline text-base"
+          >
+            <ExternalLink size={16} /> Read more on Litu Musings — Medium
+          </a>
         </div>
       </div>
     </section>
