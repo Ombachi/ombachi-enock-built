@@ -1,12 +1,17 @@
-import { Activity, Shield, Heart, BarChart3, Eye, Cpu } from "lucide-react";
+import { Compass, Network, TreePine, BookOpen, Globe, Heart, Award, GraduationCap, Cpu, Users, Map } from "lucide-react";
 
 const principles = [
-  { icon: Activity, title: "Evidence-Based Medicine", desc: "Clinical decisions grounded in validated research and quality data, not assumptions." },
-  { icon: Shield, title: "Quality Systems & Accreditation", desc: "Building labs that meet ISO 15189 and international standards from day one." },
-  { icon: Heart, title: "Preventive Over Reactive Care", desc: "Shifting resources upstream—catching problems before they become crises." },
-  { icon: BarChart3, title: "Decentralised Healthcare", desc: "Extending diagnostic capacity beyond urban centres to where people actually live." },
-  { icon: Eye, title: "Visual Learning & Informed Patients", desc: "Making complex health information accessible through clear, visual communication." },
-  { icon: Cpu, title: "Technology & AI in Health", desc: "Dashboards, LIS/EMR systems, virtual labs, and AI tools to modernise healthcare delivery." },
+  { icon: Compass, title: "First Principles", desc: "Breaking problems down to their fundamental truths and building solutions from the ground up." },
+  { icon: Network, title: "Systems Thinking", desc: "Understanding how interconnected parts create complex wholes — and designing interventions accordingly." },
+  { icon: TreePine, title: "Long-Term Stewardship", desc: "Building institutions and systems that outlast us, with patience and generational thinking." },
+  { icon: BookOpen, title: "Evidence-Based Practice", desc: "Every decision grounded in data, research, and validated methods — not assumption." },
+  { icon: Globe, title: "Decentralisation & Access", desc: "Extending quality services beyond urban centres to where communities actually live." },
+  { icon: Heart, title: "Human Dignity", desc: "Every system, every policy, every innovation must centre the worth and agency of the individual." },
+  { icon: Award, title: "Meritocracy", desc: "Rewarding competence, effort, and character — creating systems where excellence is recognised." },
+  { icon: GraduationCap, title: "Lifelong Learning", desc: "Staying curious, staying humble, and evolving with new knowledge and perspectives." },
+  { icon: Cpu, title: "Technology-Enabled Service", desc: "Leveraging AI, dashboards, and digital tools to modernise and scale healthcare delivery." },
+  { icon: Users, title: "Mentorship & Multiplication", desc: "Investing in people so they can invest in others — compounding impact across generations." },
+  { icon: Map, title: "Future Mapping", desc: "Anticipating trends, preparing for disruption, and designing systems for the world ahead." },
 ];
 
 const PrinciplesSection = () => (

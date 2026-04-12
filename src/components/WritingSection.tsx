@@ -4,36 +4,44 @@ import { supabase } from "@/integrations/supabase/client";
 
 const articles = [
   {
-    slug: "climate-diagnostics",
-    title: "Why Climate Change Is a Diagnostics Problem",
-    excerpt: "Shifting disease patterns demand that laboratories adapt faster than ever. Here's how climate data can drive diagnostic preparedness.",
+    slug: "flying-in-pieces",
+    title: "Flying in Pieces",
+    excerpt: "A reflection on fragmentation, resilience, and what it means to hold yourself together when everything is pulling apart.",
+    tag: "Life & Reflection",
+    date: "2025",
+    mediumUrl: "https://medium.com/@litusoja/flying-in-pieces-b68715f4e3ba",
+  },
+  {
+    slug: "socialist-realisation",
+    title: "When It Hit Me I Might Be a Socialist",
+    excerpt: "An honest exploration of ideology, equity, and the systems that shape how we think about wealth, access, and justice.",
+    tag: "Politics & Systems",
+    date: "2025",
+    mediumUrl: "https://medium.com/@litusoja/when-it-hit-me-i-might-be-a-socialist-b8b0d9fcc908",
+  },
+  {
+    slug: "only-we-can-stop-the-rain",
+    title: "Only We Can Stop the Rain",
+    excerpt: "On climate action, collective responsibility, and the urgency of acting before it's too late.",
     tag: "Climate & Health",
     date: "2025",
-    mediumUrl: "https://medium.com/@litusoja",
+    mediumUrl: "https://medium.com/@litusoja/only-we-can-stop-the-rain-6fff668455df",
   },
   {
-    slug: "decentralising-labs",
-    title: "Decentralising Lab Services: Lessons from the Field",
-    excerpt: "Quality diagnostics shouldn't require a four-hour bus ride. Reflections on building accessible laboratory infrastructure.",
-    tag: "Health Systems",
-    date: "2025",
-    mediumUrl: "https://medium.com/@litusoja",
-  },
-  {
-    slug: "mentorship-lab",
-    title: "Mentorship in the Lab: What I Wish I'd Known Earlier",
-    excerpt: "The most important skills in laboratory science aren't taught in textbooks. On building competence, confidence, and culture.",
-    tag: "Leadership",
+    slug: "emergent-democracy",
+    title: "Emergent Democracy",
+    excerpt: "How democratic systems evolve from the ground up — and what that means for governance, participation, and power.",
+    tag: "Governance",
     date: "2024",
-    mediumUrl: "https://medium.com/@litusoja",
+    mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048929",
   },
   {
-    slug: "ai-diagnostics",
-    title: "AI in Diagnostics: Promise, Pitfalls, and Pragmatism",
-    excerpt: "Artificial intelligence can transform healthcare delivery — but only if we implement it with context, equity, and rigour.",
-    tag: "Technology",
+    slug: "emergent-logic-of-systems",
+    title: "The Emergent Logic of Systems",
+    excerpt: "Understanding how complex systems self-organise and what that teaches us about health, society, and leadership.",
+    tag: "Systems Thinking",
     date: "2024",
-    mediumUrl: "https://medium.com/@litusoja",
+    mediumUrl: "https://medium.com/@litusoja/the-emergent-logic-of-systems-a1419fe39d9b",
   },
 ];
 
@@ -155,7 +163,6 @@ const WritingSection = () => {
                 </div>
               </a>
 
-              {/* Like & Comment bar */}
               <div className="px-6 pb-4 flex items-center gap-4">
                 <button
                   onClick={() => toggleLike(a.slug)}
@@ -175,7 +182,6 @@ const WritingSection = () => {
                 </button>
               </div>
 
-              {/* Comments panel */}
               {openComments === a.slug && (
                 <div className="px-6 pb-6 border-t border-border pt-4 space-y-3">
                   {(comments[a.slug] || []).map((c, i) => (
