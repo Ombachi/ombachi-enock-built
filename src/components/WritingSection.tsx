@@ -221,6 +221,17 @@ const WritingSection = () => {
             </article>
           ))}
         </div>
+
+        <div className="mt-8 text-center animate-on-scroll">
+          <a
+            href="https://medium.com/@litusoja"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-bold text-secondary hover:underline text-base"
+          >
+            <ExternalLink size={16} /> Read more on Litu Musings — Medium
+          </a>
+        </div>
       </div>
     </section>
   );
