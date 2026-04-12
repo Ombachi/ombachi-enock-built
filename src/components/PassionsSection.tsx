@@ -15,61 +15,61 @@ const passions = [
     name: "Film",
     image: passionFilm,
     color: "from-purple-500 to-pink-500",
-    philosophy: "Film teaches empathy — the ability to inhabit someone else's story and emerge changed. Every great film is a masterclass in perspective.",
+    philosophy: "Film teaches empathy — inhabiting someone else's story and emerging changed.",
   },
   {
     name: "Photography",
     image: passionPhotography,
     color: "from-orange-500 to-red-500",
-    philosophy: "Photography trains the eye to see what others miss. In diagnostics and in life, observation is everything.",
+    philosophy: "Photography trains the eye to see what others miss. Observation is everything.",
   },
   {
     name: "Music",
     image: passionMusic,
     color: "from-pink-500 to-yellow-500",
-    philosophy: "Music is structured creativity — rhythm, harmony, and improvisation. It mirrors the balance between protocol and intuition in the lab.",
+    philosophy: "Structured creativity — rhythm, harmony, and improvisation in perfect balance.",
   },
   {
     name: "Football",
     image: passionFootball,
     color: "from-green-500 to-yellow-500",
-    philosophy: "Football is systems thinking in motion — every player, every pass, every decision shapes the outcome. Teamwork at its purest.",
+    philosophy: "Systems thinking in motion — every pass shapes the outcome. Teamwork at its purest.",
   },
   {
     name: "Rugby",
     image: passionRugby,
     color: "from-blue-500 to-red-500",
-    philosophy: "Rugby demands resilience, discipline, and selflessness. You move forward only by passing backward — a lesson in servant leadership.",
+    philosophy: "You move forward by passing backward — a lesson in servant leadership.",
   },
   {
     name: "Badminton",
     image: passionBadminton,
     color: "from-pink-500 to-yellow-400",
-    philosophy: "Badminton is about precision and anticipation. In a split second, you read, react, and respond — like clinical decision-making.",
+    philosophy: "Precision and anticipation. Read, react, respond — like clinical decisions.",
   },
   {
     name: "Formula 1",
     image: passionF1,
     color: "from-red-500 to-orange-500",
-    philosophy: "F1 is engineering excellence under extreme pressure. Every millisecond matters — a philosophy I carry into quality systems and accreditation.",
+    philosophy: "Engineering excellence under pressure. Every millisecond matters.",
   },
   {
     name: "Golf",
     image: passionGolf,
     color: "from-green-600 to-emerald-400",
-    philosophy: "Golf is patience, strategy, and self-mastery. The only opponent is yourself — and the course demands honesty with every stroke.",
+    philosophy: "Patience, strategy, and self-mastery. The course demands honesty.",
   },
   {
     name: "Basketball",
     image: passionBasketball,
     color: "from-orange-500 to-blue-500",
-    philosophy: "Basketball rewards adaptability and court vision. Seeing the full picture and making fast, smart decisions — essential in health systems.",
+    philosophy: "Court vision and adaptability — seeing the full picture, deciding fast.",
   },
   {
     name: "Space",
     image: passionSpace,
     color: "from-purple-600 to-blue-900",
-    philosophy: "Space exploration is humanity's boldest act of curiosity. It reminds me that the biggest problems deserve the most ambitious thinking.",
+    philosophy: "Humanity's boldest curiosity. Big problems deserve ambitious thinking.",
   },
 ];
 
@@ -90,39 +90,55 @@ const PassionsSection = () => {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 animate-on-scroll">
-          {passions.map((p) => (
-            <div
-              key={p.name}
-              className={`flip-card aspect-square ${flipped === p.name ? "flipped" : ""}`}
-              onClick={() => setFlipped(flipped === p.name ? null : p.name)}
-            >
-              <div className="flip-card-inner"
-                   style={{ transformStyle: "preserve-3d" }}>
-                {/* Front */}
-                <div className="flip-card-front rounded-2xl overflow-hidden shadow-md">
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    width={640}
-                    height={640}
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${p.color} opacity-30`} />
-                  <div className="absolute inset-x-0 bottom-0 p-3">
-                    <p className="text-white font-semibold text-sm drop-shadow-lg">{p.name}</p>
+          {passions.map((p) => {
+            const isFlipped = flipped === p.name;
+            return (
+              <div
+                key={p.name}
+                className="cursor-pointer"
+                style={{ perspective: "600px" }}
+                onClick={() => setFlipped(isFlipped ? null : p.name)}
+              >
+                <div
+                  className="relative w-full transition-transform duration-500"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                    /* Fixed aspect ratio with enough height for philosophy text */
+                    paddingBottom: "130%",
+                  }}
+                >
+                  {/* Front */}
+                  <div
+                    className="absolute inset-0 rounded-2xl overflow-hidden shadow-md"
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      width={640}
+                      height={832}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${p.color} opacity-30`} />
+                    <div className="absolute inset-x-0 bottom-0 p-3">
+                      <p className="text-white font-semibold text-sm drop-shadow-lg">{p.name}</p>
+                    </div>
+                  </div>
+
+                  {/* Back */}
+                  <div
+                    className={`absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br ${p.color} flex flex-col justify-center p-4`}
+                    style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                  >
+                    <p className="text-white font-bold text-sm mb-2">{p.name}</p>
+                    <p className="text-white/90 text-xs leading-relaxed">{p.philosophy}</p>
                   </div>
                 </div>
-
-                {/* Back */}
-                <div className={`flip-card-back rounded-2xl overflow-hidden bg-gradient-to-br ${p.color} flex flex-col justify-center p-4`}
-                     style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
-                  <p className="text-white font-bold text-sm mb-2">{p.name}</p>
-                  <p className="text-white/90 text-xs leading-relaxed">{p.philosophy}</p>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <p className="text-center text-muted-foreground text-xs mt-6 animate-on-scroll">

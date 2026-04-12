@@ -74,7 +74,7 @@ const ProjectPage = () => {
   const Icon = project.icon;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background animate-fade-up">
       <Navbar />
 
       <section className="pt-28 pb-16 bg-primary">

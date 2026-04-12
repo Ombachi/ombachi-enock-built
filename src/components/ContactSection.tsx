@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Linkedin, MessageCircle, Download, Send } from "lucide-react";
+import { Mail, Linkedin, MessageCircle, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
@@ -86,13 +86,6 @@ const ContactSection = () => {
                 <p className="text-muted-foreground text-xs">+254 729 304 337</p>
               </div>
             </a>
-            <button className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors w-full text-left">
-              <Download size={20} className="text-secondary" />
-              <div>
-                <p className="font-medium text-foreground text-sm">Download CV</p>
-                <p className="text-muted-foreground text-xs">PDF format</p>
-              </div>
-            </button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4 animate-on-scroll">
