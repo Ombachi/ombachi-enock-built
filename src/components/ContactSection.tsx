@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Linkedin, MessageCircle, Send } from "lucide-react";
+import { Mail, Linkedin, MessageCircle, Send, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
@@ -18,8 +18,8 @@ const ContactSection = () => {
       });
       if (error) throw error;
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
       setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       console.error("Contact form error:", err);
     } finally {
@@ -88,54 +88,60 @@ const ContactSection = () => {
             </a>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 animate-on-scroll">
-            <div>
-              <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">Name</label>
-              <input
-                id="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="text-sm font-medium text-foreground mb-1 block">Email</label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
-                placeholder="you@example.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm font-medium text-foreground mb-1 block">Message</label>
-              <textarea
-                id="message"
-                required
-                rows={4}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 resize-none"
-                placeholder="Tell me about your project or opportunity..."
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
-            >
-              <Send size={16} /> {loading ? "Sending..." : "Send Message"}
-            </button>
+          <div className="animate-on-scroll relative">
             {submitted && (
-              <p className="text-secondary text-sm font-medium">Thank you! I'll get back to you soon.</p>
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-card rounded-xl border border-secondary/40 z-10 animate-fade-up">
+                <CheckCircle size={48} className="text-secondary mb-4" />
+                <p className="font-serif text-xl font-bold text-foreground mb-1">Message Sent!</p>
+                <p className="text-muted-foreground text-sm">Thank you — I'll get back to you soon.</p>
+              </div>
             )}
-          </form>
+            <form onSubmit={handleSubmit} className={`space-y-4 ${submitted ? "opacity-0" : ""}`}>
+              <div>
+                <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="text-sm font-medium text-foreground mb-1 block">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="text-sm font-medium text-foreground mb-1 block">Message</label>
+                <textarea
+                  id="message"
+                  required
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50 resize-none"
+                  placeholder="Tell me about your project or opportunity..."
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                <Send size={16} /> {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
