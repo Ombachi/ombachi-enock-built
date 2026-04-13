@@ -1,4 +1,4 @@
-import { Microscope, Leaf, GraduationCap, Stethoscope } from "lucide-react";
+import { Microscope, Leaf } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface Project {
@@ -24,34 +24,20 @@ const projects: Project[] = [
     icon: Leaf,
     link: "https://ecoswarm.co.ke",
   },
-  {
-    slug: "mount-kenya-university",
-    title: "Mount Kenya University",
-    summary: "Transforming laboratory systems, curriculum, and student mentorship.",
-    icon: GraduationCap,
-    link: "https://mku.ac.ke",
-  },
-  {
-    slug: "nairobi-womens-hospital",
-    title: "Nairobi Women's Hospital",
-    summary: "Clinical laboratory excellence and frontline mentorship.",
-    icon: Stethoscope,
-    link: "https://nwh.co.ke",
-  },
 ];
 
 const WorkSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="work" className="section-padding bg-muted">
+    <section id="work" className="section-padding bg-background">
       <div className="section-container">
-        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Featured Work</p>
+        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Projects</p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
-          Projects & Impact
+          Featured Projects & Impact
         </h2>
         <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-          A few projects that show how I think, build, and solve problems across diagnostics, health systems, climate, and technology.
+          Ventures I've founded or co-created to solve real problems in diagnostics, climate, and health systems.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 animate-on-scroll">
