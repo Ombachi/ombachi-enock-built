@@ -11,22 +11,9 @@ const flipImages = [
   { src: heroImg4, alt: "Ombachi Enock outdoors" },
 ];
 
-const coreValues = [
-  { word: "Integrity", color: "text-emerald-400" },
-  { word: "Equity", color: "text-sky-400" },
-  { word: "Dignity", color: "text-amber-400" },
-  { word: "Love", color: "text-rose-400" },
-  { word: "Kindness", color: "text-violet-400" },
-  { word: "Excellence", color: "text-teal-300" },
-  { word: "Honor", color: "text-orange-400" },
-  { word: "Hope", color: "text-cyan-300" },
-  { word: "Justice", color: "text-pink-400" },
-  { word: "Courage", color: "text-lime-300" },
-];
-
 const HeroSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  const [visibleValues, setVisibleValues] = useState<number[]>([]);
+  const [showTagline, setShowTagline] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,10 +23,8 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    const timers = coreValues.map((_, i) =>
-      setTimeout(() => setVisibleValues((prev) => [...prev, i]), 200 + i * 300)
-    );
-    return () => timers.forEach(clearTimeout);
+    const timer = setTimeout(() => setShowTagline(true), 400);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -55,25 +40,23 @@ const HeroSection = () => {
       ))}
       <div className="absolute inset-0 bg-primary/85" />
 
-      <div className="section-container relative z-10 py-32 flex flex-col items-center text-center">
-        <div className="flex flex-wrap justify-center gap-3 md:gap-5 max-w-3xl">
-          {coreValues.map((v, i) => (
-            <span
-              key={v.word}
-              className={`font-serif font-bold transition-all duration-700 ease-out ${v.color} ${
-                visibleValues.includes(i)
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 translate-y-8 scale-75"
-              }`}
-              style={{
-                fontSize: `clamp(1.5rem, ${2 + (i % 3) * 0.8}vw, ${2.5 + (i % 3) * 0.6}rem)`,
-                textShadow: "0 2px 20px rgba(0,0,0,0.3)",
-              }}
-            >
-              {v.word}
-            </span>
-          ))}
-        </div>
+      <div className="section-container relative z-10 py-32 flex flex-col items-center text-center justify-center min-h-[60vh]">
+        <h1
+          className={`font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground transition-all duration-1000 ease-out ${
+            showTagline ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ textShadow: "0 2px 30px rgba(0,0,0,0.4)" }}
+        >
+          Medical Laboratory Scientist
+        </h1>
+        <p
+          className={`mt-4 text-lg md:text-2xl text-primary-foreground/80 font-medium tracking-wide transition-all duration-1000 delay-300 ease-out ${
+            showTagline ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ textShadow: "0 2px 15px rgba(0,0,0,0.3)" }}
+        >
+          Health Systems Builder
+        </p>
 
         <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
           {flipImages.map((_, i) => (

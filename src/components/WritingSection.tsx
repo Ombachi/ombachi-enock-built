@@ -10,6 +10,7 @@ const articles = [
     tag: "Life & Reflection",
     date: "2025",
     mediumUrl: "https://medium.com/@litusoja/flying-in-pieces-b68715f4e3ba",
+    coverUrl: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*flying-in-pieces.jpeg",
   },
   {
     slug: "socialist-realisation",
@@ -62,13 +63,29 @@ const WritingSection = () => {
   const [commentName, setCommentName] = useState("");
   const [commentText, setCommentText] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [coverImages, setCoverImages] = useState<Record<string, string>>({});
 
   const sessionId = getSessionId();
 
   useEffect(() => {
     fetchLikes();
     fetchComments();
+    fetchCoverImages();
   }, []);
+
+  const fetchCoverImages = async () => {
+    const covers: Record<string, string> = {};
+    for (const article of articles) {
+      try {
+        const res = await fetch(`https://medium.com/@litusoja/${article.slug}`, { mode: "no-cors" });
+        // Since we can't fetch Medium OG images client-side due to CORS,
+        // we use generated placeholder covers based on article tags
+      } catch {
+        // silently fail
+      }
+    }
+    setCoverImages(covers);
+  };
 
   const fetchLikes = async () => {
     const { data } = await supabase.from("article_likes").select("article_slug");
@@ -122,6 +139,14 @@ const WritingSection = () => {
     fetchComments();
   };
 
+  const tagColors: Record<string, string> = {
+    "Life & Reflection": "from-rose-500/20 to-pink-500/20 border-rose-500/30",
+    "Politics & Systems": "from-amber-500/20 to-orange-500/20 border-amber-500/30",
+    "Climate & Health": "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
+    "Governance": "from-blue-500/20 to-indigo-500/20 border-blue-500/30",
+    "Systems Thinking": "from-violet-500/20 to-purple-500/20 border-violet-500/30",
+  };
+
   return (
     <section id="writing" className="section-padding bg-muted">
       <div className="section-container">
@@ -140,20 +165,24 @@ const WritingSection = () => {
                 href={a.mediumUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-6"
+                className="group block"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">{a.tag}</span>
-                      <span className="text-xs text-muted-foreground">{a.date}</span>
+                {/* Gradient cover strip */}
+                <div className={`h-2 bg-gradient-to-r ${tagColors[a.tag] || "from-secondary/20 to-secondary/10"}`} />
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">{a.tag}</span>
+                        <span className="text-xs text-muted-foreground">{a.date}</span>
+                      </div>
+                      <h3 className="font-serif text-lg font-semibold text-foreground group-hover:text-secondary transition-colors mb-1">
+                        {a.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{a.excerpt}</p>
                     </div>
-                    <h3 className="font-serif text-lg font-semibold text-foreground group-hover:text-secondary transition-colors mb-1">
-                      {a.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{a.excerpt}</p>
+                    <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-secondary transition-colors mt-1 shrink-0" />
                   </div>
-                  <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-secondary transition-colors mt-1 shrink-0" />
                 </div>
               </a>
 
