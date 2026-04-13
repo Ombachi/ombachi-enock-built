@@ -45,7 +45,11 @@ const Navbar = () => {
 
         <div className="md:hidden flex items-center gap-2">
           <DarkModeToggle />
-          <button className="text-foreground" onClick={() => setOpen(!open)}>
+          <button
+            className="text-foreground"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>

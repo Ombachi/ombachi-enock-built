@@ -1,4 +1,5 @@
 import headshot from "@/assets/headshot.jpg";
+import heroPortrait from "@/assets/hero-portrait.jpg";
 
 const AboutSection = () => (
   <section id="about" className="section-padding bg-background">
@@ -9,14 +10,22 @@ const AboutSection = () => (
       </h2>
 
       <div className="max-w-3xl animate-on-scroll">
-        <div className="flex justify-center md:justify-start mb-6">
+        <div className="flex gap-4 justify-center md:justify-start mb-6">
           <img
             src={headshot}
             alt="Ombachi Enock — Medical Laboratory Scientist"
-            className="w-48 h-48 rounded-2xl object-cover shadow-lg"
+            className="w-40 h-40 rounded-2xl object-cover shadow-lg"
             loading="lazy"
-            width={800}
-            height={800}
+            width={400}
+            height={400}
+          />
+          <img
+            src={heroPortrait}
+            alt="Ombachi Enock — portrait"
+            className="w-40 h-40 rounded-2xl object-cover shadow-lg hidden sm:block"
+            loading="lazy"
+            width={400}
+            height={400}
           />
         </div>
         <div className="space-y-5">

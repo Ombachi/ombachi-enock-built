@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import heroFlip1 from "@/assets/hero-flip-1.jpg";
-import heroFlip2 from "@/assets/hero-flip-2.jpg";
-import heroFlip3 from "@/assets/hero-flip-3.jpg";
-import heroFlip4 from "@/assets/hero-flip-4.jpg";
+import heroImg1 from "@/assets/hero-speaking.jpg";
+import heroImg2 from "@/assets/hero-steps.jpg";
+import heroImg3 from "@/assets/hero-casual.jpg";
+import heroImg4 from "@/assets/hero-outdoor.jpg";
 
 const flipImages = [
-  { src: heroFlip1, alt: "Sunrise over African savanna — hope" },
-  { src: heroFlip2, alt: "Children on a hillside — continuity" },
-  { src: heroFlip3, alt: "Planting a seedling — life and growth" },
-  { src: heroFlip4, alt: "Community gathering — inspiration" },
+  { src: heroImg1, alt: "Ombachi Enock speaking at an event" },
+  { src: heroImg2, alt: "Ombachi Enock — professional portrait" },
+  { src: heroImg3, alt: "Ombachi Enock — casual portrait" },
+  { src: heroImg4, alt: "Ombachi Enock outdoors" },
 ];
 
 const coreValues = [
@@ -35,7 +35,6 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Stagger core values appearance
   useEffect(() => {
     const timers = coreValues.map((_, i) =>
       setTimeout(() => setVisibleValues((prev) => [...prev, i]), 200 + i * 300)
@@ -45,20 +44,18 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Flipping BG images */}
       {flipImages.map((img, i) => (
         <div
           key={i}
           className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
           style={{ opacity: currentImage === i ? 1 : 0 }}
         >
-          <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+          <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
         </div>
       ))}
       <div className="absolute inset-0 bg-primary/85" />
 
       <div className="section-container relative z-10 py-32 flex flex-col items-center text-center">
-        {/* Animated core values */}
         <div className="flex flex-wrap justify-center gap-3 md:gap-5 max-w-3xl">
           {coreValues.map((v, i) => (
             <span
@@ -78,12 +75,12 @@ const HeroSection = () => {
           ))}
         </div>
 
-        {/* Image indicators */}
         <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
           {flipImages.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentImage(i)}
+              aria-label={`Show image ${i + 1}`}
               className={`w-2 h-2 rounded-full transition-all ${currentImage === i ? "bg-primary-foreground w-6" : "bg-primary-foreground/40"}`}
             />
           ))}
