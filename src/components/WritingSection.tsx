@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Heart, MessageCircle, ExternalLink, RefreshCw } from "lucide-react";
+import { ArrowUpRight, Heart, MessageCircle, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Article {
