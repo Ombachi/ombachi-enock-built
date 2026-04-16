@@ -59,6 +59,48 @@ export type Database = {
         }
         Relationships: []
       }
+      cached_articles: {
+        Row: {
+          author: string | null
+          cover_image_url: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          medium_url: string
+          published_date: string | null
+          slug: string
+          tag: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          medium_url: string
+          published_date?: string | null
+          slug: string
+          tag?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          medium_url?: string
+          published_date?: string | null
+          slug?: string
+          tag?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
