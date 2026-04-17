@@ -37,6 +37,7 @@ const Admin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [pageViews, setPageViews] = useState<PageView[]>([]);
   const [articleEngagement, setArticleEngagement] = useState<ArticleEngagement[]>([]);
+  const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
   const [syncing, setSyncing] = useState(false);
 
   // Auth check + role check
@@ -75,13 +76,15 @@ const Admin = () => {
 
   const loadData = async () => {
     const since = subDays(new Date(), 30).toISOString();
-    const [pvRes, likesRes, commentsRes] = await Promise.all([
+    const [pvRes, likesRes, commentsRes, contactRes] = await Promise.all([
       supabase.from("page_views").select("*").gte("created_at", since).order("created_at", { ascending: false }),
       supabase.from("article_likes").select("article_slug"),
       supabase.from("article_comments").select("article_slug"),
+      supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
     ]);
 
     if (pvRes.data) setPageViews(pvRes.data as PageView[]);
+    if (contactRes.data) setContactSubmissions(contactRes.data as ContactSubmission[]);
 
     // Engagement aggregation
     const map: Record<string, { likes: number; comments: number }> = {};
@@ -295,6 +298,63 @@ const Admin = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Contact submissions */}
+        <Card className="mb-8">
+          <CardHeader>
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <Mail className="h-5 w-5" /> Contact Submissions
+                </CardTitle>
+                <CardDescription>
+                  {contactSubmissions.length} {contactSubmissions.length === 1 ? "message" : "messages"} received
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {contactSubmissions.length === 0 ? (
+              <p className="text-sm text-muted-foreground">No messages yet.</p>
+            ) : (
+              <div className="space-y-4">
+                {contactSubmissions.map((s) => (
+                  <div key={s.id} className="border border-border rounded-lg p-4 bg-card hover:border-secondary/40 transition-colors">
+                    <div className="flex items-start justify-between gap-4 flex-wrap mb-2">
+                      <div>
+                        <p className="font-medium text-foreground text-sm">{s.name}</p>
+                        <a
+                          href={`mailto:${s.email}?subject=Re: Your message`}
+                          className="text-xs text-secondary hover:underline inline-flex items-center gap-1"
+                        >
+                          <Mail className="h-3 w-3" /> {s.email}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground tabular-nums">
+                          {format(new Date(s.created_at), "MMM d, yyyy · h:mm a")}
+                        </span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-7 px-2"
+                          onClick={() => {
+                            navigator.clipboard.writeText(s.email);
+                            toast({ title: "Email copied", description: s.email });
+                          }}
+                          title="Copy email"
+                        >
+                          <Copy className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">{s.message}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Most engaged articles */}
         <Card>
