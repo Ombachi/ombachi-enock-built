@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw } from "lucide-react";
+import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw, Mail, Copy } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { format, subDays, startOfDay } from "date-fns";
 import { toast } from "@/hooks/use-toast";
@@ -21,6 +21,14 @@ interface ArticleEngagement {
   likes: number;
   comments: number;
   total: number;
+}
+
+interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  created_at: string;
 }
 
 const Admin = () => {
