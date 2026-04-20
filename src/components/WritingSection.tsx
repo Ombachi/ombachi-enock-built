@@ -51,7 +51,8 @@ const WritingSection = () => {
     const { data } = await supabase
       .from("cached_articles")
       .select("*")
-      .order("published_date", { ascending: false });
+      .order("published_date", { ascending: false })
+      .limit(3);
 
     if (data && data.length > 0) {
       setArticles(
@@ -62,9 +63,11 @@ const WritingSection = () => {
           tag: a.tag || "General",
           date: a.published_date ? new Date(a.published_date).getFullYear().toString() : "",
           mediumUrl: a.medium_url,
-          coverImageUrl: a.cover_image_url,
+          coverImageUrl: null,
         }))
       );
+    } else {
+      setArticles(FALLBACK_ARTICLES.slice(0, 3));
     }
   };
 
@@ -143,19 +146,7 @@ const WritingSection = () => {
           {articles.map((a) => (
             <article key={a.slug} className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden">
               <a href={a.mediumUrl} target="_blank" rel="noopener noreferrer" className="group block">
-                {/* Cover image or gradient strip */}
-                {a.coverImageUrl ? (
-                  <div className="h-48 overflow-hidden">
-                    <img
-                      src={a.coverImageUrl}
-                      alt={a.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
-                ) : (
-                  <div className={`h-2 bg-gradient-to-r ${tagColors[a.tag] || "from-secondary/20 to-secondary/10"}`} />
-                )}
+                <div className={`h-2 bg-gradient-to-r ${tagColors[a.tag] || "from-secondary/20 to-secondary/10"}`} />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
