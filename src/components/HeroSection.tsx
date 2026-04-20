@@ -35,7 +35,7 @@ const HeroSection = () => {
           className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
           style={{ opacity: currentImage === i ? 1 : 0 }}
         >
-          <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+          <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-top md:object-[center_20%]" loading={i === 0 ? "eager" : "lazy"} />
         </div>
       ))}
       <div className="absolute inset-0 bg-primary/85" />
