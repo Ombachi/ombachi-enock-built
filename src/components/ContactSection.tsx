@@ -59,7 +59,7 @@ const ContactSection = () => {
               <Linkedin size={20} className="text-secondary" />
               <div>
                 <p className="font-medium text-foreground text-sm">LinkedIn</p>
-                <p className="text-muted-foreground text-xs">linkedin.com/in/ombachi-enock</p>
+                <p className="text-muted-foreground text-xs">linkedin.com/in/ombachi-enock/</p>
               </div>
             </a>
             <a
@@ -68,7 +68,9 @@ const ContactSection = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
             >
-              <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
               <div>
                 <p className="font-medium text-foreground text-sm">X (Twitter)</p>
                 <p className="text-muted-foreground text-xs">@ombachi_enock</p>
@@ -98,7 +100,9 @@ const ContactSection = () => {
             )}
             <form onSubmit={handleSubmit} className={`space-y-4 ${submitted ? "opacity-0" : ""}`}>
               <div>
-                <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">Name</label>
+                <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">
+                  Name
+                </label>
                 <input
                   id="name"
                   type="text"
@@ -110,7 +114,9 @@ const ContactSection = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="text-sm font-medium text-foreground mb-1 block">Email</label>
+                <label htmlFor="email" className="text-sm font-medium text-foreground mb-1 block">
+                  Email
+                </label>
                 <input
                   id="email"
                   type="email"
@@ -122,7 +128,9 @@ const ContactSection = () => {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="text-sm font-medium text-foreground mb-1 block">Message</label>
+                <label htmlFor="message" className="text-sm font-medium text-foreground mb-1 block">
+                  Message
+                </label>
                 <textarea
                   id="message"
                   required
