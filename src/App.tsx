@@ -9,6 +9,7 @@ import ProjectPage from "./pages/ProjectPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Auth from "./pages/Auth.tsx";
 import Admin from "./pages/Admin.tsx";
+import PostPage from "./pages/PostPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/work/:slug" element={<ProjectPage />} />
+      <Route path="/writing/:slug" element={<PostPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />

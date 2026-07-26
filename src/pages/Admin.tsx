@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw, Mail, Copy } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw, Mail, Copy, BarChart3, FileText, Inbox } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { format, subDays, startOfDay } from "date-fns";
 import { toast } from "@/hooks/use-toast";
+import PostsPanel from "@/components/admin/PostsPanel";
 
 interface PageView {
   path: string;
@@ -203,7 +205,7 @@ const Admin = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="font-serif text-3xl font-bold text-foreground">Admin Dashboard</h1>
-            <p className="text-muted-foreground text-sm mt-1">Last 30 days of activity</p>
+            <p className="text-muted-foreground text-sm mt-1">Analytics, posts, and messages</p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={handleSync} disabled={syncing}>
@@ -219,16 +221,24 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* Stat cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <Tabs defaultValue="analytics" className="w-full">
+          <TabsList className="mb-6">
+            <TabsTrigger value="analytics"><BarChart3 className="h-4 w-4 mr-1.5" /> Analytics</TabsTrigger>
+            <TabsTrigger value="posts"><FileText className="h-4 w-4 mr-1.5" /> Posts</TabsTrigger>
+            <TabsTrigger value="contact"><Inbox className="h-4 w-4 mr-1.5" /> Contact</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="analytics" className="space-y-8">
+            {/* Stat cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard icon={<Eye className="h-4 w-4" />} label="Total Views (30d)" value={totalViews} />
           <StatCard icon={<Users className="h-4 w-4" />} label="Unique Visitors" value={uniqueSessions} />
           <StatCard icon={<MousePointerClick className="h-4 w-4" />} label="Views Today" value={viewsToday} />
           <StatCard icon={<MousePointerClick className="h-4 w-4" />} label="Views This Week" value={viewsThisWeek} />
-        </div>
+            </div>
 
-        {/* Daily chart */}
-        <Card className="mb-8">
+            {/* Daily chart */}
+            <Card>
           <CardHeader>
             <CardTitle>Daily Traffic (Last 14 days)</CardTitle>
             <CardDescription>Pageviews and unique visitors</CardDescription>
@@ -251,9 +261,9 @@ const Admin = () => {
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
-        </Card>
+            </Card>
 
-        <div className="grid lg:grid-cols-2 gap-6 mb-8">
+            <div className="grid lg:grid-cols-2 gap-6">
           {/* Top pages */}
           <Card>
             <CardHeader>
@@ -297,10 +307,58 @@ const Admin = () => {
               )}
             </CardContent>
           </Card>
-        </div>
+            </div>
 
-        {/* Contact submissions */}
-        <Card className="mb-8">
+            {/* Most engaged articles */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Most Engaged Articles</CardTitle>
+                <CardDescription>Likes + comments across all posts</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {articleEngagement.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">No engagement yet.</p>
+                ) : (
+                  <>
+                    <ResponsiveContainer width="100%" height={Math.max(200, articleEngagement.length * 40)}>
+                      <BarChart data={articleEngagement} layout="vertical" margin={{ left: 80 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                        <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                        <YAxis dataKey="article_slug" type="category" stroke="hsl(var(--muted-foreground))" fontSize={11} width={140} />
+                        <Tooltip
+                          contentStyle={{
+                            background: "hsl(var(--card))",
+                            border: "1px solid hsl(var(--border))",
+                            borderRadius: "8px",
+                          }}
+                        />
+                        <Bar dataKey="likes" stackId="a" fill="hsl(var(--secondary))" name="Likes" />
+                        <Bar dataKey="comments" stackId="a" fill="hsl(var(--primary))" name="Comments" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                    <div className="mt-4 space-y-2">
+                      {articleEngagement.map((a) => (
+                        <div key={a.article_slug} className="flex items-center justify-between gap-4 text-sm py-1.5 border-b border-border last:border-0">
+                          <span className="truncate font-mono text-xs">{a.article_slug}</span>
+                          <div className="flex gap-4 text-xs text-muted-foreground">
+                            <span className="inline-flex items-center gap-1"><Heart className="h-3 w-3" /> {a.likes}</span>
+                            <span className="inline-flex items-center gap-1"><MessageCircle className="h-3 w-3" /> {a.comments}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="posts">
+            <PostsPanel />
+          </TabsContent>
+
+          <TabsContent value="contact">
+            <Card>
           <CardHeader>
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div>
@@ -354,50 +412,9 @@ const Admin = () => {
               </div>
             )}
           </CardContent>
-        </Card>
-
-        {/* Most engaged articles */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Most Engaged Articles</CardTitle>
-            <CardDescription>Likes + comments across all Litu Musings posts</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {articleEngagement.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No engagement yet.</p>
-            ) : (
-              <>
-                <ResponsiveContainer width="100%" height={Math.max(200, articleEngagement.length * 40)}>
-                  <BarChart data={articleEngagement} layout="vertical" margin={{ left: 80 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis type="number" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                    <YAxis dataKey="article_slug" type="category" stroke="hsl(var(--muted-foreground))" fontSize={11} width={140} />
-                    <Tooltip
-                      contentStyle={{
-                        background: "hsl(var(--card))",
-                        border: "1px solid hsl(var(--border))",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    <Bar dataKey="likes" stackId="a" fill="hsl(var(--secondary))" name="Likes" />
-                    <Bar dataKey="comments" stackId="a" fill="hsl(var(--primary))" name="Comments" />
-                  </BarChart>
-                </ResponsiveContainer>
-                <div className="mt-4 space-y-2">
-                  {articleEngagement.map((a) => (
-                    <div key={a.article_slug} className="flex items-center justify-between gap-4 text-sm py-1.5 border-b border-border last:border-0">
-                      <span className="truncate font-mono text-xs">{a.article_slug}</span>
-                      <div className="flex gap-4 text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1"><Heart className="h-3 w-3" /> {a.likes}</span>
-                        <span className="inline-flex items-center gap-1"><MessageCircle className="h-3 w-3" /> {a.comments}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
