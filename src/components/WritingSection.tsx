@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, Heart, MessageCircle, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -8,17 +9,7 @@ interface Article {
   excerpt: string;
   tag: string;
   date: string;
-  mediumUrl: string;
-  coverImageUrl: string | null;
 }
-
-const FALLBACK_ARTICLES: Article[] = [
-  { slug: "flying-in-pieces", title: "Flying in Pieces", excerpt: "A reflection on fragmentation, resilience, and what it means to hold yourself together when everything is pulling apart.", tag: "Life & Reflection", date: "2025", mediumUrl: "https://medium.com/@litusoja/flying-in-pieces-b68715f4e3ba", coverImageUrl: null },
-  { slug: "socialist-realisation", title: "When It Hit Me I Might Be a Socialist", excerpt: "An honest exploration of ideology, equity, and the systems that shape how we think about wealth, access, and justice.", tag: "Politics & Systems", date: "2025", mediumUrl: "https://medium.com/@litusoja/when-it-hit-me-i-might-be-a-socialist-b8b0d9fcc908", coverImageUrl: null },
-  { slug: "only-we-can-stop-the-rain", title: "Only We Can Stop the Rain", excerpt: "On climate action, collective responsibility, and the urgency of acting before it's too late.", tag: "Climate & Health", date: "2025", mediumUrl: "https://medium.com/@litusoja/only-we-can-stop-the-rain-6fff668455df", coverImageUrl: null },
-  { slug: "emergent-democracy", title: "Emergent Democracy", excerpt: "How democratic systems evolve from the ground up — and what that means for governance, participation, and power.", tag: "Governance", date: "2024", mediumUrl: "https://medium.com/@litusoja/emergent-democracy-450b4c048729", coverImageUrl: null },
-  { slug: "emergent-logic-of-systems", title: "The Emergent Logic of Systems", excerpt: "Understanding how complex systems self-organise and what that teaches us about health, society, and leadership.", tag: "Systems Thinking", date: "2024", mediumUrl: "https://medium.com/@litusoja/the-emergent-logic-of-systems-a1419fe39d9b", coverImageUrl: null },
-];
 
 const getSessionId = () => {
   let id = localStorage.getItem("session_id");
@@ -30,7 +21,8 @@ const getSessionId = () => {
 };
 
 const WritingSection = () => {
-  const [articles, setArticles] = useState<Article[]>(FALLBACK_ARTICLES);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loaded, setLoaded] = useState(false);
   const [likes, setLikes] = useState<Record<string, number>>({});
   const [userLikes, setUserLikes] = useState<Set<string>>(new Set());
   const [comments, setComments] = useState<Record<string, { commenter_name: string; comment_text: string; created_at: string }[]>>({});
@@ -49,26 +41,22 @@ const WritingSection = () => {
 
   const fetchArticles = async () => {
     const { data } = await supabase
-      .from("cached_articles")
-      .select("*")
-      .order("published_date", { ascending: false })
+      .from("posts")
+      .select("slug, title, excerpt, tag, published_at")
+      .eq("status", "published")
+      .order("published_at", { ascending: false })
       .limit(3);
 
-    if (data && data.length > 0) {
-      setArticles(
-        data.map((a) => ({
-          slug: a.slug,
-          title: a.title,
-          excerpt: a.excerpt || "",
-          tag: a.tag || "General",
-          date: a.published_date ? new Date(a.published_date).getFullYear().toString() : "",
-          mediumUrl: a.medium_url,
-          coverImageUrl: null,
-        }))
-      );
-    } else {
-      setArticles(FALLBACK_ARTICLES.slice(0, 3));
-    }
+    setArticles(
+      (data || []).map((a) => ({
+        slug: a.slug,
+        title: a.title,
+        excerpt: a.excerpt || "",
+        tag: a.tag || "General",
+        date: a.published_at ? new Date(a.published_at).getFullYear().toString() : "",
+      }))
+    );
+    setLoaded(true);
   };
 
   const fetchLikes = async () => {
@@ -143,9 +131,24 @@ const WritingSection = () => {
         </p>
 
         <div className="space-y-4 animate-on-scroll">
+          {loaded && articles.length === 0 && (
+            <div className="text-center py-12 border border-dashed border-border rounded-xl">
+              <p className="text-muted-foreground text-sm">
+                New writing is on the way. In the meantime, read the archive on{" "}
+                <a
+                  href="https://medium.com/@litusoja"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary font-medium hover:underline"
+                >
+                  Litu Musings
+                </a>.
+              </p>
+            </div>
+          )}
           {articles.map((a) => (
             <article key={a.slug} className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden">
-              <a href={a.mediumUrl} target="_blank" rel="noopener noreferrer" className="group block">
+              <Link to={`/writing/${a.slug}`} className="group block">
                 <div className={`h-2 bg-gradient-to-r ${tagColors[a.tag] || "from-secondary/20 to-secondary/10"}`} />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
@@ -162,7 +165,7 @@ const WritingSection = () => {
                     <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-secondary transition-colors mt-1 shrink-0" />
                   </div>
                 </div>
-              </a>
+              </Link>
 
               <div className="px-6 pb-4 flex items-center gap-4">
                 <button
