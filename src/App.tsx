@@ -20,8 +20,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/work/:slug" element={<ProjectPage />} />
-      <Route path="/writing/:slug" element={<PostPage />} />
       <Route path="/writing/category/:category" element={<CategoryPage />} />
+      <Route path="/writing/:slug" element={<PostPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />
