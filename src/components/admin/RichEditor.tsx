@@ -119,7 +119,7 @@ const RichEditor = ({ value, onChange }: Props) => {
     if (!editor) return;
     const incoming = value || "";
     if (incoming !== editor.getHTML()) {
-      editor.commands.setContent(incoming, false);
+      editor.commands.setContent(incoming, { emitUpdate: false });
     }
   }, [value, editor]);
 
