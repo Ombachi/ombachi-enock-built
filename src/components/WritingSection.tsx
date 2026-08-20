@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Heart, MessageCircle, ExternalLink } from "lucide-react";
+import { ArrowUpRight, Heart, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { POST_CATEGORIES, categoryGradient, categorySlug } from "@/lib/postCategories";
 
 interface Article {
   slug: string;
@@ -111,14 +112,6 @@ const WritingSection = () => {
     fetchComments();
   };
 
-  const tagColors: Record<string, string> = {
-    "Life & Reflection": "from-rose-500/20 to-pink-500/20 border-rose-500/30",
-    "Politics & Systems": "from-amber-500/20 to-orange-500/20 border-amber-500/30",
-    "Climate & Health": "from-emerald-500/20 to-teal-500/20 border-emerald-500/30",
-    Governance: "from-blue-500/20 to-indigo-500/20 border-blue-500/30",
-    "Systems Thinking": "from-violet-500/20 to-purple-500/20 border-violet-500/30",
-  };
-
   return (
     <section id="writing" className="section-padding bg-muted">
       <div className="section-container">
@@ -129,6 +122,18 @@ const WritingSection = () => {
         <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
           Short reflections on diagnostics, climate-health, leadership, and the systems that shape healthcare.
         </p>
+
+        <div className="flex flex-wrap gap-2 mb-10 animate-on-scroll">
+          {POST_CATEGORIES.map((c) => (
+            <Link
+              key={c.slug}
+              to={`/writing/category/${c.slug}`}
+              className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:border-secondary/40 hover:text-secondary transition-colors"
+            >
+              {c.name}
+            </Link>
+          ))}
+        </div>
 
         <div className="space-y-4 animate-on-scroll">
           {loaded && articles.length === 0 && (
@@ -149,7 +154,7 @@ const WritingSection = () => {
           {articles.map((a) => (
             <article key={a.slug} className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden">
               <Link to={`/writing/${a.slug}`} className="group block">
-                <div className={`h-2 bg-gradient-to-r ${tagColors[a.tag] || "from-secondary/20 to-secondary/10"}`} />
+                <div className={`h-2 bg-gradient-to-r ${categoryGradient(a.tag)}`} />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -184,6 +189,12 @@ const WritingSection = () => {
                   <MessageCircle size={14} />
                   {(comments[a.slug] || []).length}
                 </button>
+                <Link
+                  to={`/writing/category/${categorySlug(a.tag)}`}
+                  className="ml-auto text-xs text-muted-foreground hover:text-secondary transition-colors"
+                >
+                  More in {a.tag} →
+                </Link>
               </div>
 
               {openComments === a.slug && (
@@ -229,17 +240,6 @@ const WritingSection = () => {
               )}
             </article>
           ))}
-        </div>
-
-        <div className="mt-8 text-center animate-on-scroll">
-          <a
-            href="https://medium.com/@litusoja"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-bold text-secondary hover:underline text-base"
-          >
-            <ExternalLink size={16} /> Read more on Litu Musings — Medium
-          </a>
         </div>
       </div>
     </section>

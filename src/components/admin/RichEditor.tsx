@@ -9,7 +9,7 @@ import {
   Bold, Italic, Heading2, Heading3, List, ListOrdered, Quote, Code, Link as LinkIcon,
   Image as ImageIcon, Youtube as YoutubeIcon, Undo, Redo, Minus,
 } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { uploadPostImage } from "@/lib/postImages";
 import { toast } from "@/hooks/use-toast";
 
@@ -113,6 +113,15 @@ const RichEditor = ({ value, onChange }: Props) => {
     },
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
   });
+
+  // Sync external content changes (e.g. HTML import) into the editor.
+  useEffect(() => {
+    if (!editor) return;
+    const incoming = value || "";
+    if (incoming !== editor.getHTML()) {
+      editor.commands.setContent(incoming, { emitUpdate: false });
+    }
+  }, [value, editor]);
 
   return (
     <div className="border border-border rounded-lg bg-background">

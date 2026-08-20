@@ -8,10 +8,12 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, Plus, Pencil, Trash2, ExternalLink, ImagePlus, ArrowLeft } from "lucide-react";
+import { Loader2, Plus, Pencil, Trash2, ExternalLink, ImagePlus, ArrowLeft, FileCode } from "lucide-react";
 import { format } from "date-fns";
 import RichEditor from "./RichEditor";
 import { slugify, uploadPostImage } from "@/lib/postImages";
+import { CATEGORY_NAMES } from "@/lib/postCategories";
+import { sanitizeImportedHtml, extractHtmlTitle } from "@/lib/htmlImport";
 
 interface Post {
   id: string;
@@ -27,13 +29,7 @@ interface Post {
   updated_at: string;
 }
 
-const TAGS = [
-  "Life & Reflection",
-  "Politics & Systems",
-  "Climate & Health",
-  "Governance",
-  "Systems Thinking",
-];
+const TAGS = CATEGORY_NAMES;
 
 const emptyPost = (): Post => ({
   id: "",
@@ -55,6 +51,8 @@ const PostsPanel = () => {
   const [editing, setEditing] = useState<Post | null>(null);
   const [saving, setSaving] = useState(false);
   const [slugTouched, setSlugTouched] = useState(false);
+  const [htmlPaste, setHtmlPaste] = useState("");
+  const [showImport, setShowImport] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -147,6 +145,27 @@ const PostsPanel = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const applyHtml = (raw: string) => {
+    if (!editing || !raw.trim()) return;
+    const html = sanitizeImportedHtml(raw);
+    if (!html) return toast({ title: "Nothing to import", description: "The HTML had no readable content.", variant: "destructive" });
+    const title = editing.title || extractHtmlTitle(raw);
+    setEditing({
+      ...editing,
+      title,
+      slug: editing.slug || slugify(title),
+      content: html,
+    });
+    setHtmlPaste("");
+    setShowImport(false);
+    toast({ title: "HTML imported", description: "Review the content in the editor before publishing." });
+  };
+
+  const importHtmlFile = async (file: File) => {
+    const raw = await file.text();
+    applyHtml(raw);
   };
 
   if (editing) {
@@ -274,7 +293,48 @@ const PostsPanel = () => {
           </div>
 
           <div className="space-y-1.5">
-            <Label>Content</Label>
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <Label>Content</Label>
+              <div className="flex items-center gap-2">
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    accept=".html,.htm,text/html"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      e.target.value = "";
+                      if (f) importHtmlFile(f);
+                    }}
+                  />
+                  <span className="inline-flex items-center gap-1 text-sm px-3 py-1.5 rounded-md border border-border hover:bg-muted transition-colors">
+                    <FileCode className="h-3.5 w-3.5" /> Upload .html
+                  </span>
+                </label>
+                <Button type="button" variant="outline" size="sm" onClick={() => setShowImport((s) => !s)}>
+                  Paste HTML
+                </Button>
+              </div>
+            </div>
+            {showImport && (
+              <div className="space-y-2 border border-border rounded-lg p-3 bg-muted/30">
+                <Textarea
+                  value={htmlPaste}
+                  onChange={(e) => setHtmlPaste(e.target.value)}
+                  rows={6}
+                  placeholder="<h2>Section</h2><p>Paste a full HTML document or fragment…</p>"
+                  className="font-mono text-xs"
+                />
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs text-muted-foreground">
+                    Scripts, styles and inline handlers are stripped. This replaces the current content.
+                  </p>
+                  <Button type="button" size="sm" onClick={() => applyHtml(htmlPaste)} disabled={!htmlPaste.trim()}>
+                    Import
+                  </Button>
+                </div>
+              </div>
+            )}
             <RichEditor value={editing.content} onChange={(content) => setEditing({ ...editing, content })} />
           </div>
         </CardContent>
