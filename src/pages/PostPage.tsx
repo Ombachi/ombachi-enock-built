@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
+import ShareButtons from "@/components/ShareButtons";
+import { categorySlug } from "@/lib/postCategories";
 import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar } from "lucide-react";
 import { format } from "date-fns";
 
@@ -166,9 +169,43 @@ const PostPage = () => {
   }
 
   const dateStr = post.published_at ? format(new Date(post.published_at), "MMMM d, yyyy") : "";
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const postUrl = `${origin}/writing/${post.slug}`;
+  const metaDescription = (post.excerpt || post.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 155);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: metaDescription,
+    image: post.cover_image_url || undefined,
+    datePublished: post.published_at || undefined,
+    dateModified: post.updated_at,
+    articleSection: post.tag || undefined,
+    mainEntityOfPage: postUrl,
+    author: { "@type": "Person", name: "Ombachi Enock", url: origin || undefined },
+  };
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>{`${post.title} — Ombachi Enock`}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={postUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={postUrl} />
+        {post.cover_image_url && <meta property="og:image" content={post.cover_image_url} />}
+        {post.published_at && <meta property="article:published_time" content={post.published_at} />}
+        <meta property="article:modified_time" content={post.updated_at} />
+        {post.tag && <meta property="article:section" content={post.tag} />}
+        <meta property="article:author" content="Ombachi Enock" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={metaDescription} />
+        {post.cover_image_url && <meta name="twitter:image" content={post.cover_image_url} />}
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
       <div className="min-h-screen bg-background">
         <Navbar />
 
@@ -182,9 +219,12 @@ const PostPage = () => {
             </Link>
 
             {post.tag && (
-              <span className="inline-block text-xs font-medium text-secondary bg-secondary/10 px-2.5 py-1 rounded-full mb-4">
+              <Link
+                to={`/writing/category/${categorySlug(post.tag)}`}
+                className="inline-block text-xs font-medium text-secondary bg-secondary/10 hover:bg-secondary/20 transition-colors px-2.5 py-1 rounded-full mb-4"
+              >
                 {post.tag}
-              </span>
+              </Link>
             )}
 
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4">
@@ -195,10 +235,13 @@ const PostPage = () => {
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">{post.excerpt}</p>
             )}
 
-            <div className="flex items-center gap-4 text-xs text-muted-foreground mb-8 pb-8 border-b border-border">
-              <span className="inline-flex items-center gap-1.5"><Calendar size={12} /> {dateStr}</span>
-              <span>·</span>
-              <span>By Ombachi Enock</span>
+            <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground mb-8 pb-8 border-b border-border">
+              <div className="flex items-center gap-4">
+                <span className="inline-flex items-center gap-1.5"><Calendar size={12} /> {dateStr}</span>
+                <span>·</span>
+                <span>By Ombachi Enock</span>
+              </div>
+              <ShareButtons url={postUrl} title={post.title} text={post.excerpt || undefined} />
             </div>
 
             {post.cover_image_url && (
@@ -257,6 +300,9 @@ const PostPage = () => {
                 >
                   <MessageCircle size={16} /> {comments.length}
                 </button>
+                <div className="ml-auto">
+                  <ShareButtons url={postUrl} title={post.title} text={post.excerpt || undefined} />
+                </div>
               </div>
 
               {showComments && (
