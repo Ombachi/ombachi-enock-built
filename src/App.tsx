@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index.tsx";
 import ProjectPage from "./pages/ProjectPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -11,6 +12,10 @@ import Auth from "./pages/Auth.tsx";
 import Admin from "./pages/Admin.tsx";
 import PostPage from "./pages/PostPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
+import LibraryPage from "./pages/LibraryPage.tsx";
+import LibraryProductPage from "./pages/LibraryProductPage.tsx";
+import LibraryCollectionPage from "./pages/LibraryCollectionPage.tsx";
+import CartPage from "./pages/CartPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +27,10 @@ const AppRoutes = () => {
       <Route path="/work/:slug" element={<ProjectPage />} />
       <Route path="/writing/category/:category" element={<CategoryPage />} />
       <Route path="/writing/:slug" element={<PostPage />} />
+      <Route path="/library" element={<LibraryPage />} />
+      <Route path="/library/collections/:slug" element={<LibraryCollectionPage />} />
+      <Route path="/library/:slug" element={<LibraryProductPage />} />
+      <Route path="/cart" element={<CartPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />
@@ -32,11 +41,13 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <CartProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
