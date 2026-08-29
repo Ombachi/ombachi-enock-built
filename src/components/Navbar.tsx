@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
-const links = ["Home", "About", "Work", "Principles", "Passions", "Writing", "Contact"];
+const links = ["Home", "About", "Work", "Principles", "Passions", "Writing", "Library", "Contact"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);

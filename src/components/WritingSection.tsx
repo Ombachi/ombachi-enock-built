@@ -119,9 +119,17 @@ const WritingSection = () => {
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
           Thinking Out Loud
         </h2>
-        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
+        <p className="text-muted-foreground mb-6 max-w-xl animate-on-scroll">
           Short reflections on diagnostics, climate-health, leadership, and the systems that shape healthcare.
         </p>
+        <div className="mb-10 animate-on-scroll">
+          <Link
+            to="/library"
+            className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline"
+          >
+            Browse books, papers and briefs in The Library <ArrowUpRight size={15} />
+          </Link>
+        </div>
 
         <div className="flex flex-wrap gap-2 mb-10 animate-on-scroll">
           {POST_CATEGORIES.map((c) => (
