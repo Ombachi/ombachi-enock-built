@@ -24,3 +24,5 @@
 - [x] RSS edge function `supabase/functions/rss` — pending deploy (backend paused)
 - [x] sitemap.xml generator (`scripts/generate-sitemap.ts`, predev/prebuild)
 - [ ] Transactional email — blocked on a verified sending domain
+- [x] Newsletter capture (footer/home section; writes to `newsletter_subscribers` when backend is live, queues locally otherwise)
+- [ ] Migration: `newsletter_subscribers` table + RLS/GRANTs (blocked: database paused)
