@@ -43,18 +43,27 @@ const SiteSearch = () => {
     if (!open || loaded) return;
     (async () => {
       const [postRes, productRes] = await Promise.all([
-        supabase
-          .from("posts")
-          .select("slug, title, excerpt, tag")
-          .eq("status", "published")
-          .order("published_at", { ascending: false })
-          .then((r) => r.data ?? [])
-          .catch(() => []),
-        loadProducts()
-          .then((r) => r.products)
-          .catch(() => [] as Product[]),
+        (async () => {
+          try {
+            const { data } = await supabase
+              .from("posts")
+              .select("slug, title, excerpt, tag")
+              .eq("status", "published")
+              .order("published_at", { ascending: false });
+            return (data ?? []) as PostHit[];
+          } catch {
+            return [] as PostHit[];
+          }
+        })(),
+        (async () => {
+          try {
+            return (await loadProducts()).products;
+          } catch {
+            return [] as Product[];
+          }
+        })(),
       ]);
-      setPosts(postRes as PostHit[]);
+      setPosts(postRes);
       setProducts(productRes);
       setLoaded(true);
     })();
