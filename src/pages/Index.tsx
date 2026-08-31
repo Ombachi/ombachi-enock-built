@@ -8,6 +8,7 @@ import QuoteSection from "@/components/QuoteSection";
 import PassionsSection from "@/components/PassionsSection";
 import WritingSection from "@/components/WritingSection";
 import ContactSection from "@/components/ContactSection";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
@@ -29,6 +30,7 @@ const Index = () => {
         <PassionsSection />
         <WritingSection />
         <ContactSection />
+        <NewsletterSignup />
         <Footer />
         <BackToTop />
       </div>
