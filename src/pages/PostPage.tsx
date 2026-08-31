@@ -356,6 +356,8 @@ const PostPage = () => {
                   </div>
                 </div>
               )}
+
+              <RelatedPosts currentSlug={post.slug} tag={post.tag} />
             </div>
           </div>
         </article>
