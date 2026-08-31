@@ -7,8 +7,10 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import RelatedPosts from "@/components/RelatedPosts";
 import { categorySlug } from "@/lib/postCategories";
-import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar } from "lucide-react";
+import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar, Clock } from "lucide-react";
 import { format } from "date-fns";
 
 interface Post {
@@ -171,7 +173,10 @@ const PostPage = () => {
   const dateStr = post.published_at ? format(new Date(post.published_at), "MMMM d, yyyy") : "";
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const postUrl = `${origin}/writing/${post.slug}`;
-  const metaDescription = (post.excerpt || post.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 155);
+  const plainText = post.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const wordCount = plainText ? plainText.split(" ").length : 0;
+  const readMinutes = Math.max(1, Math.round(wordCount / 225));
+  const metaDescription = (post.excerpt || plainText).slice(0, 155);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -208,6 +213,8 @@ const PostPage = () => {
       </Helmet>
       <div className="min-h-screen bg-background">
         <Navbar />
+        <ReadingProgress />
+
 
         <article className="pt-24 pb-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6">
@@ -240,6 +247,8 @@ const PostPage = () => {
                 <span className="inline-flex items-center gap-1.5"><Calendar size={12} /> {dateStr}</span>
                 <span>·</span>
                 <span>By Ombachi Enock</span>
+                <span>·</span>
+                <span className="inline-flex items-center gap-1.5"><Clock size={12} /> {readMinutes} min read</span>
               </div>
               <ShareButtons url={postUrl} title={post.title} text={post.excerpt || undefined} />
             </div>
@@ -347,6 +356,8 @@ const PostPage = () => {
                   </div>
                 </div>
               )}
+
+              <RelatedPosts currentSlug={post.slug} tag={post.tag} />
             </div>
           </div>
         </article>
