@@ -7,8 +7,10 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import ShareButtons from "@/components/ShareButtons";
+import ReadingProgress from "@/components/ReadingProgress";
+import RelatedPosts from "@/components/RelatedPosts";
 import { categorySlug } from "@/lib/postCategories";
-import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar } from "lucide-react";
+import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar, Clock } from "lucide-react";
 import { format } from "date-fns";
 
 interface Post {
