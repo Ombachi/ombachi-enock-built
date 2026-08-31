@@ -145,20 +145,9 @@ const WritingSection = () => {
 
         <div className="space-y-4 animate-on-scroll">
           {loaded && articles.length === 0 && (
-            <div className="text-center py-12 border border-dashed border-border rounded-xl">
-              <p className="text-muted-foreground text-sm">
-                New writing is on the way. In the meantime, read the archive on{" "}
-                <a
-                  href="https://medium.com/@litusoja"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary font-medium hover:underline"
-                >
-                  Litu Musings
-                </a>.
-              </p>
-            </div>
+            <p className="text-muted-foreground text-sm">New writing is on the way.</p>
           )}
+
           {articles.map((a) => (
             <article key={a.slug} className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden">
               <Link to={`/writing/${a.slug}`} className="group block">
