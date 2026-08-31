@@ -45,12 +45,16 @@ const SiteSearch = () => {
       const [postRes, productRes] = await Promise.all([
         (async () => {
           try {
-            const { data } = await supabase
+            const query = supabase
               .from("posts")
               .select("slug, title, excerpt, tag")
               .eq("status", "published")
-              .order("published_at", { ascending: false });
-            return (data ?? []) as PostHit[];
+              .order("published_at", { ascending: false })
+              .then((r) => (r.data ?? []) as PostHit[]);
+            return await Promise.race([
+              query,
+              new Promise<PostHit[]>((resolve) => setTimeout(() => resolve([]), 3000)),
+            ]);
           } catch {
             return [] as PostHit[];
           }
