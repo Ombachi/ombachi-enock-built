@@ -13,18 +13,12 @@ const flipImages = [
 
 const HeroSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  const [showTagline, setShowTagline] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % flipImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowTagline(true), 400);
-    return () => clearTimeout(timer);
   }, []);
 
   return (
