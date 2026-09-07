@@ -1,4 +1,4 @@
-import { Microscope, Leaf } from "lucide-react";
+import { Microscope, Leaf, Database, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface Project {
@@ -10,6 +10,20 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    slug: "litu-vault",
+    title: "Litu Vault",
+    summary: "A modern hospital management system streamlining patient records, billing, and clinical operations.",
+    icon: Database,
+    link: "https://lituvault.com",
+  },
+  {
+    slug: "litu-hub",
+    title: "Litu Hub",
+    summary: "A premier learning management system delivering premium health and diagnostics education at scale.",
+    icon: BookOpen,
+    link: "https://lituhub.com",
+  },
   {
     slug: "litu-diagnostics",
     title: "Litu Diagnostics",
