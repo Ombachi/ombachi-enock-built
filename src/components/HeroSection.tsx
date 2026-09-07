@@ -13,18 +13,12 @@ const flipImages = [
 
 const HeroSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  const [showTagline, setShowTagline] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % flipImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowTagline(true), 400);
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -41,23 +35,6 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-primary/85" />
 
       <div className="section-container relative z-10 py-32 flex flex-col items-center text-center justify-center min-h-[60vh]">
-        <h1
-          className={`font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground transition-all duration-1000 ease-out ${
-            showTagline ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ textShadow: "0 2px 30px rgba(0,0,0,0.4)" }}
-        >
-          Medical Laboratory Scientist
-        </h1>
-        <p
-          className={`mt-4 text-lg md:text-2xl text-primary-foreground/80 font-medium tracking-wide transition-all duration-1000 delay-300 ease-out ${
-            showTagline ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ textShadow: "0 2px 15px rgba(0,0,0,0.3)" }}
-        >
-          Health Systems Builder
-        </p>
-
         <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
           {flipImages.map((_, i) => (
             <button

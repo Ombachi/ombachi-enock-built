@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Microscope, Leaf, GraduationCap, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowLeft, ExternalLink, Microscope, Leaf, Database, BookOpen, GraduationCap, Stethoscope, TrendingUp } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -15,6 +15,28 @@ const projectsData: Record<string, {
   longDescription: string;
   metrics: string[];
 }> = {
+  "litu-vault": {
+    title: "Litu Vault",
+    icon: Database,
+    link: "https://lituvault.com",
+    problem: "Healthcare facilities struggle with fragmented records, inefficient billing, and operational blind spots that compromise patient care.",
+    role: "Founder & Product Lead — systems architecture, clinical workflow design, and go-to-market strategy.",
+    tools: "FHIR-compliant data models, cloud infrastructure, role-based access control, laboratory modules, billing automation.",
+    outcome: "A modern hospital management system that unifies clinical, laboratory, and administrative workflows in one secure platform.",
+    longDescription: "Litu Vault is designed to be the operating system for modern healthcare facilities. It brings patient records, laboratory results, billing, pharmacy, and appointments into a single, secure, easy-to-use platform. Built with clinical teams in mind, it reduces administrative burden, minimises errors, and gives hospital leaders real-time visibility into operations — so they can focus on delivering better care.",
+    metrics: ["EMR, lab, billing & pharmacy modules", "Role-based access & audit trails", "Cloud-hosted with 99.9% uptime target"],
+  },
+  "litu-hub": {
+    title: "Litu Hub",
+    icon: BookOpen,
+    link: "https://lituhub.com",
+    problem: "Health professionals across Africa lack affordable, premium, locally relevant continuing education and certification pathways.",
+    role: "Founder & Learning Architect — curriculum strategy, platform design, and instructor partnerships.",
+    tools: "Learning management workflows, video delivery, assessments, cohort tracking, certification automation.",
+    outcome: "A premier learning management system making high-quality diagnostics and health systems education accessible at scale.",
+    longDescription: "Litu Hub is a learning management system built for the next generation of African health professionals. It hosts premium courses on laboratory quality, diagnostics innovation, health systems strengthening, and leadership — combining expert instruction with practical assessments and verifiable credentials. Whether you are a student, laboratory scientist, or facility manager, Litu Hub meets you where you are and helps you grow.",
+    metrics: ["Self-paced and cohort-based courses", "Certificates & competency tracking", "Mobile-friendly learning experience"],
+  },
   "litu-diagnostics": {
     title: "Litu Diagnostics",
     icon: Microscope,
