@@ -101,6 +101,36 @@ export type Database = {
         }
         Relationships: []
       }
+      collections: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -122,6 +152,168 @@ export type Database = {
           id?: string
           message?: string
           name?: string
+        }
+        Relationships: []
+      }
+      entitlements: {
+        Row: {
+          created_at: string
+          download_count: number
+          email: string
+          id: string
+          last_downloaded_at: string | null
+          order_id: string | null
+          product_id: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          download_count?: number
+          email: string
+          id?: string
+          last_downloaded_at?: string | null
+          order_id?: string | null
+          product_id: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          download_count?: number
+          email?: string
+          id?: string
+          last_downloaded_at?: string | null
+          order_id?: string | null
+          product_id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entitlements_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entitlements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          format: string | null
+          id: string
+          is_digital: boolean
+          order_id: string
+          product_id: string | null
+          quantity: number
+          title: string
+          unit_price_kes: number
+        }
+        Insert: {
+          created_at?: string
+          format?: string | null
+          id?: string
+          is_digital?: boolean
+          order_id: string
+          product_id?: string | null
+          quantity?: number
+          title: string
+          unit_price_kes?: number
+        }
+        Update: {
+          created_at?: string
+          format?: string | null
+          id?: string
+          is_digital?: boolean
+          order_id?: string
+          product_id?: string | null
+          quantity?: number
+          title?: string
+          unit_price_kes?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          fulfilment: Database["public"]["Enums"]["fulfilment_status"]
+          id: string
+          notes: string | null
+          order_number: string
+          payment_method: string
+          payment_reference: string | null
+          shipping_address: string | null
+          shipping_kes: number
+          status: Database["public"]["Enums"]["order_status"]
+          subtotal_kes: number
+          total_kes: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          fulfilment?: Database["public"]["Enums"]["fulfilment_status"]
+          id?: string
+          notes?: string | null
+          order_number?: string
+          payment_method?: string
+          payment_reference?: string | null
+          shipping_address?: string | null
+          shipping_kes?: number
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal_kes?: number
+          total_kes?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          fulfilment?: Database["public"]["Enums"]["fulfilment_status"]
+          id?: string
+          notes?: string | null
+          order_number?: string
+          payment_method?: string
+          payment_reference?: string | null
+          shipping_address?: string | null
+          shipping_kes?: number
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal_kes?: number
+          total_kes?: number
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -203,6 +395,78 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          category: string
+          collections: string[]
+          compare_at_kes: number | null
+          cover_image_url: string | null
+          created_at: string
+          description: string
+          featured: boolean
+          file_path: string | null
+          format: string
+          id: string
+          is_digital: boolean
+          is_free: boolean
+          pages: number | null
+          price_kes: number
+          published_year: number | null
+          slug: string
+          status: Database["public"]["Enums"]["post_status"]
+          stock: number | null
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          collections?: string[]
+          compare_at_kes?: number | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string
+          featured?: boolean
+          file_path?: string | null
+          format?: string
+          id?: string
+          is_digital?: boolean
+          is_free?: boolean
+          pages?: number | null
+          price_kes?: number
+          published_year?: number | null
+          slug: string
+          status?: Database["public"]["Enums"]["post_status"]
+          stock?: number | null
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          collections?: string[]
+          compare_at_kes?: number | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string
+          featured?: boolean
+          file_path?: string | null
+          format?: string
+          id?: string
+          is_digital?: boolean
+          is_free?: boolean
+          pages?: number | null
+          price_kes?: number
+          published_year?: number | null
+          slug?: string
+          status?: Database["public"]["Enums"]["post_status"]
+          stock?: number | null
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -266,6 +530,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      fulfilment_status:
+        | "unfulfilled"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "digital_delivered"
+      order_status: "pending" | "paid" | "failed" | "refunded" | "cancelled"
       post_status: "draft" | "published"
     }
     CompositeTypes: {
@@ -395,6 +666,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      fulfilment_status: [
+        "unfulfilled",
+        "processing",
+        "shipped",
+        "delivered",
+        "digital_delivered",
+      ],
+      order_status: ["pending", "paid", "failed", "refunded", "cancelled"],
       post_status: ["draft", "published"],
     },
   },
