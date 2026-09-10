@@ -23,8 +23,7 @@ const AboutSection = () => (
           <div className="space-y-5">
             <p className="text-muted-foreground leading-relaxed">
               I am a Medical Laboratory Scientist by training. A policy thinker by education. A founder by practice. A
-              writer by compulsion. I solve problems. I build systems. I connect ideas. I make things. I want to be useful.
-             
+              writer by compulsion. I solve problems. I build systems. I connect ideas. I make things. I want to be useful.      
           </div>
         </div>
         <div className="md:col-span-5 order-1 md:order-2 hidden md:block">
@@ -37,7 +36,6 @@ const AboutSection = () => (
               width={600}
               height={750}
             />
-           
           </div>
         </div>
       </div>
