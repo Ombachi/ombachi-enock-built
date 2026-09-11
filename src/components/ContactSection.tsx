@@ -35,7 +35,7 @@ const ContactSection = () => {
           Let's Connect
         </h2>
         <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-          For collaborations, speaking, consulting, teaching, or project opportunities — reach out below.
+          For collaborations, speaking, consulting, teaching, and project opportunities
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
