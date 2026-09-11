@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DarkModeToggle from "@/components/DarkModeToggle";
-import SiteSearch from "@/components/SiteSearch";
 
-const links = ["Home", "About", "Work", "Principles", "Passions", "Writing", "Library", "Contact"];
+const links = ["About", "Work", "Principles", "Writing", "Contact"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -41,12 +40,10 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <SiteSearch />
           <DarkModeToggle />
         </div>
 
         <div className="md:hidden flex items-center gap-2">
-          <SiteSearch />
           <DarkModeToggle />
           <button
             className="text-foreground"

@@ -4,11 +4,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw, Mail, Copy, BarChart3, FileText, Inbox } from "lucide-react";
+import { Loader2, LogOut, Eye, Users, MousePointerClick, Heart, MessageCircle, RefreshCw, Mail, Copy, BarChart3, FileText, Inbox, BookOpen, ShoppingBag } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { format, subDays, startOfDay } from "date-fns";
 import { toast } from "@/hooks/use-toast";
 import PostsPanel from "@/components/admin/PostsPanel";
+import ProductsPanel from "@/components/admin/ProductsPanel";
+import OrdersPanel from "@/components/admin/OrdersPanel";
 
 interface PageView {
   path: string;
@@ -222,9 +224,11 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="analytics" className="w-full">
-          <TabsList className="mb-6">
+          <TabsList className="mb-6 flex-wrap h-auto">
             <TabsTrigger value="analytics"><BarChart3 className="h-4 w-4 mr-1.5" /> Analytics</TabsTrigger>
             <TabsTrigger value="posts"><FileText className="h-4 w-4 mr-1.5" /> Posts</TabsTrigger>
+            <TabsTrigger value="products"><BookOpen className="h-4 w-4 mr-1.5" /> Products</TabsTrigger>
+            <TabsTrigger value="orders"><ShoppingBag className="h-4 w-4 mr-1.5" /> Orders</TabsTrigger>
             <TabsTrigger value="contact"><Inbox className="h-4 w-4 mr-1.5" /> Contact</TabsTrigger>
           </TabsList>
 
@@ -355,6 +359,14 @@ const Admin = () => {
 
           <TabsContent value="posts">
             <PostsPanel />
+          </TabsContent>
+
+          <TabsContent value="products">
+            <ProductsPanel />
+          </TabsContent>
+
+          <TabsContent value="orders">
+            <OrdersPanel />
           </TabsContent>
 
           <TabsContent value="contact">

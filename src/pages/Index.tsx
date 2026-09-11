@@ -23,11 +23,11 @@ const Index = () => {
         <Navbar />
         <HeroSection />
         <AboutSection />
+        <PassionsSection />
         <TimelineSection />
         <WorkSection />
         <PrinciplesSection />
         <QuoteSection />
-        <PassionsSection />
         <WritingSection />
         <ContactSection />
         <NewsletterSignup />
