@@ -361,6 +361,14 @@ const Admin = () => {
             <PostsPanel />
           </TabsContent>
 
+          <TabsContent value="products">
+            <ProductsPanel />
+          </TabsContent>
+
+          <TabsContent value="orders">
+            <OrdersPanel />
+          </TabsContent>
+
           <TabsContent value="contact">
             <Card>
           <CardHeader>
