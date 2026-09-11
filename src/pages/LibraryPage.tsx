@@ -95,8 +95,7 @@ const LibraryPage = () => {
                 Work you can read, keep and use
               </h1>
               <p className="mt-4 text-muted-foreground leading-relaxed">
-                Books, research papers, policy briefs, essays and reports — digital downloads and
-                printed editions, drawn from practice in laboratories and health systems.
+                Books, research papers, policy briefs, essays and reports.
               </p>
             </div>
             <CartButton />
