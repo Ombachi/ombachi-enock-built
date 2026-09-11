@@ -15,7 +15,7 @@ const passions = [
     name: "Film",
     image: passionFilm,
     color: "from-purple-500 to-pink-500",
-    philosophy: "Film teaches empathy — inhabiting someone else's story and emerging changed.",
+    philosophy: "Film teaches empathy by inhabiting someone else's story and emerging changed.",
   },
   {
     name: "Photography",
@@ -27,25 +27,25 @@ const passions = [
     name: "Music",
     image: passionMusic,
     color: "from-pink-500 to-yellow-500",
-    philosophy: "Structured creativity — rhythm, harmony, and improvisation in perfect balance.",
+    philosophy: "Structured creativity. Rhythm, harmony, and improvisation in perfect balance.",
   },
   {
     name: "Football",
     image: passionFootball,
     color: "from-green-500 to-yellow-500",
-    philosophy: "Systems thinking in motion — every pass shapes the outcome. Teamwork at its purest.",
+    philosophy: "Systems thinking in motion.Every pass shapes the outcome. Teamwork at its purest.",
   },
   {
     name: "Rugby",
     image: passionRugby,
     color: "from-blue-500 to-red-500",
-    philosophy: "You move forward by passing backward — a lesson in servant leadership.",
+    philosophy: "You move forward by passing backward. A lesson in servant leadership.",
   },
   {
     name: "Badminton",
     image: passionBadminton,
     color: "from-pink-500 to-yellow-400",
-    philosophy: "Precision and anticipation. Read, react, respond — like clinical decisions.",
+    philosophy: "Precision and anticipation. Read, react, respond.",
   },
   {
     name: "Formula 1",
@@ -63,7 +63,7 @@ const passions = [
     name: "Basketball",
     image: passionBasketball,
     color: "from-orange-500 to-blue-500",
-    philosophy: "Court vision and adaptability — seeing the full picture, deciding fast.",
+    philosophy: "Court vision and adaptability. Seeing the full picture, deciding fast.",
   },
   {
     name: "Space",
@@ -86,7 +86,7 @@ const PassionsSection = () => {
           Beyond the Lab
         </h2>
         <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-          Life is richer when you explore beyond your profession. Each passion carries a philosophy that shapes how I work and lead.
+          Life is richer when you explore beyond your profession.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 animate-on-scroll">
