@@ -63,7 +63,7 @@ const PrinciplesSection = () => (
     <div className="section-container">
       <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Principles</p>
       <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
-        How I Think About Health Systems
+        How I Think About Systems
       </h2>
       <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
         Operating Principles behind every project I take on.
