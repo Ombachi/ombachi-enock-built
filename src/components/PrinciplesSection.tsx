@@ -1,17 +1,61 @@
-import { Compass, Network, TreePine, BookOpen, Globe, Heart, Award, GraduationCap, Cpu, Users, Map } from "lucide-react";
+import {
+  Compass,
+  Network,
+  TreePine,
+  BookOpen,
+  Globe,
+  Heart,
+  Award,
+  GraduationCap,
+  Cpu,
+  Users,
+  Map,
+} from "lucide-react";
 
 const principles = [
-  { icon: Compass, title: "First Principles", desc: "Breaking problems down to their fundamental truths and building solutions from the ground up." },
-  { icon: Network, title: "Systems Thinking", desc: "Understanding how interconnected parts create complex wholes — and designing interventions accordingly." },
-  { icon: TreePine, title: "Long-Term Stewardship", desc: "Building institutions and systems that outlast us, with patience and generational thinking." },
-  { icon: BookOpen, title: "Evidence-Based Practice", desc: "Every decision grounded in data, research, and validated methods — not assumption." },
-  { icon: Globe, title: "Decentralisation & Access", desc: "Extending quality services beyond urban centres to where communities actually live." },
-  { icon: Heart, title: "Human Dignity", desc: "Every system, every policy, every innovation must centre the worth and agency of the individual." },
-  { icon: Award, title: "Meritocracy", desc: "Rewarding competence, effort, and character — creating systems where excellence is recognised." },
-  { icon: GraduationCap, title: "Lifelong Learning", desc: "Staying curious, staying humble, and evolving with new knowledge and perspectives." },
-  { icon: Cpu, title: "Technology-Enabled Service", desc: "Leveraging AI, dashboards, and digital tools to modernise and scale healthcare delivery." },
-  { icon: Users, title: "Mentorship & Multiplication", desc: "Investing in people so they can invest in others — compounding impact across generations." },
-  { icon: Map, title: "Future Mapping", desc: "Anticipating trends, preparing for disruption, and designing systems for the world ahead." },
+  {
+    icon: Compass,
+    title: "First Principles",
+    desc: "Breaking problems down to their fundamental truths and building solutions from the ground up.",
+  },
+  { icon: Network, title: "Systems Thinking", desc: "Understanding how interconnected parts create complex wholes." },
+  {
+    icon: TreePine,
+    title: "Long-Term Stewardship",
+    desc: "Building institutions and systems that outlast us, with patience and generational thinking.",
+  },
+  {
+    icon: BookOpen,
+    title: "Evidence-Based Practice",
+    desc: "Every decision grounded in data, research, and validated methods.",
+  },
+  {
+    icon: Globe,
+    title: "Decentralisation & Access",
+    desc: "Extending quality services beyond urban centres to where communities actually live.",
+  },
+  {
+    icon: Heart,
+    title: "Human Dignity",
+    desc: "Every system, every policy, every innovation must centre the worth and agency of the individual.",
+  },
+  { icon: Award, title: "Meritocracy", desc: "Rewarding competence, effort, and character." },
+  {
+    icon: GraduationCap,
+    title: "Lifelong Learning",
+    desc: "Staying curious, staying humble, and evolving with new knowledge and perspectives.",
+  },
+  {
+    icon: Cpu,
+    title: "Technology-Enabled Service",
+    desc: "Leveraging AI and digital tools to modernise and scale delivery.",
+  },
+  { icon: Users, title: "Mentorship & Multiplication", desc: "Investing in people so they can invest in others." },
+  {
+    icon: Map,
+    title: "Future Mapping",
+    desc: "Anticipating trends, preparing for disruption, and designing systems for the world ahead.",
+  },
 ];
 
 const PrinciplesSection = () => (
@@ -22,12 +66,15 @@ const PrinciplesSection = () => (
         How I Think About Health Systems
       </h2>
       <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-        These aren't abstract ideals — they're the operating principles behind every project I take on.
+        Operating Principles behind every project I take on.
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
         {principles.map((p) => (
-          <div key={p.title} className="group p-6 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors">
+          <div
+            key={p.title}
+            className="group p-6 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
+          >
             <p.icon size={28} className="text-secondary mb-4 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-foreground mb-2">{p.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">{p.desc}</p>
