@@ -4,20 +4,17 @@ export const COLLECTIONS: Collection[] = [
   {
     slug: "climate-and-health",
     title: "Climate & Health",
-    description:
-      "Field notes, briefs and research on planetary health, resilience and diagnostics at the frontline.",
+    description: "Field notes, briefs and research on planetary health, resilience and diagnostics at the frontline.",
   },
   {
     slug: "diagnostics-practice",
     title: "Diagnostics in Practice",
-    description:
-      "Laboratory quality, accreditation and the operational craft of running diagnostic services.",
+    description: "Laboratory quality, accreditation and the operational craft of running diagnostic services.",
   },
   {
     slug: "systems-and-governance",
     title: "Systems & Governance",
-    description:
-      "Institutions, incentives and stewardship — how health systems actually behave.",
+    description: "Institutions, incentives and stewardship.",
   },
   {
     slug: "essays-and-reflections",
@@ -114,8 +111,7 @@ export const SEED_PRODUCTS: Product[] = [
     slug: "laboratory-quality-handbook-signed",
     title: "The Laboratory Quality Handbook — Signed Edition",
     subtitle: "Hand-signed, numbered print run",
-    description:
-      "A hand-signed and numbered copy of the handbook, shipped within Kenya. Limited print run.",
+    description: "A hand-signed and numbered copy of the handbook, shipped within Kenya. Limited print run.",
     format: "Signed Copy",
     category: "Diagnostics & Labs",
     price_kes: 5500,
@@ -148,5 +144,4 @@ export const SEED_PRODUCTS: Product[] = [
   },
 ];
 
-export const collectionBySlug = (slug?: string) =>
-  COLLECTIONS.find((c) => c.slug === slug);
+export const collectionBySlug = (slug?: string) => COLLECTIONS.find((c) => c.slug === slug);
