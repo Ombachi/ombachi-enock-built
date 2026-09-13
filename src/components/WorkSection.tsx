@@ -46,13 +46,11 @@ const WorkSection = () => {
   return (
     <section id="work" className="section-padding bg-background">
       <div className="section-container">
-        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Projects</p>
+        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll"></p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
           Featured Projects & Impact
         </h2>
-        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-          Ventures I've founded or co-created to solve real problems in diagnostics, climate, and health systems.
-        </p>
+        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll"></p>
 
         <div className="grid md:grid-cols-2 gap-6 animate-on-scroll">
           {projects.map((p) => {
