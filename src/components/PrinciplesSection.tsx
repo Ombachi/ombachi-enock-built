@@ -61,13 +61,11 @@ const principles = [
 const PrinciplesSection = () => (
   <section id="principles" className="section-padding bg-background">
     <div className="section-container">
-      <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Principles</p>
+      <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll"></p>
       <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
-        How I Think About Systems
+        Fundamental Principles
       </h2>
-      <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
-        Operating Principles behind every project I take on.
-      </p>
+      <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll"></p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
         {principles.map((p) => (
