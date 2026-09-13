@@ -1,0 +1,16 @@
+
+INSERT INTO public.collections (slug, title, description, sort_order) VALUES
+  ('climate-and-health','Climate & Health','Field notes, briefs and research on planetary health, resilience and diagnostics at the frontline.',1),
+  ('diagnostics-practice','Diagnostics in Practice','Laboratory quality, accreditation and the operational craft of running diagnostic services.',2),
+  ('systems-and-governance','Systems & Governance','Institutions, incentives and stewardship.',3),
+  ('essays-and-reflections','Essays & Reflections','Longform thinking on meaning, work, and the human condition.',4)
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO public.products (slug, title, subtitle, description, format, category, price_kes, compare_at_kes, is_digital, is_free, stock, pages, published_year, collections, featured, status) VALUES
+  ('laboratory-quality-handbook','The Laboratory Quality Handbook','Building ISO 15189 capability in resource-constrained settings','A practical handbook for laboratory managers moving a facility from ad-hoc practice to accreditation-ready quality systems. Covers document control, competency assessment, internal audit, non-conformance handling and the human work of changing a lab''s culture.','Book','Diagnostics & Labs',3500,4500,false,false,40,268,2025,ARRAY['diagnostics-practice'],true,'published'),
+  ('climate-health-policy-brief','Climate & Health: A Policy Brief for County Systems','Preparing devolved health systems for climate-sensitive disease','A concise brief for county health leadership on surveillance, diagnostic readiness and budgeting for climate-sensitive disease burden. Includes an implementation checklist and indicator set.','Policy Brief','Climate & Health',0,NULL,true,true,NULL,24,2026,ARRAY['climate-and-health','systems-and-governance'],true,'published'),
+  ('decentralised-diagnostics-report','Decentralised Diagnostics','What it takes to move testing closer to people','A field report drawn from building Litu Diagnostics: unit economics, quality assurance at the periphery, supply chains, and the trade-offs of decentralising testing.','Report','Diagnostics & Labs',1200,NULL,true,false,NULL,62,2026,ARRAY['diagnostics-practice','systems-and-governance'],false,'published'),
+  ('first-principles-essays','First Principles','Essays on systems, service and the long view','A collected volume of essays on first-principles thinking, stewardship and building institutions that outlive their founders.','eBook','Philosophy',900,NULL,true,false,NULL,140,2026,ARRAY['essays-and-reflections'],true,'published'),
+  ('laboratory-quality-handbook-signed','The Laboratory Quality Handbook — Signed Edition','Hand-signed, numbered print run','A hand-signed and numbered copy of the handbook, shipped within Kenya. Limited print run.','Signed Copy','Diagnostics & Labs',5500,NULL,false,false,12,268,2025,ARRAY['diagnostics-practice'],false,'published'),
+  ('surveillance-research-paper','Diagnostic Surveillance in Devolved Systems','Peer-reviewed research paper','A research paper examining diagnostic surveillance coverage across devolved county systems, with a proposed minimum data set for national reporting.','Research Paper','Governance',0,NULL,true,true,NULL,18,2026,ARRAY['systems-and-governance','climate-and-health'],false,'published')
+ON CONFLICT (slug) DO NOTHING;
