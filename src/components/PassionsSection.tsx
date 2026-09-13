@@ -79,15 +79,9 @@ const PassionsSection = () => {
   return (
     <section id="passions" className="section-padding bg-muted">
       <div className="section-container">
-        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">
-          Passions & Play
-        </p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
-          Beyond the Lab
-        </h2>
-        <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll">
           Life is richer when you explore beyond your profession.
-        </p>
+        </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 animate-on-scroll">
           {passions.map((p) => {
