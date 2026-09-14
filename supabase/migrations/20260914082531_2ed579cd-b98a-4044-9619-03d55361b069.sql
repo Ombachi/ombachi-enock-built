@@ -1,0 +1,2 @@
+ALTER TABLE public.products ADD COLUMN IF NOT EXISTS post_id uuid REFERENCES public.posts(id) ON DELETE CASCADE;
+CREATE UNIQUE INDEX IF NOT EXISTS products_post_id_key ON public.products(post_id) WHERE post_id IS NOT NULL;
