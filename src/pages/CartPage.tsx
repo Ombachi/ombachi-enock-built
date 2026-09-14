@@ -115,16 +115,15 @@ const CartPage = () => {
                   <span className="font-serif text-xl text-foreground">{formatKES(subtotal)}</span>
                 </div>
 
-                <button
-                  disabled
-                  title="Checkout opens once payments are connected"
-                  className="mt-6 w-full cursor-not-allowed rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground opacity-60"
+                <Link
+                  to="/checkout"
+                  className="mt-6 block w-full rounded-full bg-primary px-6 py-3 text-center text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Checkout
-                </button>
+                  Proceed to checkout
+                </Link>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Checkout with M-PESA and card opens as soon as payments are connected. Your cart is
-                  saved on this device until then.
+                  Pay with M-PESA. Digital titles unlock in your account as soon as payment is
+                  confirmed.
                 </p>
                 <button
                   onClick={clear}

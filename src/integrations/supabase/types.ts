@@ -475,6 +475,7 @@ export type Database = {
           is_digital: boolean
           is_free: boolean
           pages: number | null
+          post_id: string | null
           price_kes: number
           published_year: number | null
           slug: string
@@ -498,6 +499,7 @@ export type Database = {
           is_digital?: boolean
           is_free?: boolean
           pages?: number | null
+          post_id?: string | null
           price_kes?: number
           published_year?: number | null
           slug: string
@@ -521,6 +523,7 @@ export type Database = {
           is_digital?: boolean
           is_free?: boolean
           pages?: number | null
+          post_id?: string | null
           price_kes?: number
           published_year?: number | null
           slug?: string
@@ -530,7 +533,15 @@ export type Database = {
           title?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "products_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {

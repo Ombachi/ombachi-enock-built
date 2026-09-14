@@ -20,4 +20,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/laboratory-quality-handbook</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/climate-health-policy-brief</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/decentralised-diagnostics-report</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/first-principles-essays</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/laboratory-quality-handbook-signed</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ombachi-enock-built.lovable.app/library/surveillance-research-paper</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
