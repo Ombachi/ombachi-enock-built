@@ -52,6 +52,8 @@ export interface Product {
   pages?: number | null;
   published_year?: number | null;
   cover_image_url?: string | null;
+  file_path?: string | null;
+  post_id?: string | null;
   collections: string[];
   featured?: boolean;
   status: "draft" | "published";

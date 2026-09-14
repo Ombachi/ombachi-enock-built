@@ -16,7 +16,7 @@ const withTimeout = <T>(promise: Promise<T>, ms: number): Promise<T> => {
 export async function loadProducts(): Promise<{ products: Product[]; live: boolean }> {
   try {
     const { data, error } = await withTimeout(
-      supabase.from("products").select("*").eq("status", "published"),
+      (async () => await supabase.from("products").select("*").eq("status", "published"))(),
       6000,
     );
 
