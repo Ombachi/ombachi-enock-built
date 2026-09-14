@@ -28,14 +28,14 @@ const projects: Project[] = [
   {
     slug: "litu-diagnostics",
     title: "Litu Diagnostics",
-    summary: "Decentralising quality laboratory services across underserved communities.",
+    summary: "Decentralising quality healthcare services across underserved communities.",
     icon: Microscope,
     link: "https://litudiagnostics.com",
   },
   {
     slug: "ecoswarm",
     title: "EcoSwarm",
-    summary: "Climate-health innovation linking environmental data to diagnostic preparedness.",
+    summary: "Learn climate skills. Shop sustainably. Build a greener Kenya.",
     icon: Leaf,
     link: "https://ecoswarm.co.ke",
   },
