@@ -20,7 +20,8 @@ const projects: Project[] = [
   {
     slug: "litu-hub",
     title: "Litu Hub",
-    summary: "A premier learning management system delivering premium health and diagnostics education at scale.",
+    summary:
+      "A premier learning management system used to create, deliver, track, and manage educational courses and training programs.",
     icon: BookOpen,
     link: "https://lituhub.com",
   },
