@@ -16,6 +16,8 @@ import LibraryPage from "./pages/LibraryPage.tsx";
 import LibraryProductPage from "./pages/LibraryProductPage.tsx";
 import LibraryCollectionPage from "./pages/LibraryCollectionPage.tsx";
 import CartPage from "./pages/CartPage.tsx";
+import CheckoutPage from "./pages/CheckoutPage.tsx";
+import AccountPage from "./pages/AccountPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ const AppRoutes = () => {
       <Route path="/library/collections/:slug" element={<LibraryCollectionPage />} />
       <Route path="/library/:slug" element={<LibraryProductPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/account" element={<AccountPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />

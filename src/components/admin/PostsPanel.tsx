@@ -14,6 +14,7 @@ import RichEditor from "./RichEditor";
 import { slugify, uploadPostImage } from "@/lib/postImages";
 import { CATEGORY_NAMES } from "@/lib/postCategories";
 import { sanitizeImportedHtml, extractHtmlTitle } from "@/lib/htmlImport";
+import { syncPostToLibrary } from "@/lib/library/postSync";
 
 interface Post {
   id: string;
@@ -123,12 +124,36 @@ const PostsPanel = () => {
       ? supabase.from("posts").insert(payload).select().single()
       : supabase.from("posts").update(payload).eq("id", editing.id).select().single();
 
-    const { error } = await query;
-    setSaving(false);
+    const { data, error } = await query;
     if (error) {
+      setSaving(false);
       return toast({ title: "Save failed", description: error.message, variant: "destructive" });
     }
-    toast({ title: isNew ? "Post created" : "Post updated" });
+
+    const saved = data as Post;
+    try {
+      await syncPostToLibrary({
+        id: saved.id,
+        slug: saved.slug,
+        title: saved.title,
+        excerpt: saved.excerpt,
+        cover_image_url: saved.cover_image_url,
+        tag: saved.tag,
+        status: saved.status,
+      });
+    } catch {
+      toast({
+        title: "Saved, but not listed in the Library",
+        description: "Add it manually from the Products tab.",
+        variant: "destructive",
+      });
+    }
+
+    setSaving(false);
+    toast({
+      title: isNew ? "Post created" : "Post updated",
+      description: "Also available in The Library under Products.",
+    });
     setEditing(null);
     load();
   };
