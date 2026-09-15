@@ -19,6 +19,13 @@ import { Loader2, Plus, Pencil, Trash2, AlertTriangle, Save } from "lucide-react
 import { toast } from "@/hooks/use-toast";
 import { PRODUCT_FORMATS, DIGITAL_FORMATS, formatKES } from "@/lib/library/types";
 import { COLLECTIONS } from "@/lib/library/catalogue";
+import {
+  DOCUMENT_ACCEPT,
+  deleteLibraryFile,
+  fileNameFromPath,
+  signedLibraryUrl,
+  uploadLibraryFile,
+} from "@/lib/library/files";
 
 type Row = {
   id: string;
@@ -36,6 +43,7 @@ type Row = {
   pages: number | null;
   published_year: number | null;
   cover_image_url: string | null;
+  file_path: string | null;
   collections: string[];
   featured: boolean;
   status: "draft" | "published";
@@ -56,6 +64,7 @@ const blank = (): Partial<Row> => ({
   pages: null,
   published_year: new Date().getFullYear(),
   cover_image_url: "",
+  file_path: null,
   collections: [],
   featured: false,
   status: "draft",
@@ -71,6 +80,48 @@ const ProductsPanel = () => {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Partial<Row>>(blank());
   const [stockEdits, setStockEdits] = useState<Record<string, string>>({});
+  const [uploading, setUploading] = useState(false);
+
+  const onPickFile = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const previous = draft.file_path;
+      const path = await uploadLibraryFile(file);
+      setDraft((d) => ({ ...d, file_path: path }));
+      if (previous) await deleteLibraryFile(previous).catch(() => undefined);
+      toast({ title: "File uploaded", description: "Remember to save the product." });
+    } catch (e) {
+      toast({
+        title: "Upload failed",
+        description: e instanceof Error ? e.message : "Try a different file.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const openStoredFile = async () => {
+    if (!draft.file_path) return;
+    try {
+      window.open(await signedLibraryUrl(draft.file_path), "_blank", "noopener");
+    } catch (e) {
+      toast({
+        title: "Could not open the file",
+        description: e instanceof Error ? e.message : "Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const removeStoredFile = async () => {
+    if (!draft.file_path) return;
+    const path = draft.file_path;
+    setDraft((d) => ({ ...d, file_path: null }));
+    await deleteLibraryFile(path).catch(() => undefined);
+    toast({ title: "File removed", description: "Remember to save the product." });
+  };
 
   const load = async () => {
     setLoading(true);
@@ -120,6 +171,7 @@ const ProductsPanel = () => {
       pages: draft.pages ? Number(draft.pages) : null,
       published_year: draft.published_year ? Number(draft.published_year) : null,
       cover_image_url: draft.cover_image_url || null,
+      file_path: draft.file_path || null,
       collections: draft.collections ?? [],
       featured: !!draft.featured,
       status: (draft.status ?? "draft") as "draft" | "published",
@@ -407,6 +459,36 @@ const ProductsPanel = () => {
                 value={draft.cover_image_url ?? ""}
                 onChange={(e) => set("cover_image_url", e.target.value)}
               />
+            </div>
+            <div className="sm:col-span-2 rounded-md border border-border p-3">
+              <Label htmlFor="p-file">Digital file / document</Label>
+              <p className="text-xs text-muted-foreground mt-1">
+                PDF, Word, ePub and similar files. Customers download this exact file.
+              </p>
+              {draft.file_path ? (
+                <div className="mt-3 flex items-center gap-2 flex-wrap">
+                  <span className="text-sm truncate max-w-[220px]">{fileNameFromPath(draft.file_path)}</span>
+                  <Button type="button" size="sm" variant="outline" onClick={openStoredFile}>
+                    Download
+                  </Button>
+                  <Button type="button" size="sm" variant="ghost" onClick={removeStoredFile}>
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </div>
+              ) : null}
+              <div className="mt-3 flex items-center gap-2">
+                <Input
+                  id="p-file"
+                  type="file"
+                  accept={DOCUMENT_ACCEPT}
+                  disabled={uploading}
+                  onChange={(e) => {
+                    onPickFile(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
+                {uploading && <Loader2 className="h-4 w-4 animate-spin text-secondary" />}
+              </div>
             </div>
             {!draft.is_digital && (
               <div>
