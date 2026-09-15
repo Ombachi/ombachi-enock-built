@@ -460,6 +460,36 @@ const ProductsPanel = () => {
                 onChange={(e) => set("cover_image_url", e.target.value)}
               />
             </div>
+            <div className="sm:col-span-2 rounded-md border border-border p-3">
+              <Label htmlFor="p-file">Digital file / document</Label>
+              <p className="text-xs text-muted-foreground mt-1">
+                PDF, Word, ePub and similar files. Customers download this exact file.
+              </p>
+              {draft.file_path ? (
+                <div className="mt-3 flex items-center gap-2 flex-wrap">
+                  <span className="text-sm truncate max-w-[220px]">{fileNameFromPath(draft.file_path)}</span>
+                  <Button type="button" size="sm" variant="outline" onClick={openStoredFile}>
+                    Download
+                  </Button>
+                  <Button type="button" size="sm" variant="ghost" onClick={removeStoredFile}>
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </div>
+              ) : null}
+              <div className="mt-3 flex items-center gap-2">
+                <Input
+                  id="p-file"
+                  type="file"
+                  accept={DOCUMENT_ACCEPT}
+                  disabled={uploading}
+                  onChange={(e) => {
+                    onPickFile(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
+                {uploading && <Loader2 className="h-4 w-4 animate-spin text-secondary" />}
+              </div>
+            </div>
             {!draft.is_digital && (
               <div>
                 <Label htmlFor="p-stock">Stock</Label>
