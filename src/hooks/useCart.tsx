@@ -15,10 +15,14 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 const read = (): CartLine[] => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as CartLine[]) : [];
+    const parsed = raw ? (JSON.parse(raw) as CartLine[]) : [];
+    // drop legacy/demo lines that no longer exist in the catalogue
+    return parsed.filter((l) => UUID.test(String(l?.productId ?? "")));
   } catch {
     return [];
   }
