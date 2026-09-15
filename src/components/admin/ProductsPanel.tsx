@@ -57,6 +57,7 @@ const blank = (): Partial<Row> => ({
   pages: null,
   published_year: new Date().getFullYear(),
   cover_image_url: "",
+  file_path: null,
   collections: [],
   featured: false,
   status: "draft",
