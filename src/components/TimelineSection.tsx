@@ -3,18 +3,21 @@ import { Stethoscope, GraduationCap, Building2 } from "lucide-react";
 const milestones = [
   {
     year: "2021",
+    icon: Building2,
     title: "Kenyatta National Hospital",
     role: "Medical Laboratory Attaché",
     desc: "Clinical training within Kenya’s leading national referral and teaching hospital, rotating across Haematology, Microbiology, Histology, Cytology, Clinical Chemistry, Blood Transfusion, Immunology and Molecular Diagnostics. Gained hands-on experience in specimen management, diagnostic testing, quality control, result interpretation and laboratory workflows in a high-volume clinical environment.",
   },
   {
     year: "2022",
+    icon: Stethoscope,
     title: "Nairobi Women's Hospital",
     role: "Medical Laboratory Scientist",
     desc: "Provided diagnostic laboratory services across haematology, microbiology, clinical chemistry, immunology, molecular diagnostics and blood transfusion. Managed specimen collection and processing, quality assurance, equipment maintenance, reporting and critical-result communication. Through the Gender Violence Recovery Centre (GVRC), gained specialised experience handling medico-legal specimens and documentation, coordinating with law-enforcement and legal stakeholders and supporting medical-legal clinics.",
   },
   {
     year: "2024",
+    icon: GraduationCap,
     title: "Mount Kenya University",
     role: "Laboratory Manager",
     desc: "Lead laboratory operations across clinical services, quality systems, procurement, equipment management, student training and digital health workflows. Supported the development and modernisation of laboratory infrastructure, SOPs and quality-management processes aligned with ISO 15189:2022 requirements.",
