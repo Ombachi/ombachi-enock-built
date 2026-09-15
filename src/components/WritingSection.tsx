@@ -26,7 +26,9 @@ const WritingSection = () => {
   const [loaded, setLoaded] = useState(false);
   const [likes, setLikes] = useState<Record<string, number>>({});
   const [userLikes, setUserLikes] = useState<Set<string>>(new Set());
-  const [comments, setComments] = useState<Record<string, { commenter_name: string; comment_text: string; created_at: string }[]>>({});
+  const [comments, setComments] = useState<
+    Record<string, { commenter_name: string; comment_text: string; created_at: string }[]>
+  >({});
   const [openComments, setOpenComments] = useState<string | null>(null);
   const [commentName, setCommentName] = useState("");
   const [commentText, setCommentText] = useState("");
@@ -55,7 +57,7 @@ const WritingSection = () => {
         excerpt: a.excerpt || "",
         tag: a.tag || "General",
         date: a.published_at ? new Date(a.published_at).getFullYear().toString() : "",
-      }))
+      })),
     );
     setLoaded(true);
   };
@@ -115,12 +117,11 @@ const WritingSection = () => {
   return (
     <section id="writing" className="section-padding bg-muted">
       <div className="section-container">
-        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Writing & Insights</p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
-          Thinking Out Loud
+          Writing & Insights
         </h2>
         <p className="text-muted-foreground mb-6 max-w-xl animate-on-scroll">
-          Short reflections on diagnostics, climate-health, leadership, and the systems that shape healthcare.
+          Reflections on diagnostics, climate-health, leadership, and life .
         </p>
         <div className="mb-10 animate-on-scroll">
           <Link
@@ -149,14 +150,19 @@ const WritingSection = () => {
           )}
 
           {articles.map((a) => (
-            <article key={a.slug} className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden">
+            <article
+              key={a.slug}
+              className="bg-card rounded-xl border border-border hover:border-secondary/40 transition-colors overflow-hidden"
+            >
               <Link to={`/writing/${a.slug}`} className="group block">
                 <div className={`h-2 bg-gradient-to-r ${categoryGradient(a.tag)}`} />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">{a.tag}</span>
+                        <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">
+                          {a.tag}
+                        </span>
                         <span className="text-xs text-muted-foreground">{a.date}</span>
                       </div>
                       <h3 className="font-serif text-lg font-semibold text-foreground group-hover:text-secondary transition-colors mb-1">
@@ -164,7 +170,10 @@ const WritingSection = () => {
                       </h3>
                       <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">{a.excerpt}</p>
                     </div>
-                    <ArrowUpRight size={20} className="text-muted-foreground group-hover:text-secondary transition-colors mt-1 shrink-0" />
+                    <ArrowUpRight
+                      size={20}
+                      className="text-muted-foreground group-hover:text-secondary transition-colors mt-1 shrink-0"
+                    />
                   </div>
                 </div>
               </Link>
