@@ -5,6 +5,8 @@ export const LIBRARY_BUCKET = "library-files";
 export const DOCUMENT_ACCEPT =
   ".pdf,.epub,.doc,.docx,.odt,.rtf,.txt,.md,.ppt,.pptx,.xls,.xlsx,.csv,.zip";
 
+export const HTML_ACCEPT = ".html,.htm";
+
 /** Uploads a publication file to the private library bucket and returns its path. */
 export async function uploadLibraryFile(file: File): Promise<string> {
   const ext = file.name.split(".").pop()?.toLowerCase() || "pdf";
@@ -12,6 +14,16 @@ export async function uploadLibraryFile(file: File): Promise<string> {
   const { error } = await supabase.storage
     .from(LIBRARY_BUCKET)
     .upload(path, file, { upsert: false, contentType: file.type || undefined });
+  if (error) throw error;
+  return path;
+}
+
+/** Uploads an interactive HTML experience, stored so browsers render it inline. */
+export async function uploadLibraryHtml(file: File): Promise<string> {
+  const path = `interactive/${crypto.randomUUID()}.html`;
+  const { error } = await supabase.storage
+    .from(LIBRARY_BUCKET)
+    .upload(path, file, { upsert: false, contentType: "text/html" });
   if (error) throw error;
   return path;
 }
