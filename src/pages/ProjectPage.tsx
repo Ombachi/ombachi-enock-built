@@ -34,7 +34,7 @@ const projectsData: Record<string, {
     role: "Learning Architect — curriculum strategy, platform design, and instructor partnerships.",
     tools: "Learning management and course delivery, Digital course content and multimedia, Assignments, quizzes and question banks, Discussions and collaborative learning, Gradebook and competency tracking,Tutor feedback and assessment workflows.",
     outcome: "Litu Hub is being developed as a scalable digital learning ecosystem that can help institutions move progressively from: Classroom learning → Blended learning → Self-directed learning → Distance learning without requiring them to abandon the people, curriculum, culture, or physical infrastructure that already make their educational communities valuable.",
-    longDescription: Litu Hub is a digital learning management and learner-development platform designed to extend education beyond the traditional classroom. It brings courses, learning materials, videos, assignments, quizzes, discussions, assessments, grades, feedback, portfolios, and learning progress into one connected environment.Litu Hub supports schools, tutors, students, parents, university learners, medical trainees, and lifelong learners .This is a flexible digital layer through which institutions can gradually transition from classroom-only instruction to blended, self-directed, and eventually distance learning.",
+    longDescription: "Litu Hub is a digital learning management and learner-development platform designed to extend education beyond the traditional classroom. It brings courses, learning materials, videos, assignments, quizzes, discussions, assessments, grades, feedback, portfolios, and learning progress into one connected environment. Litu Hub supports schools, tutors, students, parents, university learners, medical trainees, and lifelong learners. This is a flexible digital layer through which institutions can gradually transition from classroom-only instruction to blended, self-directed, and eventually distance learning.",
     metrics: ["Self-directed learning", "Courses, assessments & competency tracking", "Mobile-first digital learning environment"],
   },
   "litu-diagnostics": {
@@ -57,7 +57,7 @@ const projectsData: Record<string, {
     tools: "Learn → Understand → Discover → Choose better.",
     outcome: "A growing community of informed climate-conscious learners and consumers with the knowledge, tools, and access to make more sustainable everyday choices.",
     longDescription: "EcoSwarm is a climate learning and sustainable marketplace platform helping people understand the environmental challenges shaping our world and make more informed choices in everyday life.Through our Climate Academy, learners can explore accessible courses covering climate science, climate justice, resilience, biodiversity, climate governance, sustainable development, and green skills.Through EcoMarket, users can discover environmentally conscious products while learning about the environmental thinking behind better consumption choices.",
-    metrics: A digital ecosystem where climate education and sustainable consumption reinforce each other"],
+    metrics: ["Climate Academy courses", "EcoMarket sustainable products", "Education and consumption reinforcing each other"],
   },
   "mount-kenya-university": {
     title: "Mount Kenya University",
