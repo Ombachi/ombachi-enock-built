@@ -34,7 +34,7 @@ const projectsData: Record<
     link: "https://lituvault.com",
     problem:
       "Healthcare facilities struggle with fragmented records, inefficient billing, and operational blind spots that compromise patient care.",
-    role: "Founder & Product Lead — systems architecture, clinical workflow design, and go-to-market strategy.",
+    role: "Product Lead — systems architecture, clinical workflow design, and go-to-market strategy.",
     tools:
       "FHIR-compliant data models, cloud infrastructure, role-based access control, laboratory modules, billing automation.",
     outcome:
