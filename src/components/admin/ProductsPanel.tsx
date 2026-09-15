@@ -36,6 +36,7 @@ type Row = {
   pages: number | null;
   published_year: number | null;
   cover_image_url: string | null;
+  file_path: string | null;
   collections: string[];
   featured: boolean;
   status: "draft" | "published";
