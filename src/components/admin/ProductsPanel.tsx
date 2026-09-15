@@ -122,6 +122,7 @@ const ProductsPanel = () => {
       pages: draft.pages ? Number(draft.pages) : null,
       published_year: draft.published_year ? Number(draft.published_year) : null,
       cover_image_url: draft.cover_image_url || null,
+      file_path: draft.file_path || null,
       collections: draft.collections ?? [],
       featured: !!draft.featured,
       status: (draft.status ?? "draft") as "draft" | "published",
