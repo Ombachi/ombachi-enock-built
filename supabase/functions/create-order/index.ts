@@ -34,7 +34,11 @@ Deno.serve(async (req) => {
       userId = data.user?.id ?? null;
     }
 
-    const ids = [...new Set(lines.map((l) => String(l.productId)))];
+    const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const ids = [...new Set(lines.map((l) => String(l.productId)).filter((id) => UUID.test(id)))];
+    if (!ids.length) {
+      return json({ error: "Those items are no longer available. Please clear your cart." }, 400, corsHeaders);
+    }
     const { data: products, error: pErr } = await db
       .from("products")
       .select("id,title,format,price_kes,is_digital,stock,status")
