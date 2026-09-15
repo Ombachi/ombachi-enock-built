@@ -37,7 +37,7 @@ const principles = [
   {
     icon: Heart,
     title: "Human Dignity",
-    desc: "Every system, every policy, every innovation must centre the worth and agency of the individual.",
+    desc: "Every system, policy and innovation must centre the worth and agency of the individual.",
   },
   { icon: Award, title: "Meritocracy", desc: "Rewarding competence, effort, and character." },
   {
