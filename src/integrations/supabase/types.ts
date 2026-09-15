@@ -471,6 +471,8 @@ export type Database = {
           featured: boolean
           file_path: string | null
           format: string
+          html_file_path: string | null
+          html_url: string | null
           id: string
           is_digital: boolean
           is_free: boolean
@@ -495,6 +497,8 @@ export type Database = {
           featured?: boolean
           file_path?: string | null
           format?: string
+          html_file_path?: string | null
+          html_url?: string | null
           id?: string
           is_digital?: boolean
           is_free?: boolean
@@ -519,6 +523,8 @@ export type Database = {
           featured?: boolean
           file_path?: string | null
           format?: string
+          html_file_path?: string | null
+          html_url?: string | null
           id?: string
           is_digital?: boolean
           is_free?: boolean
