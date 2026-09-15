@@ -30,7 +30,6 @@ const ContactSection = () => {
   return (
     <section id="contact" className="section-padding bg-background">
       <div className="section-container">
-        <p className="text-sm font-medium tracking-widest uppercase text-secondary mb-3 animate-on-scroll">Contact</p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
           Let's Connect
         </h2>
