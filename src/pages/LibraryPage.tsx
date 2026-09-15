@@ -90,7 +90,6 @@ const LibraryPage = () => {
         <header className="pt-28 pb-10 section-container">
           <div className="flex items-start justify-between gap-6">
             <div className="max-w-2xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-secondary">The Library</p>
               <h1 className="mt-3 font-serif text-4xl md:text-5xl text-foreground leading-tight">
                 Work you can read, keep and use
               </h1>
