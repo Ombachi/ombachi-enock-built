@@ -73,6 +73,48 @@ const ProductsPanel = () => {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Partial<Row>>(blank());
   const [stockEdits, setStockEdits] = useState<Record<string, string>>({});
+  const [uploading, setUploading] = useState(false);
+
+  const onPickFile = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const previous = draft.file_path;
+      const path = await uploadLibraryFile(file);
+      setDraft((d) => ({ ...d, file_path: path }));
+      if (previous) await deleteLibraryFile(previous).catch(() => undefined);
+      toast({ title: "File uploaded", description: "Remember to save the product." });
+    } catch (e) {
+      toast({
+        title: "Upload failed",
+        description: e instanceof Error ? e.message : "Try a different file.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const openStoredFile = async () => {
+    if (!draft.file_path) return;
+    try {
+      window.open(await signedLibraryUrl(draft.file_path), "_blank", "noopener");
+    } catch (e) {
+      toast({
+        title: "Could not open the file",
+        description: e instanceof Error ? e.message : "Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const removeStoredFile = async () => {
+    if (!draft.file_path) return;
+    const path = draft.file_path;
+    setDraft((d) => ({ ...d, file_path: null }));
+    await deleteLibraryFile(path).catch(() => undefined);
+    toast({ title: "File removed", description: "Remember to save the product." });
+  };
 
   const load = async () => {
     setLoading(true);
