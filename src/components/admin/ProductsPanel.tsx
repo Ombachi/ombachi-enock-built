@@ -19,6 +19,13 @@ import { Loader2, Plus, Pencil, Trash2, AlertTriangle, Save } from "lucide-react
 import { toast } from "@/hooks/use-toast";
 import { PRODUCT_FORMATS, DIGITAL_FORMATS, formatKES } from "@/lib/library/types";
 import { COLLECTIONS } from "@/lib/library/catalogue";
+import {
+  DOCUMENT_ACCEPT,
+  deleteLibraryFile,
+  fileNameFromPath,
+  signedLibraryUrl,
+  uploadLibraryFile,
+} from "@/lib/library/files";
 
 type Row = {
   id: string;
