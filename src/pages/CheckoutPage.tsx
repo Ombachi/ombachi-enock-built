@@ -51,10 +51,15 @@ const CheckoutPage = () => {
         return;
       }
 
-      const { data: pay } = await supabase.functions.invoke("mpesa-stk-push", {
-        body: { orderId: order.id, phone: form.phone },
-      });
-      const payload = pay as { ok?: boolean; error?: string; message?: string } | null;
+      let payload: { ok?: boolean; error?: string; message?: string } | null = null;
+      try {
+        const { data: pay } = await supabase.functions.invoke("mpesa-stk-push", {
+          body: { orderId: order.id, phone: form.phone },
+        });
+        payload = pay as typeof payload;
+      } catch {
+        payload = null;
+      }
 
       clear();
       if (payload?.ok) {
