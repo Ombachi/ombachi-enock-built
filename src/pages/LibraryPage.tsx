@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import { Search, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,7 +7,6 @@ import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import ProductCard from "@/components/library/ProductCard";
 import CartButton from "@/components/library/CartButton";
-import { COLLECTIONS } from "@/lib/library/catalogue";
 import { loadProducts } from "@/lib/library/products";
 import { PRODUCT_FORMATS, type Product, type ProductFormat } from "@/lib/library/types";
 
@@ -19,6 +17,7 @@ const LibraryPage = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [format, setFormat] = useState<ProductFormat | "All">("All");
+  const [category, setCategory] = useState<string>("All");
   const [sort, setSort] = useState<Sort>("featured");
 
   useEffect(() => {
@@ -38,7 +37,8 @@ const LibraryPage = () => {
         p.description.toLowerCase().includes(q) ||
         p.category.toLowerCase().includes(q);
       const matchesFormat = format === "All" || p.format === format;
-      return matchesQuery && matchesFormat;
+      const matchesCategory = category === "All" || p.category === category;
+      return matchesQuery && matchesFormat && matchesCategory;
     });
 
     const sorted = [...list];
@@ -59,26 +59,31 @@ const LibraryPage = () => {
         sorted.sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
     }
     return sorted;
-  }, [products, query, format, sort]);
+  }, [products, query, format, category, sort]);
 
   const availableFormats = useMemo(
     () => PRODUCT_FORMATS.filter((f) => products.some((p) => p.format === f)),
     [products],
   );
 
+  const categories = useMemo(
+    () => Array.from(new Set(products.map((p) => p.category).filter(Boolean))).sort(),
+    [products],
+  );
+
   return (
     <PageTransition>
       <Helmet>
-        <title>The Library — Books, Papers & Briefs by Ombachi Enock</title>
+        <title>Publications — Books, Papers & Briefs by Ombachi Enock</title>
         <meta
           name="description"
-          content="Browse and buy books, eBooks, research papers, policy briefs, essays and reports on diagnostics, health systems and climate health."
+          content="Read, download and explore books, papers, briefs, essays and interactive publications on diagnostics, health systems and climate health."
         />
         <link rel="canonical" href={`${window.location.origin}/library`} />
-        <meta property="og:title" content="The Library — Ombachi Enock" />
+        <meta property="og:title" content="Publications — Ombachi Enock" />
         <meta
           property="og:description"
-          content="Books, papers, briefs and essays on diagnostics, health systems and climate health."
+          content="Books, papers, briefs, essays and interactive publications on diagnostics, health systems and climate health."
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -94,28 +99,12 @@ const LibraryPage = () => {
                 Work you can read, keep and use
               </h1>
               <p className="mt-4 text-muted-foreground leading-relaxed">
-                Books, research papers, policy briefs, essays and reports.
+                Books, research papers, policy briefs, essays, reports and interactive publications.
               </p>
             </div>
             <CartButton />
           </div>
         </header>
-
-        <section className="section-container pb-8" aria-label="Curated collections">
-          <h2 className="text-sm font-medium text-foreground mb-3">Curated collections</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {COLLECTIONS.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/library/collections/${c.slug}`}
-                className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-secondary/40"
-              >
-                <p className="font-serif text-base text-foreground">{c.title}</p>
-                <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{c.description}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
 
         <section className="section-container pb-20">
           <div className="flex flex-col gap-4 border-y border-border py-4 md:flex-row md:items-center md:justify-between">
@@ -125,8 +114,8 @@ const LibraryPage = () => {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search the library"
-                aria-label="Search the library"
+                placeholder="Search publications"
+                aria-label="Search publications"
                 className="w-full rounded-full border border-border bg-background py-2 pl-9 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
               />
             </div>
@@ -149,7 +138,26 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter by format">
+          {categories.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+              {(["All", ...categories]).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCategory(c)}
+                  aria-pressed={category === c}
+                  className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                    category === c
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Filter by format">
             {(["All", ...availableFormats] as (ProductFormat | "All")[]).map((f) => (
               <button
                 key={f}
@@ -168,7 +176,7 @@ const LibraryPage = () => {
 
           {loading ? (
             <div className="flex items-center gap-2 py-20 text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" /> Loading the library…
+              <Loader2 className="h-4 w-4 animate-spin" /> Loading publications…
             </div>
           ) : filtered.length === 0 ? (
             <p className="py-20 text-muted-foreground">Nothing matches that search yet.</p>

@@ -53,6 +53,8 @@ export interface Product {
   published_year?: number | null;
   cover_image_url?: string | null;
   file_path?: string | null;
+  html_file_path?: string | null;
+  html_url?: string | null;
   post_id?: string | null;
   collections: string[];
   featured?: boolean;
