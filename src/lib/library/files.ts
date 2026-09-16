@@ -43,3 +43,24 @@ export async function deleteLibraryFile(path: string): Promise<void> {
 }
 
 export const fileNameFromPath = (path: string) => path.split("/").pop() ?? path;
+
+export const COVER_BUCKET = "publication-covers";
+export const IMAGE_ACCEPT = "image/*";
+
+/**
+ * Uploads a cover image untouched — no crop, resize or re-encode — and returns
+ * its public URL.
+ */
+export async function uploadCoverImage(file: File): Promise<string> {
+  const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+  const path = `covers/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage
+    .from(COVER_BUCKET)
+    .upload(path, file, { upsert: false, contentType: file.type || undefined });
+  if (error) throw error;
+  const { data, error: linkError } = await supabase.storage
+    .from(COVER_BUCKET)
+    .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+  if (linkError || !data) throw linkError ?? new Error("Could not link the cover image.");
+  return data.signedUrl;
+}

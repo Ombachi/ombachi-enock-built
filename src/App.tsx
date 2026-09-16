@@ -14,7 +14,7 @@ import PostPage from "./pages/PostPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
 import LibraryPage from "./pages/LibraryPage.tsx";
 import LibraryProductPage from "./pages/LibraryProductPage.tsx";
-import LibraryCollectionPage from "./pages/LibraryCollectionPage.tsx";
+import LibraryViewerPage from "./pages/LibraryViewerPage.tsx";
 import CartPage from "./pages/CartPage.tsx";
 import CheckoutPage from "./pages/CheckoutPage.tsx";
 import AccountPage from "./pages/AccountPage.tsx";
@@ -30,7 +30,7 @@ const AppRoutes = () => {
       <Route path="/writing/category/:category" element={<CategoryPage />} />
       <Route path="/writing/:slug" element={<PostPage />} />
       <Route path="/library" element={<LibraryPage />} />
-      <Route path="/library/collections/:slug" element={<LibraryCollectionPage />} />
+      <Route path="/library/:slug/view" element={<LibraryViewerPage />} />
       <Route path="/library/:slug" element={<LibraryProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
