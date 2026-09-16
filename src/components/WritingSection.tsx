@@ -128,7 +128,7 @@ const WritingSection = () => {
             to="/library"
             className="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:underline"
           >
-            Browse books, papers and briefs in The Library <ArrowUpRight size={15} />
+            Browse books, papers and briefs in Publications <ArrowUpRight size={15} />
           </Link>
         </div>
 
