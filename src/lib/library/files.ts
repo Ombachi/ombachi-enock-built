@@ -58,5 +58,9 @@ export async function uploadCoverImage(file: File): Promise<string> {
     .from(COVER_BUCKET)
     .upload(path, file, { upsert: false, contentType: file.type || undefined });
   if (error) throw error;
-  return supabase.storage.from(COVER_BUCKET).getPublicUrl(path).data.publicUrl;
+  const { data, error: linkError } = await supabase.storage
+    .from(COVER_BUCKET)
+    .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+  if (linkError || !data) throw linkError ?? new Error("Could not link the cover image.");
+  return data.signedUrl;
 }
