@@ -452,13 +452,41 @@ const ProductsPanel = () => {
                 onChange={(e) => set("published_year", e.target.value === "" ? null : Number(e.target.value))}
               />
             </div>
-            <div className="sm:col-span-2">
-              <Label htmlFor="p-cover">Cover image URL</Label>
-              <Input
-                id="p-cover"
-                value={draft.cover_image_url ?? ""}
-                onChange={(e) => set("cover_image_url", e.target.value)}
-              />
+            <div className="sm:col-span-2 rounded-md border border-border p-3">
+              <Label htmlFor="p-cover">Cover image</Label>
+              <p className="text-xs text-muted-foreground mt-1">
+                Uploaded exactly as provided — original size and proportions are kept.
+              </p>
+              {draft.cover_image_url ? (
+                <div className="mt-3 flex items-center gap-3 flex-wrap">
+                  <img
+                    src={draft.cover_image_url}
+                    alt="Current cover"
+                    className="h-20 w-auto rounded border border-border"
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => set("cover_image_url", "")}
+                  >
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </div>
+              ) : null}
+              <div className="mt-3 flex items-center gap-2">
+                <Input
+                  id="p-cover"
+                  type="file"
+                  accept={IMAGE_ACCEPT}
+                  disabled={uploading}
+                  onChange={(e) => {
+                    onPickCover(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
+                {uploading && <Loader2 className="h-4 w-4 animate-spin text-secondary" />}
+              </div>
             </div>
             <div className="sm:col-span-2 rounded-md border border-border p-3">
               <Label htmlFor="p-file">Digital file / document</Label>
@@ -502,34 +530,40 @@ const ProductsPanel = () => {
                 />
               </div>
             )}
-            <div className="sm:col-span-2">
-              <Label>Collections</Label>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {COLLECTIONS.map((c) => {
-                  const active = (draft.collections ?? []).includes(c.slug);
-                  return (
-                    <button
-                      key={c.slug}
-                      type="button"
-                      onClick={() =>
-                        set(
-                          "collections",
-                          active
-                            ? (draft.collections ?? []).filter((s) => s !== c.slug)
-                            : [...(draft.collections ?? []), c.slug]
-                        )
-                      }
-                      className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                        active
-                          ? "bg-secondary text-secondary-foreground border-secondary"
-                          : "border-border text-muted-foreground hover:border-secondary/50"
-                      }`}
-                    >
-                      {c.title}
-                    </button>
-                  );
-                })}
+            <div className="sm:col-span-2 rounded-md border border-border p-3">
+              <Label htmlFor="p-html">Interactive HTML experience</Label>
+              <p className="text-xs text-muted-foreground mt-1">
+                For interactive publications: upload an HTML file, or paste a hosted link. Readers
+                open it as a live, interactive page.
+              </p>
+              {draft.html_file_path ? (
+                <div className="mt-3 flex items-center gap-2 flex-wrap">
+                  <span className="text-sm truncate max-w-[220px]">
+                    {fileNameFromPath(draft.html_file_path)}
+                  </span>
+                  <Button type="button" size="sm" variant="ghost" onClick={removeStoredHtml}>
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </div>
+              ) : null}
+              <div className="mt-3 flex items-center gap-2">
+                <Input
+                  id="p-html"
+                  type="file"
+                  accept={HTML_ACCEPT}
+                  disabled={uploading}
+                  onChange={(e) => {
+                    onPickHtml(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
               </div>
+              <Input
+                className="mt-3"
+                placeholder="https://… hosted HTML link"
+                value={draft.html_url ?? ""}
+                onChange={(e) => set("html_url", e.target.value)}
+              />
             </div>
             <div className="flex items-center gap-3">
               <Switch
