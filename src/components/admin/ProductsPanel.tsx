@@ -47,6 +47,8 @@ type Row = {
   published_year: number | null;
   cover_image_url: string | null;
   file_path: string | null;
+  html_file_path: string | null;
+  html_url: string | null;
   collections: string[];
   featured: boolean;
   status: "draft" | "published";
@@ -68,6 +70,8 @@ const blank = (): Partial<Row> => ({
   published_year: new Date().getFullYear(),
   cover_image_url: "",
   file_path: null,
+  html_file_path: null,
+  html_url: "",
   collections: [],
   featured: false,
   status: "draft",
@@ -116,6 +120,52 @@ const ProductsPanel = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const onPickCover = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadCoverImage(file);
+      setDraft((d) => ({ ...d, cover_image_url: url }));
+      toast({ title: "Cover uploaded", description: "Remember to save the product." });
+    } catch (e) {
+      toast({
+        title: "Upload failed",
+        description: e instanceof Error ? e.message : "Try a different image.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const onPickHtml = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const previous = draft.html_file_path;
+      const path = await uploadLibraryHtml(file);
+      setDraft((d) => ({ ...d, html_file_path: path }));
+      if (previous) await deleteLibraryFile(previous).catch(() => undefined);
+      toast({ title: "Interactive file uploaded", description: "Remember to save the product." });
+    } catch (e) {
+      toast({
+        title: "Upload failed",
+        description: e instanceof Error ? e.message : "Try a different file.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeStoredHtml = async () => {
+    if (!draft.html_file_path) return;
+    const path = draft.html_file_path;
+    setDraft((d) => ({ ...d, html_file_path: null }));
+    await deleteLibraryFile(path).catch(() => undefined);
+    toast({ title: "Interactive file removed", description: "Remember to save the product." });
   };
 
   const removeStoredFile = async () => {
