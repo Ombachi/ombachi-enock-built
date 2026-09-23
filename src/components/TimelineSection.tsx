@@ -26,37 +26,37 @@ const milestones = [
 
 const TimelineSection = () => {
   return (
-    <section id="timeline" className="section-padding bg-muted">
+    <section id="timeline" className="section-padding scroll-mt-16 bg-muted">
       <div className="section-container">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-12 animate-on-scroll">
+        <h2 className="mb-10 text-3xl font-bold text-foreground animate-on-scroll md:mb-14 md:text-4xl">
           Career Timeline
         </h2>
 
-        <div className="relative">
-          <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-border" />
+        <div className="relative mx-auto max-w-5xl">
+          <div className="absolute bottom-0 left-2 top-0 w-px bg-border md:left-32" />
 
-          <div className="space-y-12">
-            {milestones.map((m, i) => {
+          <div className="space-y-8 md:space-y-10">
+            {milestones.map((m) => {
               const Icon = m.icon;
-              const isLeft = i % 2 === 0;
               return (
                 <div
                   key={m.year}
-                  className={`relative flex items-start gap-6 animate-on-scroll ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+                  className="relative grid grid-cols-1 gap-3 pl-8 animate-on-scroll md:grid-cols-[8rem_minmax(0,1fr)] md:gap-8 md:pl-0"
                 >
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-secondary border-4 border-background z-10 mt-1" />
+                  <div className="absolute left-2 top-6 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-muted bg-secondary md:left-32 md:top-8" />
 
-                  <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${isLeft ? "md:pr-8" : "md:pl-8"}`}>
-                    <div className="text-left w-full bg-card p-6 rounded-xl border border-border">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Icon size={20} className="text-secondary" />
-                        <span className="text-xs font-bold text-secondary tracking-wide">{m.year}</span>
-                      </div>
-                      <h3 className="font-serif text-lg font-bold text-foreground">{m.title}</h3>
-                      <p className="text-sm text-muted-foreground mt-1">{m.role}</p>
-                      <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{m.desc}</p>
+                  <div className="flex items-center gap-2 md:justify-end md:pr-5 md:pt-7">
+                    <Icon size={18} className="shrink-0 text-secondary" aria-hidden="true" />
+                    <span className="text-sm font-bold text-secondary">{m.year}</span>
+                  </div>
+
+                  <div className="border border-border bg-card p-5 text-left shadow-sm sm:p-6 md:ml-8 md:p-8">
+                    <h3 className="text-xl font-bold leading-snug text-foreground md:text-2xl">{m.title}</h3>
+                    <p className="mt-1.5 text-sm font-medium text-secondary md:text-base">{m.role}</p>
+                    <div className="mt-5 border-t border-border pt-5">
+                      <p className="max-w-3xl text-[0.95rem] leading-7 text-muted-foreground md:text-base md:leading-8">
+                        {m.desc}
+                      </p>
                     </div>
                   </div>
                 </div>
