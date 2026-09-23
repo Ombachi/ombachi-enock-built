@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
       <div className="section-container flex items-center justify-between h-16">
         <button onClick={() => scrollTo("home")} className="font-serif text-lg font-semibold text-foreground tracking-tight">
           Ombachi Enock
