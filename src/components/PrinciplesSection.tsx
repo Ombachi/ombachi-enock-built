@@ -16,34 +16,34 @@ const principles = [
   {
     icon: Compass,
     title: "First Principles",
-    desc: "Breaking problems down to their fundamental truths and building solutions from the ground up.",
+    desc: "Breaking problems down to their fundamental truths.",
   },
-  { icon: Network, title: "Systems Thinking", desc: "Understanding how interconnected parts create complex wholes." },
+  { icon: Network, title: "Systems Thinking", desc: "Interconnected parts create complex wholes." },
   {
     icon: TreePine,
     title: "Long-Term Stewardship",
-    desc: "Building institutions and systems that outlast us, with patience and generational thinking.",
+    desc: "Building institutions and systems that outlast us.",
   },
   {
     icon: BookOpen,
     title: "Evidence-Based Practice",
-    desc: "Every decision grounded in data, research, and validated methods.",
+    desc: "Grounding decisions in data, research, and validated methods.",
   },
   {
     icon: Globe,
-    title: "Decentralisation & Access",
-    desc: "Extending quality services beyond urban centres to where communities actually live.",
+    title: "Decentralisation ",
+    desc: "Extending services to where communities live.",
   },
   {
     icon: Heart,
     title: "Human Dignity",
-    desc: "Every system, policy and innovation must centre the worth and agency of the individual.",
+    desc: "Centering the worth and agency of the individual.",
   },
   { icon: Award, title: "Meritocracy", desc: "Rewarding competence, effort, and character." },
   {
     icon: GraduationCap,
     title: "Lifelong Learning",
-    desc: "Staying curious, staying humble, and evolving with new knowledge and perspectives.",
+    desc: "Evolving with new knowledge and perspectives.",
   },
   {
     icon: Cpu,
@@ -54,7 +54,7 @@ const principles = [
   {
     icon: Map,
     title: "Future Mapping",
-    desc: "Anticipating trends, preparing for disruption, and designing systems for the world ahead.",
+    desc: "Designing systems for the world ahead.",
   },
 ];
 
