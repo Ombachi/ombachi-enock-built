@@ -1,5 +1,6 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { admin, json } from "../_shared/db.ts";
+import { sign, verify } from "../_shared/token.ts";
 
 // Safaricom Daraja STK push. Credentials are read from secrets; until they are
 // configured the function replies with a clear, non-fatal message.
@@ -33,8 +34,14 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { orderId, phone } = await req.json();
+    const { orderId, phone, paymentToken } = await req.json();
     if (!orderId || !phone) return json({ error: "orderId and phone are required." }, 400, corsHeaders);
+    // Only the checkout that created this order holds a valid token for it.
+    if (!(await verify("pay", String(orderId), paymentToken))) {
+      return json({ error: "Not authorised to pay for this order." }, 403, corsHeaders);
+    }
+    const msisdn = normalisePhone(String(phone));
+    if (!/^254[17]\d{8}$/.test(msisdn)) return json({ error: "Enter a valid Kenyan M-PESA number." }, 400, corsHeaders);
 
     const db = admin();
     const { data: order, error } = await db
@@ -43,7 +50,7 @@ Deno.serve(async (req) => {
       .eq("id", orderId)
       .single();
     if (error || !order) return json({ error: "Order not found." }, 404, corsHeaders);
-    if (order.status === "paid") return json({ error: "This order is already paid." }, 400, corsHeaders);
+    if (order.status !== "pending") return json({ error: "This order is already paid." }, 400, corsHeaders);
 
     const tokenRes = await fetch(`${base}/oauth/v1/generate?grant_type=client_credentials`, {
       headers: { Authorization: `Basic ${btoa(`${key}:${secret}`)}` },
@@ -57,7 +64,8 @@ Deno.serve(async (req) => {
       .replace(/[-:TZ.]/g, "")
       .slice(0, 14);
     const password = btoa(`${shortcode}${passkey}${ts}`);
-    const callbackUrl = `${env("SUPABASE_URL")}/functions/v1/mpesa-callback`;
+    const cbToken = await sign("cb", order.id);
+    const callbackUrl = `${env("SUPABASE_URL")}/functions/v1/mpesa-callback?o=${order.id}&t=${cbToken}`;
 
     const stkRes = await fetch(`${base}/mpesa/stkpush/v1/processrequest`, {
       method: "POST",
@@ -68,9 +76,9 @@ Deno.serve(async (req) => {
         Timestamp: ts,
         TransactionType: "CustomerPayBillOnline",
         Amount: Math.max(1, Math.round(order.total_kes)),
-        PartyA: normalisePhone(String(phone)),
+        PartyA: msisdn,
         PartyB: shortcode,
-        PhoneNumber: normalisePhone(String(phone)),
+        PhoneNumber: msisdn,
         CallBackURL: callbackUrl,
         AccountReference: order.order_number,
         TransactionDesc: `Payment for ${order.order_number}`,
@@ -79,12 +87,12 @@ Deno.serve(async (req) => {
     const stk = await stkRes.json();
 
     if (!stk.CheckoutRequestID) {
-      return json({ error: stk.errorMessage ?? "M-PESA request failed.", detail: stk }, 502, corsHeaders);
+      return json({ error: "M-PESA request failed. Please try again." }, 502, corsHeaders);
     }
 
     await db
       .from("orders")
-      .update({ payment_reference: stk.CheckoutRequestID, customer_phone: normalisePhone(String(phone)) })
+      .update({ payment_reference: stk.CheckoutRequestID, customer_phone: msisdn })
       .eq("id", order.id);
 
     return json({ ok: true, checkoutRequestId: stk.CheckoutRequestID, message: stk.CustomerMessage }, 200, corsHeaders);

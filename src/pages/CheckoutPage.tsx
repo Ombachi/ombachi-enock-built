@@ -53,8 +53,9 @@ const CheckoutPage = () => {
 
       let payload: { ok?: boolean; error?: string; message?: string } | null = null;
       try {
+        const payToken = (data as { payment_token?: string })?.payment_token;
         const { data: pay } = await supabase.functions.invoke("mpesa-stk-push", {
-          body: { orderId: order.id, phone: form.phone },
+          body: { orderId: order.id, phone: form.phone, paymentToken: payToken },
         });
         payload = pay as typeof payload;
       } catch {
