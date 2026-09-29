@@ -8,19 +8,37 @@ const Footer = () => (
       <div className="grid gap-8 sm:grid-cols-3 mb-10">
         <div>
           <p className="font-serif text-lg mb-2">Ombachi Enock</p>
-          <p className="text-sm text-muted-foreground">
-            Medical Laboratory Scientist · Health Systems Builder
-          </p>
+          <p className="text-sm text-muted-foreground">A Renaissance Man</p>
         </div>
 
         <nav aria-label="Footer navigation" className="text-sm">
           <p className="font-medium mb-3">Explore</p>
           <ul className="space-y-2 text-muted-foreground">
-            <li><Link to="/#about" className="hover:text-foreground transition-colors">About</Link></li>
-            <li><Link to="/#work" className="hover:text-foreground transition-colors">Work</Link></li>
-            <li><Link to="/#writing" className="hover:text-foreground transition-colors">Writing</Link></li>
-            <li><Link to="/library" className="hover:text-foreground transition-colors">The Library</Link></li>
-            <li><Link to="/#contact" className="hover:text-foreground transition-colors">Contact</Link></li>
+            <li>
+              <Link to="/#about" className="hover:text-foreground transition-colors">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/#work" className="hover:text-foreground transition-colors">
+                Work
+              </Link>
+            </li>
+            <li>
+              <Link to="/#writing" className="hover:text-foreground transition-colors">
+                Writing
+              </Link>
+            </li>
+            <li>
+              <Link to="/library" className="hover:text-foreground transition-colors">
+                The Library
+              </Link>
+            </li>
+            <li>
+              <Link to="/#contact" className="hover:text-foreground transition-colors">
+                Contact
+              </Link>
+            </li>
           </ul>
         </nav>
 
