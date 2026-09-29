@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Compass } from "lucide-react";
 import heroMic from "@/assets/hero-mic.jpg";
 
@@ -12,6 +13,15 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background relative overflow-hidden">
+      <Helmet>
+        <title>Page not found — Ombachi Enock</title>
+        <meta name="description" content="The page you requested could not be found. Return to Ombachi Enock's website to explore his work and publications." />
+        <link rel="canonical" href={`https://ombachi-enock-built.lovable.app${location.pathname}`} />
+        <meta property="og:title" content="Page not found — Ombachi Enock" />
+        <meta property="og:description" content="The requested page could not be found." />
+        <meta property="og:url" content={`https://ombachi-enock-built.lovable.app${location.pathname}`} />
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <img
         src={heroMic}
         alt=""

@@ -1,5 +1,11 @@
 # Roadmap — The Library (marketplace)
 
+## Site presentation and compliance (Sep 2026)
+- [ ] Role-led hero with a single accessible H1
+- [ ] Route-specific titles and descriptions
+- [ ] Contact thank-you page
+- [ ] Consent-gated analytics and cookie preferences
+
 ## Done (frontend, no backend required)
 - Product/collection data model + types
 - Seed catalogue fallback (works while backend paused)
