@@ -1,5 +1,6 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { admin, json } from "../_shared/db.ts";
+import { sign } from "../_shared/token.ts";
 
 interface LineIn {
   productId: string;
@@ -97,14 +98,15 @@ Deno.serve(async (req) => {
       .insert(items.map((i) => ({ ...i, order_id: order.id })));
     if (iErr) return json({ error: iErr.message }, 500, corsHeaders);
 
-    // Free orders are fulfilled immediately.
-    if (total === 0) {
+    // Free orders are fulfilled immediately, but only into a verified signed-in
+    // account (guests can already read free titles via free-download).
+    if (total === 0 && userId) {
       const digital = items.filter((i) => i.is_digital);
       if (digital.length) {
         await db.from("entitlements").insert(
           digital.map((i) => ({
             user_id: userId,
-            email,
+            email: null,
             product_id: i.product_id,
             order_id: order.id,
           })),
@@ -113,7 +115,8 @@ Deno.serve(async (req) => {
       }
     }
 
-    return json({ order }, 200, corsHeaders);
+    const payment_token = await sign("pay", order.id);
+    return json({ order, payment_token }, 200, corsHeaders);
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unexpected error" }, 500, corsHeaders);
   }
