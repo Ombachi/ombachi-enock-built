@@ -10,13 +10,14 @@ const slides = [
     src: heroImg1,
     alt: "Ombachi Enock speaking to an audience",
     role: "Public Leader & Advocate",
-    quote: "I believe public leadership begins by listening closely, speaking clearly, and building with communities.",
+    quote: "Public leadership begins by listening closely, speaking clearly, and building with communities.",
   },
   {
     src: heroImg2,
     alt: "Ombachi Enock in a professional portrait",
     role: "Medical Laboratory Scientist",
-    quote: "Every reliable diagnosis begins with disciplined science, careful systems, and respect for the person behind the sample.",
+    quote:
+      "Every reliable diagnosis begins with disciplined science, careful systems, and respect for the person behind the sample.",
   },
   {
     src: heroImg3,
