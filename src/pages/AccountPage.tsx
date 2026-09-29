@@ -99,6 +99,7 @@ const AccountPage = () => {
     <PageTransition>
       <Helmet>
         <title>Your account — The Library</title>
+        <meta name="description" content="View your orders, publication entitlements, and secure downloads from Ombachi Enock's Library." />
         <meta name="robots" content="noindex" />
       </Helmet>
 

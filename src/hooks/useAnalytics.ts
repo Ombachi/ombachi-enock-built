@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { ANALYTICS_CONSENT_EVENT, getAnalyticsConsent } from "@/lib/consent";
 
 const getSessionId = () => {
   let id = localStorage.getItem("session_id");
@@ -16,6 +17,7 @@ export const useAnalytics = () => {
 
   useEffect(() => {
     const trackPageview = async () => {
+      if (getAnalyticsConsent() !== "accepted") return;
       try {
         await supabase.from("page_views").insert({
           path: location.pathname + location.search,
@@ -31,10 +33,14 @@ export const useAnalytics = () => {
     };
 
     trackPageview();
+    const onConsent = () => trackPageview();
+    window.addEventListener(ANALYTICS_CONSENT_EVENT, onConsent);
+    return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, onConsent);
   }, [location.pathname, location.search]);
 };
 
 export const trackEvent = async (eventName: string, data?: Record<string, unknown>) => {
+  if (getAnalyticsConsent() !== "accepted") return;
   try {
     await supabase.from("page_views").insert({
       path: window.location.pathname,

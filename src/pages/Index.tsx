@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -19,6 +20,14 @@ const Index = () => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Ombachi Enock — Science, Technology & Public Leadership</title>
+        <meta name="description" content="Explore Ombachi Enock's work across medical laboratory science, technology, entrepreneurship, public leadership, diagnostics, and climate-health systems." />
+        <link rel="canonical" href="https://ombachi-enock-built.lovable.app/" />
+        <meta property="og:title" content="Ombachi Enock — Science, Technology & Public Leadership" />
+        <meta property="og:description" content="Work and ideas across medical laboratory science, technology, entrepreneurship, diagnostics, and public leadership." />
+        <meta property="og:url" content="https://ombachi-enock-built.lovable.app/" />
+      </Helmet>
       <div className="min-h-screen">
         <Navbar />
         <HeroSection />

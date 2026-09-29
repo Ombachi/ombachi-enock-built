@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { Mail, Linkedin, MessageCircle, Send, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Mail, Linkedin, MessageCircle, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_submissions").insert({
@@ -17,11 +20,11 @@ const ContactSection = () => {
         message: form.message,
       });
       if (error) throw error;
-      setSubmitted(true);
       setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitted(false), 5000);
+      navigate("/thank-you");
     } catch (err) {
       console.error("Contact form error:", err);
+      setErrorMessage("Your message could not be sent. Please try again or contact me by email.");
     } finally {
       setLoading(false);
     }
@@ -90,14 +93,12 @@ const ContactSection = () => {
           </div>
 
           <div className="animate-on-scroll relative">
-            {submitted && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-card rounded-xl border border-secondary/40 z-10 animate-fade-up">
-                <CheckCircle size={48} className="text-secondary mb-4" />
-                <p className="font-serif text-xl font-bold text-foreground mb-1">Message Sent!</p>
-                <p className="text-muted-foreground text-sm">Thank you — I'll get back to you soon.</p>
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className={`space-y-4 ${submitted ? "opacity-0" : ""}`}>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {errorMessage && (
+                <p id="contact-error" role="alert" className="rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                  {errorMessage}
+                </p>
+              )}
               <div>
                 <label htmlFor="name" className="text-sm font-medium text-foreground mb-1 block">
                   Name
@@ -106,6 +107,8 @@ const ContactSection = () => {
                   id="name"
                   type="text"
                   required
+                  aria-invalid={Boolean(errorMessage)}
+                  aria-describedby={errorMessage ? "contact-error" : undefined}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
@@ -120,6 +123,8 @@ const ContactSection = () => {
                   id="email"
                   type="email"
                   required
+                  aria-invalid={Boolean(errorMessage)}
+                  aria-describedby={errorMessage ? "contact-error" : undefined}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
@@ -133,6 +138,8 @@ const ContactSection = () => {
                 <textarea
                   id="message"
                   required
+                  aria-invalid={Boolean(errorMessage)}
+                  aria-describedby={errorMessage ? "contact-error" : undefined}
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}

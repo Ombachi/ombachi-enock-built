@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft,
   ExternalLink,
@@ -139,17 +140,25 @@ const ProjectPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = slug ? projectsData[slug] : null;
+  const projectUrl = `https://ombachi-enock-built.lovable.app/work/${slug ?? "not-found"}`;
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-serif font-bold text-foreground mb-4">Project not found</h1>
-          <button onClick={() => navigate("/")} className="text-secondary hover:underline">
-            ← Back home
-          </button>
+      <>
+        <Helmet>
+          <title>Project not found — Ombachi Enock</title>
+          <meta name="description" content="The requested Ombachi Enock project page could not be found." />
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-serif font-bold text-foreground mb-4">Project not found</h1>
+            <button onClick={() => navigate("/")} className="text-secondary hover:underline">
+              ← Back home
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -157,6 +166,15 @@ const ProjectPage = () => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>{project.title} — Work by Ombachi Enock</title>
+        <meta name="description" content={project.outcome.slice(0, 160)} />
+        <link rel="canonical" href={projectUrl} />
+        <meta property="og:title" content={`${project.title} — Work by Ombachi Enock`} />
+        <meta property="og:description" content={project.outcome.slice(0, 160)} />
+        <meta property="og:url" content={projectUrl} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       <div className="min-h-screen bg-background">
         <Navbar />
 
