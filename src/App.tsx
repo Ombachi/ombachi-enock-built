@@ -18,6 +18,8 @@ import LibraryViewerPage from "./pages/LibraryViewerPage.tsx";
 import CartPage from "./pages/CartPage.tsx";
 import CheckoutPage from "./pages/CheckoutPage.tsx";
 import AccountPage from "./pages/AccountPage.tsx";
+import ThankYouPage from "./pages/ThankYouPage.tsx";
+import CookieConsent from "@/components/CookieConsent";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,7 @@ const AppRoutes = () => {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/account" element={<AccountPage />} />
+      <Route path="/thank-you" element={<ThankYouPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />
@@ -50,6 +53,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AppRoutes />
+          <CookieConsent />
         </BrowserRouter>
       </CartProvider>
     </TooltipProvider>

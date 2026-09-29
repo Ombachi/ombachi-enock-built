@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Mail, Rss } from "lucide-react";
+import { openCookiePreferences } from "@/lib/consent";
 
 const Footer = () => (
   <footer className="py-12 border-t border-border bg-background">
@@ -58,9 +59,12 @@ const Footer = () => (
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground border-t border-border pt-6">
-        © {new Date().getFullYear()} Ombachi Enock. All rights reserved.
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 text-sm text-muted-foreground">
+        <p>© {new Date().getFullYear()} Ombachi Enock. All rights reserved.</p>
+        <button type="button" onClick={openCookiePreferences} className="hover:text-foreground transition-colors">
+          Cookie preferences
+        </button>
+      </div>
     </div>
   </footer>
 );

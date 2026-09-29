@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -192,9 +193,16 @@ const Admin = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-secondary" />
-      </div>
+      <>
+        <Helmet>
+          <title>Admin — Ombachi Enock</title>
+          <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <Loader2 className="h-8 w-8 animate-spin text-secondary" />
+        </div>
+      </>
     );
   }
 
@@ -202,6 +210,11 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Admin — Ombachi Enock</title>
+        <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
