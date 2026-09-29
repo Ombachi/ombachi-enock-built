@@ -29,10 +29,12 @@ Deno.serve(async (req) => {
 
     // Identify the buyer if a session was supplied.
     let userId: string | null = null;
+    let userEmail: string | null = null;
     const authHeader = req.headers.get("Authorization");
     if (authHeader?.startsWith("Bearer ")) {
       const { data } = await db.auth.getUser(authHeader.replace("Bearer ", ""));
       userId = data.user?.id ?? null;
+      userEmail = data.user?.email?.toLowerCase() ?? null;
     }
 
     const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -106,7 +108,7 @@ Deno.serve(async (req) => {
         await db.from("entitlements").insert(
           digital.map((i) => ({
             user_id: userId,
-            email: null,
+            email: userEmail ?? email,
             product_id: i.product_id,
             order_id: order.id,
           })),
