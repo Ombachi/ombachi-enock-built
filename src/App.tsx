@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -23,9 +24,34 @@ import CookieConsent from "@/components/CookieConsent";
 
 const queryClient = new QueryClient();
 
+const ScrollManager = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    const id = decodeURIComponent(hash.slice(1));
+    let tries = 0;
+    const timer = window.setInterval(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.clearInterval(timer);
+      } else if (++tries > 40) {
+        window.clearInterval(timer);
+      }
+    }, 50);
+    return () => window.clearInterval(timer);
+  }, [pathname, hash]);
+  return null;
+};
+
 const AppRoutes = () => {
   useAnalytics();
   return (
+    <>
+    <ScrollManager />
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/work/:slug" element={<ProjectPage />} />
@@ -42,6 +68,7 @@ const AppRoutes = () => {
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
   );
 };
 
