@@ -1,0 +1,12 @@
+{
+  "name": "Ombachi Enock",
+  "short_name": "Ombachi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f3d3e",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
