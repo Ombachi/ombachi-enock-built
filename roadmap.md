@@ -34,8 +34,8 @@
 - [ ] Migration: `newsletter_subscribers` table + RLS/GRANTs (blocked: database paused)
 
 ## Responsive media and commerce environment (Oct 2026)
-- [ ] Responsive AVIF/WebP sources for hero and heavy section photography
-- [ ] Requested page titles and descriptions
-- [ ] Editorial article thumbnails and publication book-jacket fallbacks
-- [ ] Preview/production order tagging
-- [ ] Circular portrait favicon and web-app icons
+- [x] Responsive AVIF/WebP sources for hero and heavy section photography
+- [x] Requested page titles and descriptions
+- [x] Editorial article thumbnails and publication book-jacket fallbacks
+- [ ] Preview/production order tagging (blocked: database paused)
+- [x] Circular portrait favicon and web-app icons
