@@ -197,7 +197,7 @@ const Admin = () => {
         <Helmet>
           <title>Admin Dashboard | Ombachi Enock</title>
           <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
-          <meta name="robots" content="noindex" />
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <div className="min-h-screen flex items-center justify-center bg-background">
           <Loader2 className="h-8 w-8 animate-spin text-secondary" />
@@ -213,7 +213,7 @@ const Admin = () => {
       <Helmet>
         <title>Admin Dashboard | Ombachi Enock</title>
         <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}

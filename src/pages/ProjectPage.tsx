@@ -163,7 +163,7 @@ const ProjectPage = () => {
   }
 
   const Icon = project.icon;
-  const summary = String((project as { problem?: string }).problem ?? project.outcome).slice(0, 160);
+  const summary = project.problem.slice(0, 160);
 
   return (
     <PageTransition>
