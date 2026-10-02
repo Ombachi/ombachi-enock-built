@@ -163,17 +163,19 @@ const ProjectPage = () => {
   }
 
   const Icon = project.icon;
+  const summary = project.problem.slice(0, 160);
 
   return (
     <PageTransition>
       <Helmet>
-        <title>{project.title} — Work by Ombachi Enock</title>
-        <meta name="description" content={project.outcome.slice(0, 160)} />
+        <title>{`${project.title} — Case Study | Ombachi Enock`}</title>
+        <meta name="description" content={summary} />
         <link rel="canonical" href={projectUrl} />
-        <meta property="og:title" content={`${project.title} — Work by Ombachi Enock`} />
-        <meta property="og:description" content={project.outcome.slice(0, 160)} />
+        <meta property="og:title" content={`${project.title} — Case Study | Ombachi Enock`} />
+        <meta property="og:description" content={summary} />
         <meta property="og:url" content={projectUrl} />
         <meta property="og:type" content="article" />
+        <meta name="twitter:description" content={summary} />
       </Helmet>
       <div className="min-h-screen bg-background">
         <Navbar />

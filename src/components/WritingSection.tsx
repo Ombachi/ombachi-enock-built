@@ -10,6 +10,7 @@ interface Article {
   excerpt: string;
   tag: string;
   date: string;
+  cover: string | null;
 }
 
 const getSessionId = () => {
@@ -45,7 +46,7 @@ const WritingSection = () => {
   const fetchArticles = async () => {
     const { data } = await supabase
       .from("posts")
-      .select("slug, title, excerpt, tag, published_at")
+      .select("slug, title, excerpt, tag, published_at, cover_image_url")
       .eq("status", "published")
       .order("published_at", { ascending: false })
       .limit(3);
@@ -56,6 +57,7 @@ const WritingSection = () => {
         title: a.title,
         excerpt: a.excerpt || "",
         tag: a.tag || "General",
+        cover: a.cover_image_url,
         date: a.published_at ? new Date(a.published_at).getFullYear().toString() : "",
       })),
     );
@@ -145,6 +147,17 @@ const WritingSection = () => {
         </div>
 
         <div className="space-y-4 animate-on-scroll">
+          {!loaded &&
+            [0, 1, 2].map((i) => (
+              <div key={i} aria-hidden="true" className="flex gap-5 rounded-xl border border-border bg-card p-6 animate-pulse">
+                <div className="hidden h-24 w-32 shrink-0 rounded-lg bg-muted sm:block" />
+                <div className="flex-1 space-y-3">
+                  <div className="h-3 w-24 rounded bg-muted" />
+                  <div className="h-5 w-3/4 rounded bg-muted" />
+                  <div className="h-3 w-full rounded bg-muted" />
+                </div>
+              </div>
+            ))}
           {loaded && articles.length === 0 && (
             <p className="text-muted-foreground text-sm">New writing is on the way.</p>
           )}
@@ -158,7 +171,18 @@ const WritingSection = () => {
                 <div className={`h-2 bg-gradient-to-r ${categoryGradient(a.tag)}`} />
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
-                    <div>
+                    <div className="hidden h-24 w-32 shrink-0 overflow-hidden rounded-lg sm:block">
+                      {a.cover ? (
+                        <img src={a.cover} alt="" loading="lazy" className="h-full w-full object-cover" />
+                      ) : (
+                        <div className={`flex h-full w-full items-end bg-gradient-to-br ${categoryGradient(a.tag)} p-2`}>
+                          <span className="rounded-full bg-background/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
+                            {a.tag}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-xs font-medium text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">
                           {a.tag}

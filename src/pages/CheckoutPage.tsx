@@ -85,7 +85,7 @@ const CheckoutPage = () => {
     <PageTransition>
       <Helmet>
         <title>Checkout — The Library</title>
-        <meta name="description" content="Complete your order securely and provide delivery details for publications from Ombachi Enock's Library." />
+        <meta name="description" content="Secure checkout for publications and diagnostic handbooks via M-PESA." />
         <meta name="robots" content="noindex" />
       </Helmet>
 

@@ -15,7 +15,7 @@ const CartPage = () => {
     <PageTransition>
       <Helmet>
         <title>Your cart — The Library</title>
-        <meta name="description" content="Review the items in your Library cart before checkout." />
+        <meta name="description" content="Review your selected publications and order summary before checkout." />
         <meta name="robots" content="noindex" />
       </Helmet>
 
