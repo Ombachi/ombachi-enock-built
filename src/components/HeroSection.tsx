@@ -1,3 +1,5 @@
+import ResponsivePicture from "@/components/ResponsivePicture";
+import { responsiveImages } from "@/lib/responsiveImages";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImg1 from "@/assets/hero-speaking.jpg";
@@ -8,12 +10,14 @@ import heroImg4 from "@/assets/hero-outdoor.jpg";
 const slides = [
   {
     src: heroImg1,
+    key: "hero-speaking" as const,
     alt: "Ombachi Enock speaking to an audience",
     role: "Public Leader & Advocate",
     quote: "Public leadership begins by listening closely, speaking clearly, and building with communities.",
   },
   {
     src: heroImg2,
+    key: "hero-steps" as const,
     alt: "Ombachi Enock in a professional portrait",
     role: "Medical Laboratory Scientist",
     quote:
@@ -21,12 +25,14 @@ const slides = [
   },
   {
     src: heroImg3,
+    key: "hero-casual" as const,
     alt: "Ombachi Enock in a relaxed portrait",
     role: "Tech Professional",
     quote: "Technology matters most when it turns complex systems into practical tools people can trust and use.",
   },
   {
     src: heroImg4,
+    key: "hero-outdoor" as const,
     alt: "Ombachi Enock outdoors",
     role: "Entrepreneur",
     quote: "I build ventures that move strong ideas into useful, sustainable solutions for everyday challenges.",
@@ -68,7 +74,9 @@ const HeroSection = () => {
           className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out motion-reduce:transition-none"
           style={{ opacity: currentImage === i ? 1 : 0 }}
         >
-          <img
+          <ResponsivePicture
+            sources={responsiveImages[slide.key]}
+            sizes="100vw"
             src={slide.src}
             alt={currentImage === i ? slide.alt : ""}
             className="h-full w-full object-cover object-top md:object-[center_20%]"

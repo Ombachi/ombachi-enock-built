@@ -21,7 +21,7 @@ const Index = () => {
   return (
     <PageTransition>
       <Helmet>
-        <title>Ombachi Enock — Science, Technology & Public Leadership</title>
+        <title>Ombachi Enock — A Renaissance Man</title>
         <meta name="description" content="Explore Ombachi Enock's work across medical laboratory science, technology, entrepreneurship, public leadership, diagnostics, and climate-health systems." />
         <link rel="canonical" href="https://ombachi-enock-built.lovable.app/" />
         <meta property="og:title" content="Ombachi Enock — Science, Technology & Public Leadership" />

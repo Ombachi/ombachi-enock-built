@@ -195,7 +195,7 @@ const Admin = () => {
     return (
       <>
         <Helmet>
-          <title>Admin — Ombachi Enock</title>
+          <title>Admin Dashboard | Ombachi Enock</title>
           <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
           <meta name="robots" content="noindex" />
         </Helmet>
@@ -211,7 +211,7 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Admin — Ombachi Enock</title>
+        <title>Admin Dashboard | Ombachi Enock</title>
         <meta name="description" content="Private content, publication, order, and analytics administration for Ombachi Enock." />
         <meta name="robots" content="noindex" />
       </Helmet>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BookOpen, Download, MonitorPlay, Package } from "lucide-react";
+import EditorialJacket from "@/components/library/EditorialJacket";
 import { formatKES, type Product } from "@/lib/library/types";
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -27,9 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             className="block h-auto w-auto max-w-full"
           />
         ) : (
-          <span className="font-serif text-3xl text-primary/40 px-6 py-16 text-center leading-tight">
-            {product.title.split(" ").slice(0, 3).join(" ")}
-          </span>
+          <EditorialJacket title={product.title} category={product.category} />
         )}
         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground backdrop-blur">
           <Icon size={12} /> {interactive ? "Interactive" : product.format}
