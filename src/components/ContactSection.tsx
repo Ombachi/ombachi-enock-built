@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Linkedin, MessageCircle, Send } from "lucide-react";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
@@ -25,6 +26,7 @@ const ContactSection = () => {
     } catch (err) {
       console.error("Contact form error:", err);
       setErrorMessage("Your message could not be sent. Please try again or contact me by email.");
+      toast.error("Your message could not be sent. Please try again.");
     } finally {
       setLoading(false);
     }
