@@ -16,12 +16,28 @@ Deno.serve(async (req) => {
     const db = admin();
     const { data: product } = await db
       .from("products")
-      .select("title,status,html_url,html_file_path")
+      .select("id,title,status,html_url,html_file_path,is_free,price_kes")
       .eq("slug", slug)
       .maybeSingle();
 
     if (!product || product.status !== "published") {
       return json({ error: "Not found." }, 404, corsHeaders);
+    }
+
+    // Paid publications require a signed-in owner (or admin).
+    if (!product.is_free && product.price_kes > 0) {
+      const authHeader = req.headers.get("Authorization") ?? "";
+      const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+      const { data: u } = token ? await db.auth.getUser(token) : { data: { user: null } };
+      const user = u.user;
+      if (!user) return json({ error: "Sign in to open this publication." }, 401, corsHeaders);
+      const { data: role } = await db
+        .from("user_roles").select("id").eq("user_id", user.id).eq("role", "admin").maybeSingle();
+      if (!role) {
+        const { data: ent } = await db
+          .from("entitlements").select("id").eq("product_id", product.id).eq("user_id", user.id).limit(1).maybeSingle();
+        if (!ent) return json({ error: "Purchase this publication to open it." }, 403, corsHeaders);
+      }
     }
 
     if (product.html_url) {
