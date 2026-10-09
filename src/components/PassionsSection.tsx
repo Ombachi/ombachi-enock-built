@@ -1,5 +1,3 @@
-import ResponsivePicture from "@/components/ResponsivePicture";
-import { responsiveImages } from "@/lib/responsiveImages";
 import { useState } from "react";
 import passionFilm from "@/assets/passion-film.jpg";
 import passionPhotography from "@/assets/passion-photography.jpg";
@@ -109,9 +107,7 @@ const PassionsSection = () => {
                     className="absolute inset-0 rounded-2xl overflow-hidden shadow-md"
                     style={{ backfaceVisibility: "hidden" }}
                   >
-                    <ResponsivePicture
-                      sources={responsiveImages[`passion-${p.name.toLowerCase()}` as keyof typeof responsiveImages] ?? { avif: "", webp: "" }}
-                      sizes="(max-width: 768px) 50vw, 20vw"
+                    <img
                       src={p.image}
                       alt={p.name}
                       className="w-full h-full object-cover"
