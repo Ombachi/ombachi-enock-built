@@ -1,5 +1,3 @@
-import ResponsivePicture from "@/components/ResponsivePicture";
-import { responsiveImages } from "@/lib/responsiveImages";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImg1 from "@/assets/hero-speaking.jpg";
@@ -74,9 +72,7 @@ const HeroSection = () => {
           className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out motion-reduce:transition-none"
           style={{ opacity: currentImage === i ? 1 : 0 }}
         >
-          <ResponsivePicture
-            sources={responsiveImages[slide.key]}
-            sizes="100vw"
+          <img
             src={slide.src}
             alt={currentImage === i ? slide.alt : ""}
             className="h-full w-full object-cover object-top md:object-[center_20%]"

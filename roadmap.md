@@ -34,6 +34,7 @@
 - [ ] Migration: `newsletter_subscribers` table + RLS/GRANTs (blocked: database paused)
 
 ## Responsive media and commerce environment (Oct 2026)
+- [ ] Bundle Hero, About, and Passions photos directly for external hosting and verify image loading
 - [x] Responsive AVIF/WebP sources for hero and heavy section photography
 - [x] Requested page titles and descriptions
 - [x] Editorial article thumbnails and publication book-jacket fallbacks

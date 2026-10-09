@@ -1,5 +1,3 @@
-import ResponsivePicture from "@/components/ResponsivePicture";
-import { responsiveImages } from "@/lib/responsiveImages";
 import headshot from "@/assets/headshot.jpg";
 import heroPortrait from "@/assets/hero-portrait.jpg";
 
@@ -11,9 +9,7 @@ const AboutSection = () => (
       </h2>
 
       <div className="animate-on-scroll flow-root">
-        <ResponsivePicture
-          sources={responsiveImages.headshot}
-          sizes="160px"
+        <img
           src={headshot}
           alt="Ombachi Enock — Medical Laboratory Scientist"
           className="mx-auto mb-7 h-40 w-40 rounded-lg object-cover shadow-lg md:hidden"
@@ -22,9 +18,7 @@ const AboutSection = () => (
           height={400}
         />
         <figure className="hidden md:float-right md:ml-10 md:mb-7 md:block md:w-[42%] lg:ml-14 lg:w-[39%]">
-          <ResponsivePicture
-            sources={responsiveImages["hero-portrait"]}
-            sizes="(max-width: 768px) 100vw, 40vw"
+          <img
             src={heroPortrait}
             alt="Ombachi Enock — portrait"
             className="h-auto w-full rounded-lg shadow-xl"
