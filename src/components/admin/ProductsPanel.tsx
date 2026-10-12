@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2, Plus, Pencil, Trash2, AlertTriangle, Save } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import RichEditor from "./RichEditor";
 import { PRODUCT_FORMATS, DIGITAL_FORMATS, formatKES } from "@/lib/library/types";
 import {
   DOCUMENT_ACCEPT,
@@ -52,7 +53,13 @@ type Row = {
   collections: string[];
   featured: boolean;
   status: "draft" | "published";
+  post_id: string | null;
 };
+
+type Delivery = "article" | "interactive" | "file";
+
+const deliveryOf = (r: Partial<Row>): Delivery =>
+  r.post_id ? "article" : r.html_file_path || r.html_url ? "interactive" : "file";
 
 const blank = (): Partial<Row> => ({
   slug: "",
@@ -88,6 +95,8 @@ const ProductsPanel = () => {
   const [draft, setDraft] = useState<Partial<Row>>(blank());
   const [stockEdits, setStockEdits] = useState<Record<string, string>>({});
   const [uploading, setUploading] = useState(false);
+  const [delivery, setDelivery] = useState<Delivery>("file");
+  const [articleHtml, setArticleHtml] = useState("");
 
   const onPickFile = async (file: File | undefined) => {
     if (!file) return;
@@ -195,12 +204,26 @@ const ProductsPanel = () => {
 
   const openNew = () => {
     setDraft(blank());
+    setDelivery("file");
+    setArticleHtml("");
     setOpen(true);
   };
 
-  const openEdit = (r: Row) => {
+  const openEdit = async (r: Row) => {
     setDraft({ ...r });
+    setDelivery(deliveryOf(r));
+    setArticleHtml("");
     setOpen(true);
+    if (r.post_id) {
+      const { data } = await supabase.from("posts").select("content").eq("id", r.post_id).maybeSingle();
+      setArticleHtml(data?.content ?? "");
+    }
+  };
+
+  const pickDelivery = (d: Delivery) => {
+    setDelivery(d);
+    if (d === "article") setDraft((x) => ({ ...x, format: "Essay", is_digital: true, price_kes: 0, is_free: true }));
+    if (d === "interactive") setDraft((x) => ({ ...x, format: x.format === "Essay" ? "Publication" : x.format, is_digital: true }));
   };
 
   const save = async () => {
@@ -208,9 +231,42 @@ const ProductsPanel = () => {
       toast({ title: "Title is required", variant: "destructive" });
       return;
     }
+    if (delivery === "article" && (!articleHtml || articleHtml === "<p></p>")) {
+      toast({ title: "Write or paste the article text", variant: "destructive" });
+      return;
+    }
     setSaving(true);
+    const slug = draft.slug?.trim() || slugify(draft.title);
+    const status = (draft.status ?? "draft") as "draft" | "published";
+    let postId: string | null = delivery === "article" ? draft.post_id ?? null : null;
+    if (delivery === "article") {
+      const { data: { user } } = await supabase.auth.getUser();
+      const post = {
+        slug,
+        title: draft.title.trim(),
+        excerpt: draft.description || null,
+        cover_image_url: draft.cover_image_url || null,
+        tag: draft.category || null,
+        content: articleHtml,
+        status,
+        published_at: status === "published" ? new Date().toISOString() : null,
+      };
+      if (postId) {
+        const { published_at: _p, ...rest } = post;
+        const { error } = await supabase.from("posts").update(status === "published" ? rest : { ...rest }).eq("id", postId);
+        if (error) { setSaving(false); toast({ title: "Save failed", description: error.message, variant: "destructive" }); return; }
+        if (status === "published") {
+          await supabase.from("posts").update({ published_at: new Date().toISOString() }).eq("id", postId).is("published_at", null);
+        }
+      } else {
+        const { data, error } = await supabase.from("posts").insert({ ...post, author_id: user?.id ?? null }).select("id").single();
+        if (error) { setSaving(false); toast({ title: "Save failed", description: error.message, variant: "destructive" }); return; }
+        postId = data.id;
+      }
+    }
     const payload = {
-      slug: draft.slug?.trim() || slugify(draft.title),
+      post_id: postId,
+      slug,
       title: draft.title.trim(),
       subtitle: draft.subtitle || null,
       description: draft.description ?? "",
@@ -229,7 +285,7 @@ const ProductsPanel = () => {
       html_url: draft.html_url?.trim() || null,
       collections: draft.collections ?? [],
       featured: !!draft.featured,
-      status: (draft.status ?? "draft") as "draft" | "published",
+      status,
     };
 
     const { error } = draft.id
@@ -241,7 +297,7 @@ const ProductsPanel = () => {
       toast({ title: "Save failed", description: error.message, variant: "destructive" });
       return;
     }
-    toast({ title: draft.id ? "Product updated" : "Product created" });
+    toast({ title: draft.id ? "Publication updated" : "Publication created" });
     setOpen(false);
     load();
   };
@@ -249,6 +305,7 @@ const ProductsPanel = () => {
   const remove = async (r: Row) => {
     if (!window.confirm(`Delete "${r.title}"? This cannot be undone.`)) return;
     const { error } = await supabase.from("products").delete().eq("id", r.id);
+    if (!error && r.post_id) await supabase.from("posts").delete().eq("id", r.post_id);
     if (error) {
       toast({ title: "Delete failed", description: error.message, variant: "destructive" });
       return;
@@ -305,14 +362,14 @@ const ProductsPanel = () => {
         <CardHeader>
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <CardTitle>Products</CardTitle>
+              <CardTitle>Publications</CardTitle>
               <CardDescription>
                 {rows.length} item{rows.length === 1 ? "" : "s"} in The Library ·{" "}
                 {rows.filter((r) => r.status === "published").length} published
               </CardDescription>
             </div>
             <Button size="sm" onClick={openNew}>
-              <Plus className="h-4 w-4 mr-1.5" /> New product
+              <Plus className="h-4 w-4 mr-1.5" /> New publication
             </Button>
           </div>
         </CardHeader>
@@ -413,9 +470,29 @@ const ProductsPanel = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{draft.id ? "Edit product" : "New product"}</DialogTitle>
-            <DialogDescription>Details shown on the product page in The Library.</DialogDescription>
+            <DialogTitle>{draft.id ? "Edit publication" : "New publication"}</DialogTitle>
+            <DialogDescription>One entry per piece — it appears under Publications automatically.</DialogDescription>
           </DialogHeader>
+
+          <div className="grid gap-2 sm:grid-cols-3" role="radiogroup" aria-label="Delivery format">
+            {([
+              ["article", "Written article", "Write or paste rich text"],
+              ["interactive", "Interactive document", "Upload an HTML file"],
+              ["file", "Document / file", "PDF or a physical book"],
+            ] as const).map(([v, label, hint]) => (
+              <button
+                key={v}
+                type="button"
+                role="radio"
+                aria-checked={delivery === v}
+                onClick={() => pickDelivery(v)}
+                className={`rounded-md border p-3 text-left text-sm transition-colors ${delivery === v ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"}`}
+              >
+                <span className="block font-medium">{label}</span>
+                <span className="block text-xs text-muted-foreground">{hint}</span>
+              </button>
+            ))}
+          </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
@@ -543,6 +620,15 @@ const ProductsPanel = () => {
                 {uploading && <Loader2 className="h-4 w-4 animate-spin text-secondary" />}
               </div>
             </div>
+            {delivery === "article" && (
+              <div className="sm:col-span-2">
+                <Label>Article text</Label>
+                <div className="mt-1">
+                  <RichEditor value={articleHtml} onChange={setArticleHtml} />
+                </div>
+              </div>
+            )}
+            {delivery === "file" && (
             <div className="sm:col-span-2 rounded-md border border-border p-3">
               <Label htmlFor="p-file">Digital file / document</Label>
               <p className="text-xs text-muted-foreground mt-1">
@@ -573,7 +659,8 @@ const ProductsPanel = () => {
                 {uploading && <Loader2 className="h-4 w-4 animate-spin text-secondary" />}
               </div>
             </div>
-            {!draft.is_digital && (
+            )}
+            {delivery === "file" && !draft.is_digital && (
               <div>
                 <Label htmlFor="p-stock">Stock</Label>
                 <Input
@@ -585,6 +672,7 @@ const ProductsPanel = () => {
                 />
               </div>
             )}
+            {delivery === "interactive" && (
             <div className="sm:col-span-2 rounded-md border border-border p-3">
               <Label htmlFor="p-html">Interactive HTML experience</Label>
               <p className="text-xs text-muted-foreground mt-1">
@@ -620,6 +708,7 @@ const ProductsPanel = () => {
                 onChange={(e) => set("html_url", e.target.value)}
               />
             </div>
+            )}
             <div className="flex items-center gap-3">
               <Switch
                 id="p-featured"
