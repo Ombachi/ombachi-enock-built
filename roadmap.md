@@ -40,3 +40,15 @@
 - [x] Editorial article thumbnails and publication book-jacket fallbacks
 - [ ] Preview/production order tagging (blocked: database paused)
 - [x] Circular portrait favicon and web-app icons
+
+## Oct 12 2026 batch
+- [ ] Forgot password + /reset-password
+- [ ] Checkout shipping address + delivery notes for physical books; admin order status
+- [ ] Navbar: About -> /about, Publications, My Library
+- [ ] Order receipt email on M-PESA success (Access Your Publication link)
+- [ ] Contact form: notify contact@ + visitor acknowledgment
+- [ ] Remove homepage newsletter
+- [ ] /about page (bio, education, passions, principles); streamlined homepage
+- [ ] publication-html serves text/html; viewer uses srcDoc; full-screen endpoint
+- [ ] Unified "Writing & Publications" homepage section with format badges
+- [ ] Admin: single Publications manager (article / interactive / file)
