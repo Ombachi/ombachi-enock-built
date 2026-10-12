@@ -89,7 +89,8 @@ Deno.serve(async (req) => {
     const stk = await stkRes.json();
 
     if (!stk.CheckoutRequestID) {
-      return json({ error: "M-PESA request failed. Please try again." }, 502, corsHeaders);
+      console.error("STK push rejected", stk?.errorCode, stk?.errorMessage ?? stk?.ResponseDescription);
+      return json({ error: stk?.errorMessage ?? "M-PESA request failed. Please try again." }, 502, corsHeaders);
     }
 
     await db
