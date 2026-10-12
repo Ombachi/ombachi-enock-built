@@ -21,6 +21,7 @@ Deno.serve(async (req) => {
   const secret = env("MPESA_CONSUMER_SECRET");
   const shortcode = env("MPESA_SHORTCODE");
   const passkey = env("MPESA_PASSKEY");
+  const till = env("MPESA_TILL_NUMBER").trim();
   const base = env("MPESA_ENV") === "production"
     ? "https://api.safaricom.co.ke"
     : "https://sandbox.safaricom.co.ke";
@@ -74,10 +75,11 @@ Deno.serve(async (req) => {
         BusinessShortCode: shortcode,
         Password: password,
         Timestamp: ts,
-        TransactionType: "CustomerPayBillOnline",
+        // Buy Goods (Till): shortcode is the Store Number, PartyB is the Till.
+        TransactionType: till ? "CustomerBuyGoodsOnline" : "CustomerPayBillOnline",
         Amount: Math.max(1, Math.round(order.total_kes)),
         PartyA: msisdn,
-        PartyB: shortcode,
+        PartyB: till || shortcode,
         PhoneNumber: msisdn,
         CallBackURL: callbackUrl,
         AccountReference: order.order_number,
