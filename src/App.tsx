@@ -10,6 +10,8 @@ import Index from "./pages/Index.tsx";
 import ProjectPage from "./pages/ProjectPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Auth from "./pages/Auth.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
+import AboutPage from "./pages/AboutPage.tsx";
 import Admin from "./pages/Admin.tsx";
 import PostPage from "./pages/PostPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
@@ -65,6 +67,8 @@ const AppRoutes = () => {
       <Route path="/account" element={<AccountPage />} />
       <Route path="/thank-you" element={<ThankYouPage />} />
       <Route path="/auth" element={<Auth />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

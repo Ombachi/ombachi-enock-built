@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -15,13 +15,9 @@ const ContactSection = () => {
     setErrorMessage("");
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
-        name: form.name,
-        email: form.email,
-        message: form.message,
-      });
-      if (error) throw error;
-      setForm({ name: "", email: "", message: "" });
+      const { data, error } = await supabase.functions.invoke("contact-submit", { body: form });
+      if (error || !data?.ok) throw error ?? new Error("send failed");
+      setForm({ name: "", email: "", subject: "", message: "" });
       navigate("/thank-you");
     } catch (err) {
       console.error("Contact form error:", err);
@@ -131,6 +127,20 @@ const ContactSection = () => {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
                   placeholder="you@example.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="subject" className="text-sm font-medium text-foreground mb-1 block">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  maxLength={200}
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                  placeholder="What is this about?"
                 />
               </div>
               <div>

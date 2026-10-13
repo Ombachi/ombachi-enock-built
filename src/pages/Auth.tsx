@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react";
 
 const Auth = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [mode, setMode] = useState<"signin" | "signup" | "forgot">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,6 +32,18 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      if (mode === "forgot") {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+        if (error) throw error;
+        toast({
+          title: "Check your inbox",
+          description: "If an account exists for this email, a recovery link is on its way.",
+        });
+        setMode("signin");
+        return;
+      }
       if (mode === "signup") {
         const { error } = await supabase.auth.signUp({
           email,
@@ -63,12 +75,14 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="font-serif text-2xl">
-            {mode === "signin" ? "Admin Sign In" : "Create Admin Account"}
+            {mode === "signin" ? "Sign In" : mode === "forgot" ? "Reset your password" : "Create Account"}
           </CardTitle>
           <CardDescription>
             {mode === "signin"
-              ? "Sign in to view your analytics dashboard."
-              : "First account becomes the admin. Confirm your email to activate."}
+              ? "Sign in to your account."
+              : mode === "forgot"
+                ? "Enter your email and we'll send you a recovery link."
+                : "Confirm your email to activate your account."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -84,8 +98,16 @@ const Auth = () => {
                 autoComplete="email"
               />
             </div>
+            {mode !== "forgot" && (
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                {mode === "signin" && (
+                  <button type="button" onClick={() => setMode("forgot")} className="text-xs text-secondary hover:underline">
+                    Forgot password?
+                  </button>
+                )}
+              </div>
               <Input
                 id="password"
                 type="password"
@@ -96,9 +118,10 @@ const Auth = () => {
                 autoComplete={mode === "signin" ? "current-password" : "new-password"}
               />
             </div>
+            )}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {mode === "signin" ? "Sign In" : "Sign Up"}
+              {mode === "signin" ? "Sign In" : mode === "forgot" ? "Send recovery link" : "Sign Up"}
             </Button>
           </form>
           <button
@@ -106,7 +129,7 @@ const Auth = () => {
             onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
             className="mt-4 text-sm text-muted-foreground hover:text-foreground w-full text-center"
           >
-            {mode === "signin" ? "Need to create the admin account?" : "Already have an account? Sign in"}
+            {mode === "signin" ? "Need an account? Sign up" : "Back to sign in"}
           </button>
         </CardContent>
       </Card>
