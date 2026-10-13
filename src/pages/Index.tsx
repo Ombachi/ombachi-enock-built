@@ -1,15 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 import WorkSection from "@/components/WorkSection";
 import TimelineSection from "@/components/TimelineSection";
-import PrinciplesSection from "@/components/PrinciplesSection";
-import QuoteSection from "@/components/QuoteSection";
-import PassionsSection from "@/components/PassionsSection";
-import WritingSection from "@/components/WritingSection";
+import PublicationsSection from "@/components/PublicationsSection";
 import ContactSection from "@/components/ContactSection";
-import NewsletterSignup from "@/components/NewsletterSignup";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
@@ -31,15 +26,10 @@ const Index = () => {
       <div className="min-h-screen">
         <Navbar />
         <HeroSection />
-        <AboutSection />
-        <PassionsSection />
         <TimelineSection />
         <WorkSection />
-        <PrinciplesSection />
-        <QuoteSection />
-        <WritingSection />
+        <PublicationsSection />
         <ContactSection />
-        <NewsletterSignup />
         <Footer />
         <BackToTop />
       </div>
