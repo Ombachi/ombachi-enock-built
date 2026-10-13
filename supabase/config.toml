@@ -5,3 +5,5 @@ project_id = "ynwpcesdspzcuemwdmnw"
     verify_jwt = false
   [functions.rss]
     verify_jwt = false
+  [functions.contact-submit]
+    verify_jwt = false
