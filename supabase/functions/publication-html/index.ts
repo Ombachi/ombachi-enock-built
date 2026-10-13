@@ -48,12 +48,12 @@ Deno.serve(async (req) => {
       return json({ error: "No interactive content for this publication." }, 409, corsHeaders);
     }
 
-    const { data: signed, error } = await db.storage
-      .from("library-files")
-      .createSignedUrl(product.html_file_path, 3600);
-    if (error || !signed) return json({ error: "Could not open the experience." }, 500, corsHeaders);
-
-    return json({ url: signed.signedUrl, title: product.title }, 200, corsHeaders);
+    // Download the stored HTML and return its text, so the viewer can run it via srcDoc
+    // (storage serves .html as text/plain, which would show raw source).
+    const { data: file, error } = await db.storage.from("library-files").download(product.html_file_path);
+    if (error || !file) return json({ error: "Could not open the experience." }, 500, corsHeaders);
+    const html = new TextDecoder("utf-8").decode(await file.arrayBuffer());
+    return json({ html, title: product.title }, 200, corsHeaders);
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unexpected error" }, 500, corsHeaders);
   }

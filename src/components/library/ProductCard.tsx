@@ -3,7 +3,7 @@ import { BookOpen, Download, MonitorPlay, Package } from "lucide-react";
 import EditorialJacket from "@/components/library/EditorialJacket";
 import { formatKES, type Product } from "@/lib/library/types";
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({ product, badgeLabel }: { product: Product; badgeLabel?: string }) => {
   const interactive = !!(product.html_url || product.html_file_path);
   const Icon = interactive
     ? MonitorPlay
@@ -31,7 +31,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <EditorialJacket title={product.title} category={product.category} />
         )}
         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground backdrop-blur">
-          <Icon size={12} /> {interactive ? "Interactive" : product.format}
+          <Icon size={12} /> {badgeLabel ?? (interactive ? "Interactive" : product.format)}
         </span>
         {product.is_free && (
           <span className="absolute top-3 right-3 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-secondary-foreground">

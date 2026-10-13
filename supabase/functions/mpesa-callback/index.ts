@@ -1,5 +1,6 @@
 import { admin } from "../_shared/db.ts";
 import { verify } from "../_shared/token.ts";
+import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 
 // Safaricom posts the payment result here. It always answers 200 so Daraja does
 // not retry endlessly, but it only acts when (1) the callback URL carries a valid
@@ -56,7 +57,7 @@ Deno.serve(async (req) => {
     const db = admin();
     const { data: order } = await db
       .from("orders")
-      .select("id,customer_email,user_id,status,payment_reference")
+      .select("id,customer_email,customer_name,total_kes,user_id,status,payment_reference")
       .eq("id", orderId)
       .maybeSingle();
     if (!order || order.status !== "pending") return ok();
@@ -82,7 +83,7 @@ Deno.serve(async (req) => {
 
     const { data: items } = await db
       .from("order_items")
-      .select("product_id,is_digital")
+      .select("product_id,is_digital,title,quantity,unit_price_kes")
       .eq("order_id", order.id);
 
     const digital = (items ?? []).filter((i) => i.is_digital && i.product_id);
@@ -96,6 +97,25 @@ Deno.serve(async (req) => {
         })),
       );
       await db.from("orders").update({ fulfilment: "digital_delivered" }).eq("id", order.id);
+    }
+
+    try {
+      const list = items ?? [];
+      await sendTemplateEmail("order-receipt", order.customer_email, {
+        templateData: {
+          name: order.customer_name,
+          orderRef: order.id.slice(0, 8).toUpperCase(),
+          receipt: receipt ? String(receipt) : undefined,
+          items: list.map((i) => ({ title: i.title, quantity: i.quantity, unit_price_kes: i.unit_price_kes, is_digital: i.is_digital })),
+          total: order.total_kes,
+          hasDigital: list.some((i) => i.is_digital),
+          hasPhysical: list.some((i) => !i.is_digital),
+        },
+        replyTo: "orders@ombachienock.me.ke",
+        idempotencyKey: `order-receipt-${order.id}`,
+      });
+    } catch (e) {
+      console.error("receipt email failed", e);
     }
 
     return ok();

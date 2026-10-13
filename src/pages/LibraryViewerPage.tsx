@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 const LibraryViewerPage = () => {
   const { slug } = useParams();
   const [url, setUrl] = useState<string | null>(null);
+  const [html, setHtml] = useState<string | null>(null);
   const [title, setTitle] = useState("Interactive publication");
   const [error, setError] = useState<string | null>(null);
 
@@ -18,17 +19,32 @@ const LibraryViewerPage = () => {
         body: { slug },
       });
       if (!active) return;
-      if (fnError || !data?.url) {
+      if (fnError || (!data?.url && !data?.html)) {
         setError("This publication has no interactive content yet.");
         return;
       }
-      setUrl(data.url as string);
+      if (data.html) setHtml(data.html as string);
+      else setUrl(data.url as string);
       if (data.title) setTitle(data.title as string);
     })();
     return () => {
       active = false;
     };
   }, [slug]);
+
+  const openFullScreen = () => {
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (html) {
+      const blobUrl = URL.createObjectURL(new Blob([html], { type: "text/html;charset=utf-8" }));
+      window.open(blobUrl, "_blank");
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 60_000);
+    }
+  };
+
+  const ready = Boolean(url || html);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -44,25 +60,25 @@ const LibraryViewerPage = () => {
         >
           <ArrowLeft size={15} /> Back to {title}
         </Link>
-        {url && (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
+        {ready && (
+          <button
+            type="button"
+            onClick={openFullScreen}
             className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
           >
             <Maximize2 size={14} /> Open full screen
-          </a>
+          </button>
         )}
       </header>
 
       {error ? (
         <div className="flex flex-1 items-center justify-center p-10 text-muted-foreground">{error}</div>
-      ) : url ? (
+      ) : ready ? (
         <iframe
-          src={url}
+          {...(html ? { srcDoc: html } : { src: url! })}
           title={title}
           className="flex-1 w-full border-0"
+          style={{ minHeight: "calc(100vh - 53px)" }}
           sandbox="allow-scripts allow-forms allow-popups allow-modals allow-downloads"
         />
       ) : (

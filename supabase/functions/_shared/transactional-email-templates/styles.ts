@@ -1,0 +1,9 @@
+export const main = { backgroundColor: '#ffffff', fontFamily: 'Georgia, "Times New Roman", serif', color: '#1f2937' }
+export const container = { maxWidth: '560px', margin: '0 auto', padding: '32px 28px' }
+export const brand = { fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2f7d5b', margin: '0 0 24px' }
+export const h1 = { fontSize: '24px', color: '#1e3a5f', margin: '0 0 16px', fontWeight: 'bold' as const }
+export const text = { fontSize: '15px', lineHeight: '1.6', color: '#374151', margin: '0 0 14px', fontFamily: 'Arial, sans-serif' }
+export const muted = { ...text, fontSize: '13px', color: '#6b7280' }
+export const box = { backgroundColor: '#f4f7f6', borderRadius: '8px', padding: '16px 18px', margin: '0 0 18px' }
+export const button = { backgroundColor: '#1e3a5f', color: '#ffffff', padding: '13px 22px', borderRadius: '6px', fontSize: '15px', fontFamily: 'Arial, sans-serif', textDecoration: 'none', display: 'inline-block' }
+export const SITE_URL = 'https://ombachi-enock-built.lovable.app'

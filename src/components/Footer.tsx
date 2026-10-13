@@ -15,7 +15,7 @@ const Footer = () => (
           <p className="font-medium mb-3">Explore</p>
           <ul className="space-y-2 text-muted-foreground">
             <li>
-              <Link to="/#about" className="hover:text-foreground transition-colors">
+              <Link to="/about" className="hover:text-foreground transition-colors">
                 About
               </Link>
             </li>
