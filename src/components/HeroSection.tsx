@@ -25,7 +25,7 @@ const slides = [
     src: heroImg3,
     key: "hero-casual" as const,
     alt: "Ombachi Enock in a relaxed portrait",
-    role: "Tech Professional",
+    role: "Techie",
     quote: "Technology matters most when it turns complex systems into practical tools people can trust and use.",
   },
   {
