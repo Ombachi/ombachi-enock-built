@@ -5,7 +5,7 @@ const milestones = [
     year: "2021",
     icon: Building2,
     title: "Kenyatta National Hospital",
-    role: "Medical Laboratory Attaché",
+    role: "Intern",
     desc: "Clinical training within Kenya’s leading national referral and teaching hospital, rotating across Haematology, Microbiology, Histology, Cytology, Clinical Chemistry, Blood Transfusion, Immunology and Molecular Diagnostics. Gained hands-on experience in specimen management, diagnostic testing, quality control, result interpretation and laboratory workflows in a high-volume clinical environment.",
   },
   {
