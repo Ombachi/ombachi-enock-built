@@ -57,7 +57,7 @@ Deno.serve(async (req) => {
     const db = admin();
     const { data: order } = await db
       .from("orders")
-      .select("id,customer_email,customer_name,total_kes,user_id,status,payment_reference")
+      .select("id,customer_email,customer_name,total_kes,user_id,status,payment_reference,order_number")
       .eq("id", orderId)
       .maybeSingle();
     if (!order || order.status !== "pending") return ok();
@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
         templateData: {
           name: order.customer_name,
           orderRef: order.order_number ?? order.id.slice(0, 8).toUpperCase(),
-          accessUrl: `https://ombachienock.me.ke/order-confirmation?order=${order.id}&token=${await sign("access", order.id)}`,
+          accessUrl: `${Deno.env.get("PUBLIC_SITE_URL") ?? "https://ombachi-enock-built.lovable.app"}/order-confirmation?order=${order.id}&token=${await sign("access", order.id)}`,
           receipt: receipt ? String(receipt) : undefined,
           items: list.map((i) => ({ title: i.title, quantity: i.quantity, unit_price_kes: i.unit_price_kes, is_digital: i.is_digital })),
           total: order.total_kes,
