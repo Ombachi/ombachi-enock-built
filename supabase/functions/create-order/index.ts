@@ -118,7 +118,8 @@ Deno.serve(async (req) => {
     }
 
     const payment_token = await sign("pay", order.id);
-    return json({ order, payment_token }, 200, corsHeaders);
+    const access_token = await sign("access", order.id);
+    return json({ order, payment_token, access_token }, 200, corsHeaders);
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unexpected error" }, 500, corsHeaders);
   }

@@ -122,7 +122,7 @@ const CartPage = () => {
                   Proceed to checkout
                 </Link>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Pay with M-PESA. Digital titles unlock in your account as soon as payment is
+                  Pay with M-PESA. Digital titles open on your confirmation screen as soon as payment is
                   confirmed.
                 </p>
                 <button

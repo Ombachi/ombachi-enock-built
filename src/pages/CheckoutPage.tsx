@@ -44,10 +44,11 @@ const CheckoutPage = () => {
       const order = (data as { order?: { id: string; order_number: string; total_kes: number } })?.order;
       if (!order) throw new Error((data as { error?: string })?.error ?? "Could not place the order.");
 
+      const accessToken = (data as { access_token?: string })?.access_token ?? "";
+      const confirmUrl = `/order-confirmation?order=${order.id}&token=${accessToken}`;
       if (order.total_kes === 0) {
         clear();
-        toast.success(`Order ${order.order_number} confirmed. Your downloads are ready.`);
-        navigate("/account");
+        navigate(confirmUrl);
         return;
       }
 
@@ -70,7 +71,7 @@ const CheckoutPage = () => {
           `Order ${order.order_number} received. Payment instructions will be sent to ${form.email}.`,
         );
       }
-      navigate("/account");
+      navigate(confirmUrl);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {

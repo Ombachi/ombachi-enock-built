@@ -3,7 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
-const links = ["About", "Work", "Principles", "Writing", "Contact"];
+const links = ["About", "Work", "Publications", "Contact"];
+const PAGE_LINKS: Record<string, string> = { About: "/about", Publications: "/library" };
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,10 @@ const Navbar = () => {
 
   const scrollTo = (id: string) => {
     setOpen(false);
+    if (PAGE_LINKS[id]) {
+      navigate(PAGE_LINKS[id]);
+      return;
+    }
     if (location.pathname !== "/") {
       navigate(`/#${id.toLowerCase()}`);
       return;
