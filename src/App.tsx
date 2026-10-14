@@ -22,6 +22,7 @@ import CartPage from "./pages/CartPage.tsx";
 import CheckoutPage from "./pages/CheckoutPage.tsx";
 import AccountPage from "./pages/AccountPage.tsx";
 import ThankYouPage from "./pages/ThankYouPage.tsx";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage.tsx";
 import CookieConsent from "@/components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const AppRoutes = () => {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/account" element={<AccountPage />} />
+      <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
       <Route path="/thank-you" element={<ThankYouPage />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/reset-password" element={<ResetPassword />} />

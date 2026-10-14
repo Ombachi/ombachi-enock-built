@@ -47,8 +47,8 @@ const AboutPage = () => {
             </ul>
           </div>
         </section>
-        <PassionsSection />
         <PrinciplesSection />
+        <PassionsSection />
         <Footer />
         <BackToTop />
       </div>
