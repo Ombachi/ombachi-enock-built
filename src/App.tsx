@@ -23,7 +23,6 @@ import CheckoutPage from "./pages/CheckoutPage.tsx";
 import AccountPage from "./pages/AccountPage.tsx";
 import ThankYouPage from "./pages/ThankYouPage.tsx";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage.tsx";
-import CookieConsent from "@/components/CookieConsent";
 
 const queryClient = new QueryClient();
 
