@@ -85,7 +85,6 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AppRoutes />
-          <CookieConsent />
         </BrowserRouter>
       </CartProvider>
     </TooltipProvider>
