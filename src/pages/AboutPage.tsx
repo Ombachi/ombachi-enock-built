@@ -9,10 +9,10 @@ import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-// Replace with confirmed qualifications.
 const EDUCATION = [
   { title: "Bachelor of Science, Medical Laboratory Science", detail: "Clinical training across haematology, microbiology, clinical chemistry and blood transfusion." },
   { title: "Laboratory Quality Management (ISO 15189)", detail: "Quality systems, internal audit and accreditation readiness for clinical laboratories." },
+  { title: "Public Leadership and Policy", detail: "Studied at the School of Politics, Policy and Governance (SPPG)." },
 ];
 
 const AboutPage = () => {
