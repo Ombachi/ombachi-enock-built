@@ -10,8 +10,8 @@ import PageTransition from "@/components/PageTransition";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const EDUCATION = [
-  { title: "Bachelor of Science, Medical Laboratory Science", detail: "Clinical training across haematology, microbiology, clinical chemistry and blood transfusion." },
-  { title: "Public Leadership and Policy", detail: "Studied at the School of Politics, Policy and Governance (SPPG)." },
+  { title: "Bachelor of Science, Medical Laboratory Science", detail: "University of Nairobi." },
+  { title: "Public Leadership and Policy", detail: " School of Politics, Policy and Governance (SPPG)." },
 ];
 
 const AboutPage = () => {
@@ -20,7 +20,10 @@ const AboutPage = () => {
     <PageTransition>
       <Helmet>
         <title>About — Ombachi Enock</title>
-        <meta name="description" content="The story, education, principles and passions behind Ombachi Enock's work in diagnostics, technology and public leadership." />
+        <meta
+          name="description"
+          content="The story, education, principles and passions behind Ombachi Enock's work in diagnostics, technology and public leadership."
+        />
         <link rel="canonical" href="https://ombachi-enock-built.lovable.app/about" />
         <meta property="og:title" content="About Ombachi Enock" />
         <meta property="og:url" content="https://ombachi-enock-built.lovable.app/about" />
