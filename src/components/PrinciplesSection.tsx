@@ -8,7 +8,6 @@ import {
   Award,
   GraduationCap,
   Cpu,
-  Users,
   Map,
 } from "lucide-react";
 
@@ -50,7 +49,6 @@ const principles = [
     title: "Technology-Enabled Service",
     desc: "Leveraging AI and digital tools to modernise and scale delivery.",
   },
-  { icon: Users, title: "Mentorship & Multiplication", desc: "Investing in people so they can invest in others." },
   {
     icon: Map,
     title: "Future Mapping",
