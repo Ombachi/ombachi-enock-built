@@ -11,7 +11,7 @@ const ThankYouPage = () => (
     <Helmet>
       <title>Thank you — Ombachi Enock</title>
       <meta name="description" content="Your message to Ombachi Enock has been received." />
-      <link rel="canonical" href="https://ombachi-enock-built.lovable.app/thank-you" />
+      <link rel="canonical" href="https://www.ombachienock.me.ke/thank-you" />
       <meta name="robots" content="noindex" />
     </Helmet>
     <div className="flex min-h-screen flex-col bg-background">

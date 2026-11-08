@@ -63,13 +63,13 @@ const PrinciplesSection = () => (
       <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4 animate-on-scroll">
         Fundamental Principles
       </h2>
-      <p className="text-muted-foreground mb-12 max-w-xl animate-on-scroll"></p>
+      <div className="mb-10" />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
         {principles.map((p) => (
           <div
             key={p.title}
-            className="group p-6 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
+            className="group flex h-full flex-col p-6 rounded-xl border border-border bg-card hover:border-secondary/40 transition-colors"
           >
             <p.icon size={28} className="text-secondary mb-4 group-hover:scale-110 transition-transform" />
             <h3 className="font-semibold text-foreground mb-2">{p.title}</h3>

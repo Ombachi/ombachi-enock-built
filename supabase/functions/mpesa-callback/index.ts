@@ -105,7 +105,7 @@ Deno.serve(async (req) => {
         templateData: {
           name: order.customer_name,
           orderRef: order.order_number ?? order.id.slice(0, 8).toUpperCase(),
-          accessUrl: `${Deno.env.get("PUBLIC_SITE_URL") ?? "https://ombachi-enock-built.lovable.app"}/order-confirmation?order=${order.id}&token=${await sign("access", order.id)}`,
+          accessUrl: `${Deno.env.get("PUBLIC_SITE_URL") ?? "https://www.ombachienock.me.ke"}/order-confirmation?order=${order.id}&token=${await sign("access", order.id)}`,
           receipt: receipt ? String(receipt) : undefined,
           items: list.map((i) => ({ title: i.title, quantity: i.quantity, unit_price_kes: i.unit_price_kes, is_digital: i.is_digital })),
           total: order.total_kes,

@@ -15,6 +15,13 @@
       "when": 1791885285879,
       "tag": "0001_contact_subject",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794141409568,
+      "tag": "0002_admin_delete_orders",
+      "breakpoints": true
     }
   ]
 }

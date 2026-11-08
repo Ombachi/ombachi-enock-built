@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, Mail, Package, RefreshCw } from "lucide-react";
+import { Loader2, Mail, Package, RefreshCw, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "@/hooks/use-toast";
 import { formatKES } from "@/lib/library/types";
@@ -93,6 +93,17 @@ const OrdersPanel = () => {
     }
     setOrders((os) => os.map((x) => (x.id === o.id ? { ...x, ...patch } : x)));
     toast({ title: "Order updated", description: o.order_number });
+  };
+
+  const removeOrder = async (o: Order) => {
+    if (!window.confirm(`Delete order ${o.order_number}? This cannot be undone.`)) return;
+    const { error } = await supabase.from("orders").delete().eq("id", o.id);
+    if (error) {
+      toast({ title: "Delete failed", description: error.message, variant: "destructive" });
+      return;
+    }
+    setOrders((os) => os.filter((x) => x.id !== o.id));
+    toast({ title: "Order deleted", description: o.order_number });
   };
 
   if (loading) {
@@ -206,6 +217,15 @@ const OrdersPanel = () => {
                         ))}
                       </select>
                     </label>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 text-destructive ml-auto"
+                      onClick={() => removeOrder(o)}
+                      aria-label={`Delete order ${o.order_number}`}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" /> Delete
+                    </Button>
                   </div>
                 </div>
               ))}

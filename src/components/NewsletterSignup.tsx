@@ -39,7 +39,7 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 border-t border-border bg-muted/30" aria-labelledby="newsletter-heading">
+    <section className="py-12 sm:py-16 md:py-20 border-t border-border bg-muted/30" aria-labelledby="newsletter-heading">
       <div className="section-container max-w-2xl text-center">
         <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 text-primary mb-5">
           <Mail className="w-5 h-5" aria-hidden="true" />

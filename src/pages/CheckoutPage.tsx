@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2, Smartphone } from "lucide-react";
@@ -21,13 +21,15 @@ const CheckoutPage = () => {
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", address: "", notes: "" });
   const [busy, setBusy] = useState(false);
+  const isSubmitting = useRef(false);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!lines.length) return;
+    if (!lines.length || isSubmitting.current) return;
+    isSubmitting.current = true;
     setBusy(true);
     try {
       const { data, error } = await supabase.functions.invoke("create-order", {
@@ -76,6 +78,7 @@ const CheckoutPage = () => {
       toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setBusy(false);
+      isSubmitting.current = false;
     }
   };
 

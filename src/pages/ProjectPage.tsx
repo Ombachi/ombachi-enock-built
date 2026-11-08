@@ -140,7 +140,7 @@ const ProjectPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = slug ? projectsData[slug] : null;
-  const projectUrl = `https://ombachi-enock-built.lovable.app/work/${slug ?? "not-found"}`;
+  const projectUrl = `https://www.ombachienock.me.ke/work/${slug ?? "not-found"}`;
 
   if (!project) {
     return (

@@ -1,6 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.4";
 
-const SITE_URL = "https://ombachi-enock-built.lovable.app";
+const SITE_URL = "https://www.ombachienock.me.ke";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

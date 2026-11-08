@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
 
     // Emails are best-effort: the message is already saved.
     const results = await Promise.allSettled([
-      sendTemplateEmail("contact-notification", "contact@ombachienock.me.ke", {
+      sendTemplateEmail("contact-notification", "ombachienock5@outlook.com", {
         templateData: d, replyTo: d.email, idempotencyKey: `contact-notify-${row.id}`,
       }),
       sendTemplateEmail("contact-acknowledgment", d.email, {

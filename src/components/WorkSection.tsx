@@ -58,14 +58,14 @@ const WorkSection = () => {
               <button
                 key={p.slug}
                 onClick={() => navigate(`/work/${p.slug}`)}
-                className="text-left bg-card shadow-sm hover:shadow-md transition-all p-8 rounded-xl border border-border hover:border-secondary/40 group"
+                className="flex h-full flex-col text-left bg-card shadow-sm hover:shadow-md transition-all p-8 rounded-xl border border-border hover:border-secondary/40 group"
               >
                 <Icon size={32} className="text-secondary mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-serif text-xl font-bold text-foreground mb-2 group-hover:text-secondary transition-colors">
                   {p.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">{p.summary}</p>
-                <span className="text-xs font-medium text-secondary">View full project →</span>
+                <span className="mt-auto text-xs font-medium text-secondary">View full project →</span>
               </button>
             );
           })}

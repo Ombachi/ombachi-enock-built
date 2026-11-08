@@ -24,9 +24,9 @@ const AboutPage = () => {
           name="description"
           content="The story, education, principles and passions behind Ombachi Enock's work in diagnostics, technology and public leadership."
         />
-        <link rel="canonical" href="https://ombachi-enock-built.lovable.app/about" />
+        <link rel="canonical" href="https://www.ombachienock.me.ke/about" />
         <meta property="og:title" content="About Ombachi Enock" />
-        <meta property="og:url" content="https://ombachi-enock-built.lovable.app/about" />
+        <meta property="og:url" content="https://www.ombachienock.me.ke/about" />
       </Helmet>
       <div className="min-h-screen">
         <Navbar />
@@ -38,7 +38,7 @@ const AboutPage = () => {
             </h2>
             <ul className="grid gap-4 md:grid-cols-2 animate-on-scroll">
               {EDUCATION.map((e) => (
-                <li key={e.title} className="flex gap-4 rounded-xl border border-border bg-card p-6">
+                <li key={e.title} className="flex h-full gap-4 rounded-xl border border-border bg-card p-6">
                   <GraduationCap className="mt-1 shrink-0 text-secondary" size={20} />
                   <div>
                     <h3 className="font-serif text-lg font-semibold text-foreground">{e.title}</h3>

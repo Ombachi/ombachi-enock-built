@@ -1,5 +1,5 @@
 const QuoteSection = () => (
-  <section className="py-16 bg-primary">
+  <section className="py-12 sm:py-16 md:py-20 bg-primary">
     <div className="section-container text-center">
       <blockquote className="max-w-2xl mx-auto">
         <p className="text-xl md:text-2xl font-serif italic text-primary-foreground/90 leading-relaxed">

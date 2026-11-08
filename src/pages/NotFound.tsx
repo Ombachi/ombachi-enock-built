@@ -16,10 +16,10 @@ const NotFound = () => {
       <Helmet>
         <title>Page Not Found (404) | Ombachi Enock</title>
         <meta name="description" content="The page you are looking for does not exist or has moved." />
-        <link rel="canonical" href={`https://ombachi-enock-built.lovable.app${location.pathname}`} />
+        <link rel="canonical" href={`https://www.ombachienock.me.ke${location.pathname}`} />
         <meta property="og:title" content="Page not found — Ombachi Enock" />
         <meta property="og:description" content="The requested page could not be found." />
-        <meta property="og:url" content={`https://ombachi-enock-built.lovable.app${location.pathname}`} />
+        <meta property="og:url" content={`https://www.ombachienock.me.ke${location.pathname}`} />
         <meta name="robots" content="noindex" />
       </Helmet>
       <img

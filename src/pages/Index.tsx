@@ -18,10 +18,10 @@ const Index = () => {
       <Helmet>
         <title>Ombachi Enock — A Renaissance Man</title>
         <meta name="description" content="Explore Ombachi Enock's work across medical laboratory science, technology, entrepreneurship, public leadership, diagnostics, and climate-health systems." />
-        <link rel="canonical" href="https://ombachi-enock-built.lovable.app/" />
+        <link rel="canonical" href="https://www.ombachienock.me.ke/" />
         <meta property="og:title" content="Ombachi Enock — Science, Technology & Public Leadership" />
         <meta property="og:description" content="Work and ideas across medical laboratory science, technology, entrepreneurship, diagnostics, and public leadership." />
-        <meta property="og:url" content="https://ombachi-enock-built.lovable.app/" />
+        <meta property="og:url" content="https://www.ombachienock.me.ke/" />
       </Helmet>
       <div className="min-h-screen">
         <Navbar />

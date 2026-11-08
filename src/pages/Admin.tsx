@@ -223,10 +223,6 @@ const Admin = () => {
             <p className="text-muted-foreground text-sm mt-1">Analytics, posts, and messages</p>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={handleSync} disabled={syncing}>
-              <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? "animate-spin" : ""}`} />
-              Sync Medium
-            </Button>
             <Button variant="outline" size="sm" onClick={() => navigate("/")}>
               View site
             </Button>

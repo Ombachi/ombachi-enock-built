@@ -6,4 +6,4 @@ export const text = { fontSize: '15px', lineHeight: '1.6', color: '#374151', mar
 export const muted = { ...text, fontSize: '13px', color: '#6b7280' }
 export const box = { backgroundColor: '#f4f7f6', borderRadius: '8px', padding: '16px 18px', margin: '0 0 18px' }
 export const button = { backgroundColor: '#1e3a5f', color: '#ffffff', padding: '13px 22px', borderRadius: '6px', fontSize: '15px', fontFamily: 'Arial, sans-serif', textDecoration: 'none', display: 'inline-block' }
-export const SITE_URL = 'https://ombachi-enock-built.lovable.app'
+export const SITE_URL = 'https://www.ombachienock.me.ke'

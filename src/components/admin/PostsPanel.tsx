@@ -8,7 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, Plus, Pencil, Trash2, ExternalLink, ImagePlus, ArrowLeft, FileCode } from "lucide-react";
+import { Loader2, Plus, Pencil, Trash2, ExternalLink, ImagePlus, ArrowLeft, FileCode, Share2 } from "lucide-react";
+import SocialDraftsDialog from "./SocialDraftsDialog";
 import { format } from "date-fns";
 import RichEditor from "./RichEditor";
 import { slugify, uploadPostImage } from "@/lib/postImages";
@@ -55,6 +56,7 @@ const PostsPanel = () => {
   const [htmlPaste, setHtmlPaste] = useState("");
   const [showImport, setShowImport] = useState(false);
 
+  const [draftFor, setDraftFor] = useState<Post | null>(null);
   const load = async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -413,6 +415,11 @@ const PostsPanel = () => {
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   )}
+                  {p.status === "published" && (
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => setDraftFor(p)} aria-label="Draft LinkedIn and X posts" title="Draft LinkedIn & X posts">
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                  )}
                   <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => startEdit(p)} aria-label="Edit">
                     <Pencil className="h-4 w-4" />
                   </Button>
@@ -425,6 +432,7 @@ const PostsPanel = () => {
           </div>
         )}
       </CardContent>
+      <SocialDraftsDialog post={draftFor} onClose={() => setDraftFor(null)} />
     </Card>
   );
 };
