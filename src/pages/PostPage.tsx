@@ -10,6 +10,7 @@ import ShareButtons from "@/components/ShareButtons";
 import ReadingProgress from "@/components/ReadingProgress";
 import RelatedPosts from "@/components/RelatedPosts";
 import { categorySlug } from "@/lib/postCategories";
+import { toast } from "sonner";
 import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar, Clock } from "lucide-react";
 import { format } from "date-fns";
 
@@ -126,7 +127,11 @@ const PostPage = () => {
 
   const toggleLike = async () => {
     if (!slug || liked) return;
-    await supabase.from("article_likes").insert({ article_slug: slug, session_id: sessionId });
+    const { error } = await supabase.from("article_likes").insert({ article_slug: slug, session_id: sessionId });
+    if (error) {
+      toast.error("Your like could not be saved. Please try again.");
+      return;
+    }
     setLiked(true);
     setLikes((n) => n + 1);
   };
@@ -134,11 +139,19 @@ const PostPage = () => {
   const submitComment = async () => {
     if (!slug || !name.trim() || !text.trim()) return;
     setSubmitting(true);
-    await supabase.from("article_comments").insert({
+    const { error } = await supabase.from("article_comments").insert({
       article_slug: slug,
       commenter_name: name.trim(),
       comment_text: text.trim(),
     });
+    if (error) {
+      setSubmitting(false);
+      toast.error("Your comment could not be posted. Please try again in a moment.");
+      return;
+    }
+    toast.success("Thank you! Your comment has been posted.");
+    setShowComments(true);
+    setTimeout(() => document.getElementById("comments")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     setComments((c) => [...c, { commenter_name: name.trim(), comment_text: text.trim(), created_at: new Date().toISOString() }]);
     setName("");
     setText("");
@@ -315,7 +328,7 @@ const PostPage = () => {
               </div>
 
               {showComments && (
-                <div className="mt-6 space-y-4">
+                <div id="comments" className="mt-6 space-y-4 scroll-mt-24">
                   {comments.map((c, i) => (
                     <div key={i} className="border border-border rounded-lg p-4 bg-card">
                       <div className="flex items-center gap-2 mb-1">

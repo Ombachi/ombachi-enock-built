@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Heart, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { POST_CATEGORIES, categoryGradient, categorySlug } from "@/lib/postCategories";
 
 interface Article {
@@ -97,7 +98,11 @@ const WritingSection = () => {
 
   const toggleLike = async (slug: string) => {
     if (userLikes.has(slug)) return;
-    await supabase.from("article_likes").insert({ article_slug: slug, session_id: sessionId });
+    const { error } = await supabase.from("article_likes").insert({ article_slug: slug, session_id: sessionId });
+    if (error) {
+      toast.error("Your like could not be saved. Please try again.");
+      return;
+    }
     setUserLikes((prev) => new Set([...prev, slug]));
     setLikes((prev) => ({ ...prev, [slug]: (prev[slug] || 0) + 1 }));
   };
@@ -105,11 +110,17 @@ const WritingSection = () => {
   const submitComment = async (slug: string) => {
     if (!commentName.trim() || !commentText.trim()) return;
     setSubmitting(true);
-    await supabase.from("article_comments").insert({
+    const { error } = await supabase.from("article_comments").insert({
       article_slug: slug,
       commenter_name: commentName.trim(),
       comment_text: commentText.trim(),
     });
+    if (error) {
+      setSubmitting(false);
+      toast.error("Your comment could not be posted. Please try again in a moment.");
+      return;
+    }
+    toast.success("Thank you! Your comment has been posted.");
     setCommentName("");
     setCommentText("");
     setSubmitting(false);

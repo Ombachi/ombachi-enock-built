@@ -8,6 +8,9 @@ const Body = z.object({
   email: z.string().trim().email().max(255),
   subject: z.string().trim().max(200).optional().default(""),
   message: z.string().trim().min(1).max(5000),
+  // When the site already saved the message itself, only send the emails.
+  notifyOnly: z.boolean().optional().default(false),
+  submissionId: z.string().uuid().optional(),
 });
 
 // Public contact form: stores the message, notifies the owner, acknowledges the visitor.
@@ -18,6 +21,20 @@ Deno.serve(async (req) => {
     if (!parsed.success) return json({ error: "Please check the form fields." }, 400, corsHeaders);
     const d = parsed.data;
     const db = admin();
+
+    if (d.notifyOnly) {
+      const key = d.submissionId ?? crypto.randomUUID();
+      const results = await Promise.allSettled([
+        sendTemplateEmail("contact-notification", "ombachienock5@outlook.com", {
+          templateData: d, replyTo: d.email, idempotencyKey: `contact-notify-${key}`,
+        }),
+        sendTemplateEmail("contact-acknowledgment", d.email, {
+          templateData: { name: d.name, subject: d.subject }, idempotencyKey: `contact-ack-${key}`,
+        }),
+      ]);
+      results.forEach((r) => r.status === "rejected" && console.error("contact email failed", r.reason));
+      return json({ ok: true }, 200, corsHeaders);
+    }
 
     // Simple rate limit: max 3 messages per email per 10 minutes.
     const since = new Date(Date.now() - 10 * 60 * 1000).toISOString();

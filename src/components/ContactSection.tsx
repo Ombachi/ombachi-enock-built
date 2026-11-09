@@ -15,8 +15,20 @@ const ContactSection = () => {
     setErrorMessage("");
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke("contact-submit", { body: form });
-      if (error || !data?.ok) throw error ?? new Error("send failed");
+      const id = crypto.randomUUID();
+      const payload = {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim() || null,
+        message: form.message.trim(),
+      };
+      // Save straight to the database first so the message is never lost.
+      const { error } = await supabase.from("contact_submissions").insert({ id, ...payload });
+      if (error) throw error;
+      // Email alerts are best-effort; a failure here must not block the visitor.
+      supabase.functions
+        .invoke("contact-submit", { body: { ...payload, subject: payload.subject ?? "", notifyOnly: true, submissionId: id } })
+        .catch((err) => console.warn("Contact notification failed:", err));
       setForm({ name: "", email: "", subject: "", message: "" });
       navigate("/thank-you");
     } catch (err) {

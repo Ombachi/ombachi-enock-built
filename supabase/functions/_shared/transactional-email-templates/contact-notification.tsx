@@ -29,6 +29,6 @@ export const template = {
   component: Email,
   subject: (d: Record<string, any>) => `Website message: ${d.subject || `from ${d.name ?? 'a visitor'}`}`,
   displayName: 'Contact notification (to owner)',
-  to: 'contact@ombachienock.me.ke',
+  to: 'ombachienock5@outlook.com',
   previewData: { name: 'Jane Doe', email: 'jane@example.com', subject: 'Speaking invitation', message: 'Hello Enock, we would love to have you speak.' },
 } satisfies TemplateEntry
