@@ -9,15 +9,29 @@ interface Props {
   text?: string;
 }
 
-const ShareButtons = ({ url, title, text }: Props) => {
+const CANONICAL_ORIGIN = "https://www.ombachienock.me.ke";
+
+const toCanonical = (raw: string) => {
+  try {
+    const u = new URL(raw, CANONICAL_ORIGIN);
+    return `${CANONICAL_ORIGIN}${u.pathname}${u.search}${u.hash}`;
+  } catch {
+    return CANONICAL_ORIGIN;
+  }
+};
+
+const ShareButtons = ({ url: rawUrl, title, text }: Props) => {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const url = toCanonical(rawUrl);
   const enc = encodeURIComponent;
+  const xText = `Reading "${title}" by @ombachi_enock:`;
+  const waText = `"${title}" by Ombachi Enock — Read it here:\n${url}`;
   const targets = [
-    { label: "X", href: `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`, Icon: Twitter },
+    { label: "X", href: `https://twitter.com/intent/tweet?text=${enc(xText)}&url=${enc(url)}`, Icon: Twitter },
     { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`, Icon: Linkedin },
-    { label: "WhatsApp", href: `https://wa.me/?text=${enc(`${title} ${url}`)}`, Icon: MessageCircle },
+    { label: "WhatsApp", href: `https://wa.me/?text=${enc(waText)}`, Icon: MessageCircle },
   ];
 
   const copy = async () => {
@@ -37,7 +51,11 @@ const ShareButtons = ({ url, title, text }: Props) => {
     if (canNative) {
       e.preventDefault();
       try {
-        await navigator.share({ title, text: text || title, url });
+        await navigator.share({
+          title: `${title} — Ombachi Enock`,
+          text: text ? `"${title}" by Ombachi Enock — ${text}` : `"${title}" by Ombachi Enock`,
+          url,
+        });
       } catch {
         /* dismissed */
       }
