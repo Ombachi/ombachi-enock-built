@@ -3,7 +3,7 @@ name: Deploy Supabase Migrations
 on:
   push:
     branches:
-      - main
+      - main # If your default branch is called 'master', change 'main' to 'master'
 
 jobs:
   deploy:
@@ -18,9 +18,9 @@ jobs:
         with:
           version: latest
 
-      - name: Link and push migrations to remote project
+      - name: Link and Push Migrations
         run: |
-          supabase link --project-ref "${{ secrets.SUPABASE_PROJECT_REF }}" --password "${{ secrets.SUPABASE_DB_PASSWORD }}"
+          supabase link --project-ref "hctmiqucnojaidnjgaca" --password "${{ secrets.SUPABASE_DB_PASSWORD }}"
           supabase db push --remote
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
