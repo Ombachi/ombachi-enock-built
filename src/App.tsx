@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Analytics } from "@vercel/analytics/react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { CartProvider } from "@/hooks/useCart";
 import Index from "./pages/Index.tsx";
@@ -86,6 +87,7 @@ const App = () => (
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
+        <Analytics />
       </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
