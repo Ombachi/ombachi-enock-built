@@ -37,21 +37,48 @@ Deno.serve(async (req) => {
   try {
     const { orderId, phone, paymentToken } = await req.json();
     if (!orderId || !phone) return json({ error: "orderId and phone are required." }, 400, corsHeaders);
-    // Only the checkout that created this order holds a valid token for it.
-    if (!(await verify("pay", String(orderId), paymentToken))) {
-      return json({ error: "Not authorised to pay for this order." }, 403, corsHeaders);
-    }
     const msisdn = normalisePhone(String(phone));
     if (!/^254[17]\d{8}$/.test(msisdn)) return json({ error: "Enter a valid Kenyan M-PESA number." }, 400, corsHeaders);
 
     const db = admin();
     const { data: order, error } = await db
       .from("orders")
-      .select("id,order_number,total_kes,status")
+      .select("id,order_number,total_kes,status,created_at,payment_reference")
       .eq("id", orderId)
       .single();
     if (error || !order) return json({ error: "Order not found." }, 404, corsHeaders);
     if (order.status !== "pending") return json({ error: "This order is already paid." }, 400, corsHeaders);
+
+    // Orders created by the legacy checkout carry a signed pay token. Orders
+    // written straight from the browser are accepted only while fresh and
+    // before any prompt has been sent for them.
+    const tokenOk = paymentToken ? await verify("pay", String(orderId), paymentToken) : false;
+    const fresh = Date.now() - new Date(order.created_at).getTime() < 15 * 60 * 1000;
+    if (!tokenOk && !(fresh && !order.payment_reference)) {
+      return json({ error: "Not authorised to pay for this order." }, 403, corsHeaders);
+    }
+
+    // Never trust browser-supplied prices: recompute from the catalogue.
+    const { data: items } = await db
+      .from("order_items")
+      .select("id,product_id,quantity")
+      .eq("order_id", order.id);
+    const ids = (items ?? []).map((i) => i.product_id).filter(Boolean) as string[];
+    if (!ids.length) return json({ error: "This order has no items." }, 400, corsHeaders);
+    const { data: prods } = await db.from("products").select("id,price_kes,title,format,is_digital").in("id", ids);
+    let total = 0;
+    for (const it of items ?? []) {
+      const p = prods?.find((x) => x.id === it.product_id);
+      if (!p) return json({ error: "An item is no longer available." }, 400, corsHeaders);
+      const qty = p.is_digital ? 1 : Math.max(1, Number(it.quantity) || 1);
+      total += p.price_kes * qty;
+      await db.from("order_items").update({ unit_price_kes: p.price_kes, quantity: qty, title: p.title, format: p.format, is_digital: p.is_digital }).eq("id", it.id);
+    }
+    if (total <= 0) return json({ error: "Nothing to pay for." }, 400, corsHeaders);
+    if (total !== order.total_kes) {
+      await db.from("orders").update({ subtotal_kes: total, shipping_kes: 0, total_kes: total }).eq("id", order.id);
+      order.total_kes = total;
+    }
 
     const tokenRes = await fetch(`${base}/oauth/v1/generate?grant_type=client_credentials`, {
       headers: { Authorization: `Basic ${btoa(`${key}:${secret}`)}` },
@@ -98,7 +125,12 @@ Deno.serve(async (req) => {
       .update({ payment_reference: stk.CheckoutRequestID, customer_phone: msisdn })
       .eq("id", order.id);
 
-    return json({ ok: true, checkoutRequestId: stk.CheckoutRequestID, message: stk.CustomerMessage }, 200, corsHeaders);
+    const accessToken = await sign("access", order.id);
+    return json(
+      { ok: true, checkoutRequestId: stk.CheckoutRequestID, message: stk.CustomerMessage, accessToken },
+      200,
+      corsHeaders,
+    );
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unexpected error" }, 500, corsHeaders);
   }

@@ -11,10 +11,14 @@ import ReadingProgress from "@/components/ReadingProgress";
 import RelatedPosts from "@/components/RelatedPosts";
 import { categorySlug } from "@/lib/postCategories";
 import { toast } from "sonner";
-import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar, Clock } from "lucide-react";
+import { ArrowLeft, Heart, MessageCircle, Loader2, Calendar, Clock, Lock } from "lucide-react";
+import MpesaPayBox from "@/components/library/MpesaPayBox";
+import { getUnlock, isOrderPaid, isPaidProduct } from "@/lib/library/mpesaCheckout";
+import { formatKES, type Product } from "@/lib/library/types";
 import { format } from "date-fns";
 
 interface Post {
+  id: string;
   slug: string;
   title: string;
   excerpt: string | null;
@@ -82,6 +86,8 @@ const PostPage = () => {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [paidProduct, setPaidProduct] = useState<Product | null>(null);
+  const [unlocked, setUnlocked] = useState(false);
 
   const sessionId = getSessionId();
 
@@ -92,7 +98,7 @@ const PostPage = () => {
       setLoading(true);
       const { data } = await supabase
         .from("posts")
-        .select("slug, title, excerpt, cover_image_url, tag, content, published_at, updated_at")
+        .select("id, slug, title, excerpt, cover_image_url, tag, content, published_at, updated_at")
         .eq("slug", slug)
         .eq("status", "published")
         .maybeSingle();
@@ -103,6 +109,22 @@ const PostPage = () => {
       }
       setPost(data as Post);
       setProcessed(processContent(data.content));
+      // Paywall: is this essay linked to a paid publication?
+      const { data: prod } = await supabase
+        .from("products")
+        .select("*")
+        .eq("post_id", data.id)
+        .eq("status", "published")
+        .maybeSingle();
+      const product = prod as unknown as Product | null;
+      if (product && isPaidProduct(product)) {
+        setPaidProduct(product);
+        const u = getUnlock(product.id);
+        setUnlocked(u ? await isOrderPaid(u.orderId, u.token) : false);
+      } else {
+        setPaidProduct(null);
+        setUnlocked(true);
+      }
       setLoading(false);
     })();
   }, [slug]);
@@ -182,6 +204,14 @@ const PostPage = () => {
       </div>
     );
   }
+
+  const locked = !!paidProduct && !unlocked;
+  const previewHtml = (() => {
+    if (!locked) return "";
+    const doc = new DOMParser().parseFromString(`<div>${processed.html}</div>`, "text/html");
+    const paras = Array.from(doc.querySelectorAll("p")).filter((p) => p.textContent?.trim()).slice(0, 2);
+    return paras.length ? paras.map((p) => p.outerHTML).join("") : `<p>${post.excerpt ?? ""}</p>`;
+  })();
 
   const dateStr = post.published_at ? format(new Date(post.published_at), "MMMM d, yyyy") : "";
   const origin = typeof window !== "undefined" ? window.location.origin : "";
@@ -276,7 +306,7 @@ const PostPage = () => {
           </div>
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[220px_minmax(0,1fr)] gap-10">
-            {processed.toc.length > 1 ? (
+            {!locked && processed.toc.length > 1 ? (
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">On this page</p>
@@ -300,74 +330,101 @@ const PostPage = () => {
             )}
 
             <div className="max-w-2xl mx-auto lg:mx-0 w-full">
-              <div
-                className="prose prose-neutral dark:prose-invert prose-headings:font-serif prose-a:text-secondary max-w-none"
-                dangerouslySetInnerHTML={{ __html: processed.html }}
-              />
-
-              {/* Engagement */}
-              <div className="mt-12 pt-6 border-t border-border flex items-center gap-6">
-                <button
-                  onClick={toggleLike}
-                  className={`inline-flex items-center gap-1.5 text-sm transition-colors ${
-                    liked ? "text-rose-500" : "text-muted-foreground hover:text-rose-500"
-                  }`}
-                  aria-label="Like post"
-                >
-                  <Heart size={16} fill={liked ? "currentColor" : "none"} /> {likes}
-                </button>
-                <button
-                  onClick={() => setShowComments((s) => !s)}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-secondary transition-colors"
-                >
-                  <MessageCircle size={16} /> {comments.length}
-                </button>
-                <div className="ml-auto">
-                  <ShareButtons url={postUrl} title={post.title} text={post.excerpt || undefined} />
-                </div>
-              </div>
-
-              {showComments && (
-                <div id="comments" className="mt-6 space-y-4 scroll-mt-24">
-                  {comments.map((c, i) => (
-                    <div key={i} className="border border-border rounded-lg p-4 bg-card">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-foreground text-sm">{c.commenter_name}</span>
-                        <span className="text-xs text-muted-foreground">
-                          {format(new Date(c.created_at), "MMM d, yyyy")}
-                        </span>
-                      </div>
-                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">{c.comment_text}</p>
-                    </div>
-                  ))}
-                  <div className="border border-border rounded-lg p-4 bg-card space-y-2">
-                    <input
-                      type="text"
-                      placeholder="Your name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      maxLength={100}
-                      className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-secondary"
+              {locked && paidProduct ? (
+                <>
+                  <div className="relative">
+                    <div
+                      className="prose prose-neutral dark:prose-invert prose-headings:font-serif prose-a:text-secondary max-w-none"
+                      dangerouslySetInnerHTML={{ __html: previewHtml }}
                     />
-                    <textarea
-                      placeholder="Share your thoughts…"
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      maxLength={500}
-                      rows={3}
-                      className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-secondary"
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        onClick={submitComment}
-                        disabled={submitting || !name.trim() || !text.trim()}
-                        className="px-4 py-2 text-sm bg-secondary text-secondary-foreground rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity"
-                      >
-                        {submitting ? "Posting…" : "Post comment"}
-                      </button>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+                  </div>
+                  <div className="mt-8 rounded-xl border border-border bg-card p-6 sm:p-8">
+                    <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-secondary">
+                      <Lock size={12} /> Unlock Full Publication
+                    </p>
+                    <p className="mt-3 font-serif text-2xl text-foreground">
+                      This is a premium publication by Ombachi Enock
+                    </p>
+                    <p className="mt-2 font-serif text-3xl text-foreground">{formatKES(paidProduct.price_kes)}</p>
+                    <div className="mt-6">
+                      <MpesaPayBox product={paidProduct} expanded onPaid={() => setUnlocked(true)} />
                     </div>
                   </div>
+                </>
+              ) : (
+                <>
+              <div
+                  className="prose prose-neutral dark:prose-invert prose-headings:font-serif prose-a:text-secondary max-w-none"
+                  dangerouslySetInnerHTML={{ __html: processed.html }}
+                />
+  
+                {/* Engagement */}
+                <div className="mt-12 pt-6 border-t border-border flex items-center gap-6">
+                  <button
+                    onClick={toggleLike}
+                    className={`inline-flex items-center gap-1.5 text-sm transition-colors ${
+                      liked ? "text-rose-500" : "text-muted-foreground hover:text-rose-500"
+                    }`}
+                    aria-label="Like post"
+                  >
+                    <Heart size={16} fill={liked ? "currentColor" : "none"} /> {likes}
+                  </button>
+                  <button
+                    onClick={() => setShowComments((s) => !s)}
+                    className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-secondary transition-colors"
+                  >
+                    <MessageCircle size={16} /> {comments.length}
+                  </button>
+                  <div className="ml-auto">
+                    <ShareButtons url={postUrl} title={post.title} text={post.excerpt || undefined} />
+                  </div>
                 </div>
+  
+                {showComments && (
+                  <div id="comments" className="mt-6 space-y-4 scroll-mt-24">
+                    {comments.map((c, i) => (
+                      <div key={i} className="border border-border rounded-lg p-4 bg-card">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-foreground text-sm">{c.commenter_name}</span>
+                          <span className="text-xs text-muted-foreground">
+                            {format(new Date(c.created_at), "MMM d, yyyy")}
+                          </span>
+                        </div>
+                        <p className="text-sm text-muted-foreground whitespace-pre-wrap">{c.comment_text}</p>
+                      </div>
+                    ))}
+                    <div className="border border-border rounded-lg p-4 bg-card space-y-2">
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        maxLength={100}
+                        className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-secondary"
+                      />
+                      <textarea
+                        placeholder="Share your thoughts…"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        maxLength={500}
+                        rows={3}
+                        className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-secondary"
+                      />
+                      <div className="flex justify-end">
+                        <button
+                          onClick={submitComment}
+                          disabled={submitting || !name.trim() || !text.trim()}
+                          className="px-4 py-2 text-sm bg-secondary text-secondary-foreground rounded-md hover:opacity-90 disabled:opacity-50 transition-opacity"
+                        >
+                          {submitting ? "Posting…" : "Post comment"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+  
+                </>
               )}
 
               <RelatedPosts currentSlug={post.slug} tag={post.tag} />

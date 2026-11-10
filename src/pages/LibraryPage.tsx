@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import ProductCard from "@/components/library/ProductCard";
-import CartButton from "@/components/library/CartButton";
 import { loadProducts } from "@/lib/library/products";
 import { PRODUCT_FORMATS, type Product, type ProductFormat } from "@/lib/library/types";
 
@@ -102,7 +101,6 @@ const LibraryPage = () => {
                 Books, research papers, policy briefs, essays, reports and interactive publications.
               </p>
             </div>
-            <CartButton />
           </div>
         </header>
 

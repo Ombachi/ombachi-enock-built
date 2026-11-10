@@ -6,12 +6,10 @@ import {
   BookOpen,
   Bookmark,
   BookmarkCheck,
-  Check,
   Download,
   Loader2,
   MonitorPlay,
   Package,
-  ShoppingBag,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -19,8 +17,7 @@ import BackToTop from "@/components/BackToTop";
 import PageTransition from "@/components/PageTransition";
 import ShareButtons from "@/components/ShareButtons";
 import ProductCard from "@/components/library/ProductCard";
-import CartButton from "@/components/library/CartButton";
-import { useCart } from "@/hooks/useCart";
+import MpesaPayBox from "@/components/library/MpesaPayBox";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { loadProducts } from "@/lib/library/products";
@@ -29,9 +26,7 @@ import { formatKES, type Product } from "@/lib/library/types";
 
 const LibraryProductPage = () => {
   const { slug } = useParams();
-  const { add } = useCart();
   const [products, setProducts] = useState<Product[] | null>(null);
-  const [added, setAdded] = useState(false);
   const [saved, setSaved] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
@@ -75,12 +70,6 @@ const LibraryProductPage = () => {
   const soldOut = !product.is_digital && typeof product.stock === "number" && product.stock <= 0;
   const isFree = product.is_free || product.price_kes === 0;
   const interactive = !!(product.html_url || product.html_file_path);
-
-  const handleAdd = () => {
-    add(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
 
   const handleFreeDownload = async () => {
     setDownloading(true);
@@ -146,7 +135,6 @@ const LibraryProductPage = () => {
           >
             <ArrowLeft size={15} /> Publications
           </Link>
-          <CartButton />
         </div>
 
         <article className="section-container pb-16 grid gap-10 lg:grid-cols-[5fr_6fr]">
@@ -250,23 +238,13 @@ const LibraryProductPage = () => {
                   </button>
                 ) : null
               ) : (
-                <>
-                  <button
-                    onClick={handleAdd}
-                    disabled={soldOut}
-                    aria-label={`Add ${product.title} to cart`}
-                    className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    {added ? <Check size={16} /> : <ShoppingBag size={16} />}
-                    {soldOut ? "Sold out" : added ? "Added to cart" : "Add to cart"}
-                  </button>
-                  <Link
-                    to="/cart"
-                    className="rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-secondary/50 hover:text-secondary"
-                  >
-                    View cart
-                  </Link>
-                </>
+                soldOut ? (
+                  <span className="rounded-full border border-border px-6 py-3 text-sm text-muted-foreground">Sold out</span>
+                ) : (
+                  <div className="basis-full">
+                    <MpesaPayBox product={product} />
+                  </div>
+                )
               )}
 
               <button
