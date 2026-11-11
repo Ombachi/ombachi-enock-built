@@ -4,8 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   BookOpen,
-  Bookmark,
-  BookmarkCheck,
   Download,
   Loader2,
   MonitorPlay,
@@ -21,22 +19,17 @@ import MpesaPayBox from "@/components/library/MpesaPayBox";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { loadProducts } from "@/lib/library/products";
-import { isBookmarked, toggleBookmark } from "@/lib/library/bookmarks";
 import { formatKES, type Product } from "@/lib/library/types";
 
 const LibraryProductPage = () => {
   const { slug } = useParams();
   const [products, setProducts] = useState<Product[] | null>(null);
-  const [saved, setSaved] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     loadProducts().then(({ products }) => setProducts(products));
   }, []);
 
-  useEffect(() => {
-    if (slug) setSaved(isBookmarked(slug));
-  }, [slug]);
 
   if (!products) {
     return (
@@ -86,10 +79,6 @@ const LibraryProductPage = () => {
       return;
     }
     window.open(data.url as string, "_blank", "noopener");
-  };
-
-  const handleBookmark = () => {
-    setSaved(toggleBookmark(product.slug));
   };
 
   return (
@@ -180,14 +169,14 @@ const LibraryProductPage = () => {
                 {interactive ? (
                   <MonitorPlay size={12} />
                 ) : product.is_digital ? (
-                  <Download size={12} />
+                  <BookOpen size={12} />
                 ) : (
                   <Package size={12} />
                 )}
                 {interactive
                   ? "Interactive publication"
                   : product.is_digital
-                    ? "Instant download"
+                    ? "Digital publication"
                     : "Shipped within Kenya"}
               </span>
               {product.pages ? (
@@ -217,7 +206,7 @@ const LibraryProductPage = () => {
                 </Link>
               )}
 
-              {product.post_id && (
+              {product.post_id && isFree && (
                 <Link
                   to={`/writing/${product.slug}`}
                   className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-secondary/50 hover:text-secondary"
@@ -247,14 +236,6 @@ const LibraryProductPage = () => {
                 )
               )}
 
-              <button
-                onClick={handleBookmark}
-                aria-pressed={saved}
-                className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-secondary/50 hover:text-secondary"
-              >
-                {saved ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
-                {saved ? "Bookmarked" : "Bookmark"}
-              </button>
             </div>
 
             <div className="mt-8 border-t border-border pt-5">

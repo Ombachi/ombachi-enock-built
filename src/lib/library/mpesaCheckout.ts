@@ -32,8 +32,17 @@ export const getUnlock = (productId: string): Unlock | null => readUnlocks()[pro
 
 /** Asks the server whether an order is paid (needs the signed access token). */
 export const isOrderPaid = async (orderId: string, token: string): Promise<boolean> => {
-  const { data } = await supabase.functions.invoke("order-access", { body: { orderId, token } });
-  return (data as { order?: { status?: string } })?.order?.status === "paid";
+  try {
+    const r = await fetch("/api/mpesa/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, token }),
+    });
+    const data = await r.json().catch(() => null);
+    return data?.status === "paid";
+  } catch {
+    return false;
+  }
 };
 
 /**
@@ -69,11 +78,18 @@ export const startMpesaPurchase = async (product: Product, phone: string) => {
   });
   if (iErr) throw new Error("We couldn't save your order item. Please try again.");
 
-  const { data, error } = await supabase.functions.invoke("mpesa-stk-push", {
-    body: { orderId, phone: msisdn },
-  });
-  const res = data as { ok?: boolean; error?: string; message?: string; accessToken?: string } | null;
-  if (error || !res?.ok || !res.accessToken) {
+  let res: { ok?: boolean; error?: string; message?: string; accessToken?: string } | null = null;
+  try {
+    const r = await fetch("/api/mpesa/stk-push", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, phone: msisdn }),
+    });
+    res = await r.json().catch(() => null);
+  } catch {
+    res = null;
+  }
+  if (!res?.ok || !res.accessToken) {
     throw new Error(res?.error || res?.message || "M-PESA could not send the prompt. Please try again.");
   }
   saveUnlock(product.id, { orderId, token: res.accessToken });
