@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Declaration of Purpose and Principle — Dr. Ombachi Enock</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F2A45;--gold:#C8960C;--red:#8B1A1A;--cream:#F6F1E8;--sage:#2D6A4F;
+  --navy-light:#1B3A5C;--gold-light:#E8B84B;--cream-dark:#EAE3D2;
+  --text:#1A1A1A;--text-muted:#555;--white:#FFFFFF;
+  --sidebar-w:270px;--font-scale:1;
+  --ch1:#A0281E;--ch2:#1B5E20;--ch3:#0D47A1;--ch4:#880E4F;
+  --ch5:#BF360C;--ch6:#33691E;--ch7:#311B92;--ch8:#006064}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lora',Georgia,serif;background:var(--cream);color:var(--text);display:flex;min-height:100vh;transition:background .3s,color .3s}
+body.dark{--cream:#0D1B2A;--cream-dark:#162032;--text:#E8DFC8;--text-muted:#9AABBB;--white:#162032;background:var(--cream)}
+#toolbar{position:fixed;top:0;left:0;right:0;height:52px;background:var(--navy);display:flex;align-items:center;padding:0 12px;gap:6px;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.35);flex-wrap:nowrap;overflow:hidden}
+#toolbar .logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:12px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#search-wrap{display:flex;align-items:center;gap:4px;flex-shrink:0}
+#search-inp{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 10px;font-size:12px;color:#fff;width:150px;outline:none;transition:width .2s}
+#search-inp::placeholder{color:rgba(255,255,255,.5)}
+#search-inp:focus{width:200px;background:rgba(255,255,255,.18)}
+.tb-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;padding:5px 8px;font-size:11px;cursor:pointer;transition:background .15s;white-space:nowrap;font-family:'Inter',sans-serif;flex-shrink:0}
+.tb-btn:hover{background:rgba(255,255,255,.22)}
+.tb-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+#search-count{color:rgba(255,255,255,.6);font-size:10px;font-family:'Inter',sans-serif;min-width:36px;text-align:center}
+#sidebar{position:fixed;top:52px;left:0;bottom:0;width:var(--sidebar-w);background:var(--navy);overflow-y:auto;z-index:100;transform:translateX(0);transition:transform .3s}
+#sidebar.collapsed{transform:translateX(calc(-1 * var(--sidebar-w)))}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(200,150,12,.4);border-radius:2px}
+.sidebar-header{padding:20px 16px 12px;border-bottom:1px solid rgba(200,150,12,.2)}
+.sidebar-title{font-family:'Playfair Display',serif;color:var(--gold);font-size:15px;font-weight:600;line-height:1.3}
+.sidebar-sub{color:rgba(255,255,255,.45);font-size:11px;margin-top:4px;font-family:'Inter',sans-serif}
+.progress-bar{height:3px;background:rgba(255,255,255,.1);margin-top:10px;border-radius:2px}
+.progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .3s}
+.nav-section{padding:8px 0}
+.nav-label{color:rgba(200,150,12,.5);font-size:9px;font-family:'Inter',sans-serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px 4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;transition:background .15s;border-left:3px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,.06)}
+.nav-item.active{background:rgba(200,150,12,.12);border-left-color:var(--gold)}
+.nav-item .nav-num{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;color:var(--gold);opacity:.7;min-width:20px}
+.nav-item .nav-text{color:rgba(255,255,255,.75);font-size:12.5px;line-height:1.3;font-family:'Inter',sans-serif}
+.nav-item.active .nav-text{color:#fff}
+#main{margin-left:var(--sidebar-w);margin-top:52px;min-height:calc(100vh - 52px);transition:margin-left .3s;padding-bottom:80px}
+#main.sidebar-collapsed{margin-left:0}
+#cover{min-height:100vh;background:linear-gradient(160deg,#0F2A45 0%,#1a4a7a 45%,#0a2235 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:60px 40px}
+.cover-bg{position:absolute;inset:0;opacity:.08}
+.cover-content{position:relative;z-index:2;text-align:center;max-width:600px}
+.cover-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;font-weight:600}
+.cover-title{font-family:'Playfair Display',serif;font-size:clamp(30px,5.5vw,52px);color:#fff;line-height:1.15;font-weight:700;margin-bottom:8px}
+.cover-title em{color:var(--gold);font-style:normal}
+.cover-rule{width:60px;height:3px;background:var(--gold);margin:24px auto;border-radius:2px}
+.cover-author{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:600;margin-bottom:6px}
+.cover-inst{font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase}
+.cover-vm{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}
+.vm-card{background:rgba(255,255,255,.07);border:1px solid rgba(200,150,12,.25);border-radius:12px;padding:16px 20px}
+.vm-label{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.vm-text{font-family:'Lora',serif;font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;font-style:italic}
+.cover-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.cover-scroll span{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase}
+.scroll-arr{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.3);border-bottom:2px solid rgba(255,255,255,.3);transform:rotate(45deg);animation:ab 1.5s ease-in-out infinite}
+@keyframes ab{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+.chapter{padding:60px clamp(20px,5vw,72px) 48px;max-width:820px;margin:0 auto}
+.chapter-header{margin-bottom:44px;position:relative;padding-bottom:28px;border-bottom:1px solid rgba(0,0,0,.08)}
+body.dark .chapter-header{border-bottom-color:rgba(255,255,255,.08)}
+.chapter-eyebrow{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;opacity:.6}
+.chapter-num{font-family:'Playfair Display',serif;font-size:clamp(70px,13vw,110px);font-weight:700;line-height:1;position:absolute;top:-16px;right:0;opacity:.055;color:currentColor;pointer-events:none;user-select:none}
+.chapter-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4.5vw,38px);font-weight:700;line-height:1.15;margin-bottom:10px}
+.chapter-subtitle{font-family:'Lora',serif;font-size:16px;color:var(--text-muted);font-style:italic;line-height:1.5}
+.chapter-illus{width:100%;height:170px;border-radius:16px;margin:22px 0 0;overflow:hidden}
+.section-head{font-family:'Playfair Display',serif;font-size:clamp(17px,2.8vw,21px);font-weight:600;color:var(--navy);margin:36px 0 12px;padding-top:4px}
+body.dark .section-head{color:var(--gold-light)}
+p{font-size:calc(15.5px * var(--font-scale));line-height:1.82;margin-bottom:1.2em;text-align:justify;hyphens:auto;transition:font-size .2s}
+.pull-quote{border-left:4px solid var(--gold);background:rgba(200,150,12,.06);padding:18px 22px;margin:24px 0;border-radius:0 12px 12px 0}
+body.dark .pull-quote{background:rgba(200,150,12,.09)}
+.pull-quote p{font-size:calc(15.5px * var(--font-scale));color:var(--navy);font-family:'Playfair Display',serif;font-weight:400;margin-bottom:8px;line-height:1.6;text-align:left}
+body.dark .pull-quote p{color:var(--gold-light)}
+.pull-quote cite{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);font-style:normal;display:block}
+.stat-row{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0}
+.stat-box{flex:1;min-width:130px;background:var(--white);border-radius:14px;padding:18px 14px;text-align:center;box-shadow:0 2px 14px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.06)}
+body.dark .stat-box{background:var(--navy-light);border-color:rgba(255,255,255,.08)}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(26px,5.5vw,40px);font-weight:700;line-height:1;margin-bottom:6px}
+.stat-label{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;line-height:1.4}
+.stat-src{font-family:'Inter',sans-serif;font-size:9.5px;color:var(--text-muted);margin-top:5px;font-style:italic;opacity:.7}
+.dtw{overflow-x:auto;margin:22px 0;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.07)}
+.dtt{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;font-style:italic}
+table{width:100%;border-collapse:collapse;font-size:calc(12.5px * var(--font-scale));font-family:'Inter',sans-serif}
+thead tr{background:var(--navy)}
+thead th{color:#fff;padding:10px 13px;text-align:left;font-weight:600;font-size:10.5px;letter-spacing:.4px;white-space:nowrap}
+tbody tr:nth-child(even){background:rgba(0,0,0,.03)}
+body.dark tbody tr:nth-child(even){background:rgba(255,255,255,.04)}
+tbody td{padding:9px 13px;color:var(--text);border-bottom:1px solid rgba(0,0,0,.05);font-size:12.5px}
+body.dark tbody td{border-bottom-color:rgba(255,255,255,.06)}
+.pill-list{list-style:none;margin:14px 0 22px;display:flex;flex-direction:column;gap:11px}
+.pill-item{display:flex;gap:13px;align-items:flex-start;background:var(--white);border-radius:12px;padding:15px 17px;box-shadow:0 1px 5px rgba(0,0,0,.06);border-left:4px solid var(--navy)}
+body.dark .pill-item{background:var(--navy-light);border-left-color:var(--gold)}
+.pill-icon{font-size:19px;line-height:1;margin-top:1px;flex-shrink:0}
+.pill-text{font-size:calc(13.5px * var(--font-scale));line-height:1.65;color:var(--text)}
+.pill-text strong{color:var(--navy);font-weight:600}
+body.dark .pill-text strong{color:var(--gold-light)}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:13px;margin:22px 0}
+.value-card{background:var(--white);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.07);border-top:4px solid var(--gold);transition:transform .2s,box-shadow .2s}
+body.dark .value-card{background:var(--navy-light)}
+.value-card:hover{transform:translateY(-3px);box-shadow:0 6px 22px rgba(0,0,0,.12)}
+.value-icon{font-size:26px;margin-bottom:9px}
+.value-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:5px}
+body.dark .value-name{color:var(--gold-light)}
+.value-desc{font-family:'Inter',sans-serif;font-size:11.5px;color:var(--text-muted);line-height:1.5}
+.path-compare{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:22px 0}
+.path-card{border-radius:16px;padding:22px;position:relative;overflow:hidden}
+.path-bad{background:linear-gradient(135deg,#3a0808,#5a1010)}
+.path-good{background:linear-gradient(135deg,#0a2a1a,#1a4a2a)}
+.path-label{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.6;color:#fff;margin-bottom:9px}
+.path-head{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:11px;line-height:1.3}
+.path-text{font-family:'Lora',serif;font-size:13px;color:rgba(255,255,255,.78);line-height:1.6}
+.annotatable{cursor:text;border-radius:3px;transition:background .15s}
+.annotatable:hover{background:rgba(200,150,12,.07)}
+.annotation-mark{background:rgba(200,150,12,.22);border-bottom:2px solid var(--gold);cursor:pointer}
+#anno-panel{position:fixed;right:-340px;top:52px;bottom:0;width:320px;background:var(--white);border-left:1px solid rgba(0,0,0,.1);overflow-y:auto;z-index:150;transition:right .3s;padding:20px}
+body.dark #anno-panel{background:#0D1B2A;border-left-color:rgba(255,255,255,.1)}
+#anno-panel.open{right:0}
+.anno-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+body.dark .anno-title{color:var(--gold-light)}
+.anno-sub{font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);margin-bottom:18px}
+.anno-item{background:rgba(200,150,12,.07);border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid var(--gold)}
+.anno-ref{font-family:'Lora',serif;font-size:11.5px;color:var(--text-muted);font-style:italic;margin-bottom:6px;line-height:1.4}
+.anno-note{font-family:'Inter',sans-serif;font-size:12.5px;color:var(--text);line-height:1.5}
+.anno-del{float:right;background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;line-height:1}
+#anno-empty{font-family:'Lora',serif;font-size:13.5px;color:var(--text-muted);font-style:italic;text-align:center;margin-top:40px;line-height:1.7}
+.search-hl{background:#FFD54F;border-radius:2px;padding:0 1px}
+.search-hl.current{background:#FF6F00;color:#fff}
+#tts-bar{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);border-radius:40px;padding:9px 18px;align-items:center;gap:10px;z-index:180;box-shadow:0 4px 22px rgba(0,0,0,.35)}
+#tts-bar.visible{display:flex}
+#tts-text{font-family:'Inter',sans-serif;font-size:11.5px;color:rgba(255,255,255,.7);max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tts-btn{background:none;border:none;color:#fff;cursor:pointer;font-size:17px;padding:4px;border-radius:50%;transition:background .15s}
+.tts-btn:hover{background:rgba(255,255,255,.15)}
+#tts-speed{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:11px;padding:4px 7px;border-radius:12px;cursor:pointer;font-family:'Inter',sans-serif}
+.cta-section{background:linear-gradient(160deg,var(--navy) 0%,#1a4a7a 100%);border-radius:20px;padding:44px;margin:22px 0;text-align:center}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(20px,3.8vw,30px);color:#fff;font-weight:700;margin-bottom:14px}
+.cta-text{font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:20px;max-width:540px;margin-left:auto;margin-right:auto}
+.cta-sig{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);font-style:italic}
+.ref-section{margin-bottom:26px}
+.ref-section-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:11px;padding-bottom:5px;border-bottom:2px solid var(--gold)}
+body.dark .ref-section-title{color:var(--gold-light)}
+.ref-item{font-family:'Lora',serif;font-size:12.5px;line-height:1.7;padding:7px 0 7px 18px;border-bottom:1px solid rgba(0,0,0,.05);text-indent:-18px;color:var(--text)}
+body.dark .ref-item{border-bottom-color:rgba(255,255,255,.06)}
+.ref-item a{color:var(--navy)}
+body.dark .ref-item a{color:var(--gold)}
+#notif{position:fixed;bottom:78px;right:18px;background:var(--navy);color:#fff;padding:9px 15px;border-radius:10px;font-family:'Inter',sans-serif;font-size:12.5px;box-shadow:0 4px 14px rgba(0,0,0,.3);transform:translateY(18px);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none;z-index:300}
+#notif.show{transform:translateY(0);opacity:1}
+.ch-corruption .section-head,.ch-corruption .chapter-eyebrow{color:var(--ch1)}
+.ch-unemployment .section-head,.ch-unemployment .chapter-eyebrow{color:var(--ch2)}
+.ch-education .section-head,.ch-education .chapter-eyebrow{color:var(--ch3)}
+.ch-healthcare .section-head,.ch-healthcare .chapter-eyebrow{color:var(--ch4)}
+.ch-inequality .section-head,.ch-inequality .chapter-eyebrow{color:var(--ch5)}
+.ch-infrastructure .section-head,.ch-infrastructure .chapter-eyebrow{color:var(--ch6)}
+.ch-governance .section-head,.ch-governance .chapter-eyebrow{color:var(--ch7)}
+.ch-dependence .section-head,.ch-dependence .chapter-eyebrow{color:var(--ch8)}
+.ch-corruption .pill-item{border-left-color:var(--ch1)}
+.ch-unemployment .pill-item{border-left-color:var(--ch2)}
+.ch-education .pill-item{border-left-color:var(--ch3)}
+.ch-healthcare .pill-item{border-left-color:var(--ch4)}
+.ch-inequality .pill-item{border-left-color:var(--ch5)}
+.ch-infrastructure .pill-item{border-left-color:var(--ch6)}
+.ch-governance .pill-item{border-left-color:var(--ch7)}
+.ch-dependence .pill-item{border-left-color:var(--ch8)}
+@media(max-width:768px){:root{--sidebar-w:250px}
+  #sidebar{transform:translateX(calc(-1 * var(--sidebar-w)))}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0!important}
+  .path-compare{grid-template-columns:1fr}
+  .cover-vm{grid-template-columns:1fr}
+  #search-inp{width:110px}
+  #search-inp:focus{width:150px}}
+@media print{#toolbar,#sidebar,#anno-panel,#tts-bar{display:none!important}#main{margin-left:0}.chapter{page-break-before:always}}
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <button class="tb-btn" onclick="toggleSidebar()" title="Menu">☰</button>
+  <div class="logo">A Declaration of Purpose &amp; Principle — Dr. Ombachi Enock</div>
+  <div id="search-wrap">
+    <input id="search-inp" type="text" placeholder="Search…" oninput="onSearch(this.value)" onkeydown="searchKey(event)">
+    <button class="tb-btn" onclick="searchStep(-1)">↑</button>
+    <span id="search-count"></span>
+    <button class="tb-btn" onclick="searchStep(1)">↓</button>
+  </div>
+  <button class="tb-btn" onclick="setFont(0.88)">A−</button>
+  <button class="tb-btn" onclick="setFont(1)">A</button>
+  <button class="tb-btn" onclick="setFont(1.15)">A+</button>
+  <button class="tb-btn" id="tts-toggle" onclick="toggleTTS()">🔊 Read</button>
+  <button class="tb-btn" id="anno-toggle" onclick="toggleAnno()">✏️ Notes</button>
+  <button class="tb-btn" id="dark-toggle" onclick="toggleDark()">🌙</button>
+</div>
+
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Dr. Ombachi Enock</div>
+    <div class="sidebar-sub">SPPG Kenya · A Personal Manifesto · 2025</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Front Matter</div>
+    <div class="nav-item" onclick="goTo('cover')"><span class="nav-num">—</span><span class="nav-text">Cover</span></div>
+    <div class="nav-item" onclick="goTo('preface')"><span class="nav-num">—</span><span class="nav-text">Preface</span></div>
+    <div class="nav-item" onclick="goTo('intro')"><span class="nav-num">—</span><span class="nav-text">Introduction</span></div>
+    <div class="nav-item" onclick="goTo('values')"><span class="nav-num">—</span><span class="nav-text">Vision, Mission &amp; Values</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">The Eight Ills</div>
+    <div class="nav-item" onclick="goTo('ch1')"><span class="nav-num">01</span><span class="nav-text">Corruption</span></div>
+    <div class="nav-item" onclick="goTo('ch2')"><span class="nav-num">02</span><span class="nav-text">Unemployment</span></div>
+    <div class="nav-item" onclick="goTo('ch3')"><span class="nav-num">03</span><span class="nav-text">Education</span></div>
+    <div class="nav-item" onclick="goTo('ch4')"><span class="nav-num">04</span><span class="nav-text">Healthcare</span></div>
+    <div class="nav-item" onclick="goTo('ch5')"><span class="nav-num">05</span><span class="nav-text">Economic Inequality</span></div>
+    <div class="nav-item" onclick="goTo('ch6')"><span class="nav-num">06</span><span class="nav-text">Infrastructure</span></div>
+    <div class="nav-item" onclick="goTo('ch7')"><span class="nav-num">07</span><span class="nav-text">Governance</span></div>
+    <div class="nav-item" onclick="goTo('ch8')"><span class="nav-num">08</span><span class="nav-text">Global Dependence</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Resolution</div>
+    <div class="nav-item" onclick="goTo('prognosis')"><span class="nav-num">—</span><span class="nav-text">Prognosis: Two Paths</span></div>
+    <div class="nav-item" onclick="goTo('cta')"><span class="nav-num">—</span><span class="nav-text">Join Me</span></div>
+    <div class="nav-item" onclick="goTo('annex')"><span class="nav-num">—</span><span class="nav-text">Policy Matrix</span></div>
+    <div class="nav-item" onclick="goTo('refs')"><span class="nav-num">—</span><span class="nav-text">Bibliography</span></div>
+  </div>
+</nav>
+
+<div id="anno-panel">
+  <div class="anno-title">📝 My Annotations</div>
+  <div class="anno-sub">Select text in the document, then type a note in the prompt that appears.</div>
+  <div id="anno-list"><div id="anno-empty">No annotations yet.<br><br>Highlight any paragraph text to begin annotating.</div></div>
+</div>
+
+<div id="tts-bar">
+  <button class="tts-btn" onclick="ttsPrev()">⏮</button>
+  <button class="tts-btn" id="tts-play-btn" onclick="ttsPlayPause()">▶️</button>
+  <button class="tts-btn" onclick="ttsNext()">⏭</button>
+  <div id="tts-text">Ready to read…</div>
+  <select id="tts-speed" onchange="ttsSpeed(this.value)">
+    <option value="0.8">0.8×</option>
+    <option value="1" selected>1×</option>
+    <option value="1.2">1.2×</option>
+    <option value="1.5">1.5×</option>
+  </select>
+  <button class="tts-btn" onclick="ttsStop()">⏹</button>
+</div>
+
+<div id="notif"></div>
+
+<div id="main">
+<section id="cover">
+  <div class="cover-bg">
+    <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+      <defs><radialGradient id="rg1" cx="50%" cy="70%"><stop offset="0%" stop-color="#C8960C" stop-opacity=".5"/><stop offset="100%" stop-color="#0F2A45" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="400" cy="520" r="350" fill="url(#rg1)"/>
+      <circle cx="400" cy="520" r="220" fill="none" stroke="#C8960C" stroke-width=".6" stroke-opacity=".3"/>
+      <circle cx="400" cy="520" r="150" fill="none" stroke="#C8960C" stroke-width=".6" stroke-opacity=".2"/>
+      <path d="M0 480 Q200 400 400 420 Q600 440 800 380" stroke="#C8960C" stroke-opacity=".08" stroke-width="1.5" fill="none"/>
+      <ellipse cx="250" cy="468" rx="38" ry="75" fill="rgba(200,150,12,0.07)"/>
+      <ellipse cx="400" cy="428" rx="28" ry="96" fill="rgba(200,150,12,0.09)"/>
+      <ellipse cx="560" cy="458" rx="48" ry="68" fill="rgba(200,150,12,0.06)"/>
+      <circle cx="130" cy="140" r="1.5" fill="#C8960C" opacity=".5"/>
+      <circle cx="680" cy="160" r="1" fill="#C8960C" opacity=".3"/>
+      <circle cx="350" cy="60" r="2" fill="#C8960C" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="cover-content">
+    <div class="cover-tag">A Personal Manifesto &middot; Kenya &middot; 2025</div>
+    <div class="cover-title">A Declaration of<br><em>Purpose &amp; Principle</em></div>
+    <div class="cover-rule"></div>
+    <div class="cover-author">Dr. Ombachi Enock</div>
+    <div class="cover-inst">School of Politics, Policy &amp; Governance</div>
+    <div class="cover-vm">
+      <div class="vm-card"><div class="vm-label">Vision</div><div class="vm-text">A Kenya of Shared and Sustainable Prosperity</div></div>
+      <div class="vm-card"><div class="vm-label">Mission</div><div class="vm-text">To inspire informed, ethical, and innovative Kenyans</div></div>
+    </div>
+  </div>
+  <div class="cover-scroll" onclick="goTo('preface')"><span>Begin Reading</span><div class="scroll-arr"></div></div>
+</section>
+
+<section id="preface" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Preface</div>
+    <h1 class="chapter-title">A Call Forged in Conviction</h1>
+    <p class="chapter-subtitle">"The price of apathy towards public affairs is to be ruled by evil men." — Plato, <em>The Republic</em></p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#0F2A45,#1B5E7A);display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 500 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="80" r="55" fill="none" stroke="#C8960C" stroke-width="1.5" stroke-opacity=".4"/>
+        <circle cx="250" cy="80" r="38" fill="none" stroke="#C8960C" stroke-width="1" stroke-opacity=".25"/>
+        <circle cx="250" cy="80" r="22" fill="rgba(200,150,12,0.15)"/>
+        <path d="M222 80 L240 62 L258 98 L276 72" stroke="#C8960C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="80" y1="80" x2="218" y2="80" stroke="rgba(200,150,12,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="282" y1="80" x2="420" y2="80" stroke="rgba(200,150,12,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="250" y="140" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" fill="rgba(200,150,12,0.5)" font-style="italic">The Voice of Purpose</text>
+      </svg>
+    </div>
+  </div>
+  <p class="annotatable">I have had the privilege of studying the science of how living systems function — how cells communicate, how organisms heal and adapt. These lessons are not merely biological; they are profoundly political. A healthy organism redistributes resources to where they are needed most. It repairs damaged tissue. It builds immunity through memory. It does not permit a single organ to accumulate all nutrients while others starve. Kenya, as a political organism, must learn these same lessons.</p>
+  <p class="annotatable">The School of Politics, Policy and Governance (SPPG) has provided me with the rigorous intellectual scaffolding to translate lived experience into structured policy thinking. This programme has deepened my understanding of governance architecture — how institutions are built and broken, how evidence is gathered and ignored, how power is exercised and how it can be made to serve. The manifesto you hold is the culmination of that learning, fused with decades of observation and commitment.</p>
+  <p class="annotatable">I present this document to my fellow Kenyans as an opening argument in a longer conversation. It is a declaration of purpose — what I believe, what I stand for, and what I propose. It draws on the best available evidence, comparative international experience, the wisdom embedded in our constitutional framework, and the testimonies of ordinary Kenyans who have navigated systems that too often failed them.</p>
+  <div class="pull-quote"><p>Each of the eight national ills identified in this manifesto represents a systemic failure compounded over decades. Corruption is not merely dishonesty — it is a structural disease that starves public systems of the resources they need to function. The prescriptions offered here are grounded in first principles, not vague aspirations.</p><cite>— Dr. Ombachi Enock, Preface</cite></div>
+  <p class="annotatable">This manifesto is dedicated to Kenya's greatest resource — its people.</p>
+</section>
+
+<section id="intro" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Introduction</div>
+    <h1 class="chapter-title">The Kenya Moment</h1>
+    <p class="chapter-subtitle">A nation at crossroads — the weight of possibility and the urgency of choice</p>
+    <div class="chapter-illus" style="background:#0D1E30;border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 130 Q175 60 300 80 Q425 100 560 40" stroke="#C8960C" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".85"/>
+        <path d="M40 130 Q175 105 300 112 Q425 120 560 95" stroke="rgba(139,26,26,0.55)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="5,4"/>
+        <circle cx="300" cy="80" r="9" fill="rgba(200,150,12,0.3)" stroke="#C8960C" stroke-width="1.5"/>
+        <line x1="300" y1="20" x2="300" y2="70" stroke="rgba(200,150,12,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="304" y="17" font-family="'Inter',sans-serif" font-size="10" fill="rgba(200,150,12,0.65)">2025 — The Crossroads</text>
+        <text x="30" y="150" font-family="'Inter',sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">Independence 1963</text>
+        <text x="480" y="35" font-family="'Inter',sans-serif" font-size="9" fill="rgba(200,150,12,0.5)">Reform Path 2040</text>
+        <text x="480" y="92" font-family="'Inter',sans-serif" font-size="9" fill="rgba(139,26,26,0.5)">Status Quo 2040</text>
+      </svg>
+    </div>
+  </div>
+  <h2 class="section-head">1.1 The Weight of Possibility</h2>
+  <p class="annotatable">Kenya stands at a crossroads. Not for the first time in its post-independence history — but with an urgency that is qualitatively different from any before. The convergence of a global polycrisis characterised by debt distress, climate disruption, geopolitical realignment, and technological disruption has collided with Kenya's own internal contradictions: a young population that outnumbers available productive employment, public institutions chronically weakened by political interference and corruption, and an economy whose headline growth figures mask deep inequalities in wealth, opportunity, and voice.</p>
+  <p class="annotatable">Yet this moment is also pregnant with possibility. Kenya's demographic dividend — if properly harnessed — could power economic transformation of a scale not seen since the Asian tigers of the mid-twentieth century. The nation's mobile-first digital infrastructure, the depth of its entrepreneurial culture, the dynamism of its civil society, and the clarity of its constitutional vision all point toward a country with the raw materials of greatness. The question is not whether Kenya can transform. The question is whether those who hold the levers of power are willing to make the structural choices that transformation demands.</p>
+  <h2 class="section-head">1.2 A Nation Born in Promise</h2>
+  <p class="annotatable">When Kenya gained independence on 12 December 1963, Mzee Jomo Kenyatta's declaration of <em>uhuru</em> was existential — a rupture from the architecture of colonial extraction and an assertion that this land and its people would henceforth determine their own destiny. For the first decade, progress was real: GDP growth averaged above five percent annually, driven by coffee and tea exports, a growing manufacturing base, and significant investment in education. Yet the structural vulnerabilities — over-dependence on commodity prices, deepening ethnic patronage networks, the centralisation of power — were being laid down in those early years, their consequences yet to unfold.</p>
+  <h2 class="section-head">1.3 The 2010 Constitution: Unfulfilled Architecture</h2>
+  <p class="annotatable">The promulgation of Kenya's new Constitution in August 2010 represented perhaps the most significant political achievement since independence. Born of the trauma of post-election violence in 2007–2008, it enshrined a Bill of Rights including second-generation rights to education, health, water, and food; devolved substantial power to 47 counties; created independent oversight commissions; and reimagined citizenship as an active, rights-bearing status. Fifteen years after promulgation, these promises remain substantially unfulfilled. This manifesto is, in part, an argument for taking the Constitution seriously — treating its provisions not as decorative aspirations but as binding operational mandates.</p>
+  <h2 class="section-head">1.4 The Purpose of This Manifesto</h2>
+  <p class="annotatable">This manifesto combines epidemiological logic with political economy. Each national ill is treated as a public health challenge: establish the diagnosis through quantitative indicators; identify pathological mechanisms through structural and historical analysis; propose a prescription grounded in evidence of what has worked elsewhere; and specify the measurable outcomes expected from implementation. A society, like a patient, cannot be cured by wishful thinking or by treating symptoms while ignoring underlying pathology. What follows is a framework for continuous, accountable governance — a set of commitments against which performance can be measured, evaluated, and where necessary, revised.</p>
+</section>
+
+<section id="values" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Part I</div>
+    <h1 class="chapter-title">Vision, Mission &amp; Foundational Values</h1>
+    <p class="chapter-subtitle">Seven principles grounded in first-principles philosophy — each addressing a specific documented failure mode in Kenya's governance history</p>
+    <div class="chapter-illus" style="background:#0a1e30;border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 500 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(250,80)">
+          <circle r="58" fill="none" stroke="#C8960C" stroke-width="1.5" stroke-opacity=".3"/>
+          <circle r="32" fill="rgba(200,150,12,0.1)"/>
+          <circle cx="0" cy="-53" r="11" fill="rgba(200,150,12,0.22)" stroke="#C8960C" stroke-width="1"/>
+          <circle cx="50" cy="-16" r="11" fill="rgba(200,150,12,0.18)" stroke="#C8960C" stroke-width="1"/>
+          <circle cx="31" cy="43" r="11" fill="rgba(200,150,12,0.18)" stroke="#C8960C" stroke-width="1"/>
+          <circle cx="-31" cy="43" r="11" fill="rgba(200,150,12,0.18)" stroke="#C8960C" stroke-width="1"/>
+          <circle cx="-50" cy="-16" r="11" fill="rgba(200,150,12,0.18)" stroke="#C8960C" stroke-width="1"/>
+          <circle cx="-14" cy="-50" r="11" fill="rgba(200,150,12,0.12)" stroke="#C8960C" stroke-width=".6"/>
+          <circle cx="14" cy="-50" r="11" fill="rgba(200,150,12,0.12)" stroke="#C8960C" stroke-width=".6"/>
+          <text y="4" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7.5" fill="rgba(200,150,12,0.7)" font-weight="700">7 VALUES</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <h2 class="section-head">Vision: A Kenya of Shared &amp; Sustainable Prosperity</h2>
+  <p class="annotatable">Shared prosperity is a concept with deep roots in development economics — adopted by the World Bank in 2013 as growth in the per capita income of the bottom forty percent. Kenya's headline GDP growth of 4.7 percent in 2024 is creditable, but it has not translated into reductions in the Gini coefficient, which has remained stubbornly elevated at approximately 38.7. Sustainable prosperity adds a temporal and ecological dimension: prosperity built on accumulating debt or degrading ecosystem services is prosperity on borrowed time. Kenya's climate vulnerability — intensifying droughts, erratic rainfall, flooding events — makes the sustainability caveat existentially necessary.</p>
+  <h2 class="section-head">Mission: Inspiring Informed, Ethical &amp; Innovative Kenyans</h2>
+  <p class="annotatable">Sustainable national development cannot be imposed by external actors or engineered solely through institutional reform. It requires a citizenry that is informed enough to hold power to account, ethical enough to resist the normalisation of corruption and mediocrity, and innovative enough to find solutions that standard frameworks miss. Rwanda's celebrated transformation has been driven in no small part by a culture of civic responsibility. Singapore's emergence from third-world to first was built on a culture of excellence deliberately cultivated over decades.</p>
+  <h2 class="section-head">The Seven Foundational Values</h2>
+  <div class="values-grid">
+    <div class="value-card"><div class="value-icon">🏛️</div><div class="value-name">Service</div><div class="value-desc">Leadership as stewardship, not entitlement. Public office exists solely to serve the public interest — not personal advancement or patronage.</div></div>
+    <div class="value-card"><div class="value-icon">📊</div><div class="value-name">Evidence</div><div class="value-desc">Let the best available data guide policy rather than ideology, intuition, or political expediency. Kahneman's confirmation bias is the enemy of good governance.</div></div>
+    <div class="value-card"><div class="value-icon">⚖️</div><div class="value-name">Accountability</div><div class="value-desc">SMART commitments — specific, measurable, achievable, relevant, time-bound — published, monitored, and reported upon with real consequences for failure.</div></div>
+    <div class="value-card"><div class="value-icon">🤲</div><div class="value-name">Dignity</div><div class="value-desc">Every Kenyan — regardless of ethnicity, gender, income, or region — is entitled to treatment that respects their fundamental humanity (Article 28, CoK 2010).</div></div>
+    <div class="value-card"><div class="value-icon">🔍</div><div class="value-name">Transparency</div><div class="value-desc">A government that conceals decisions, expenditures, and failures severs the informational link between rulers and ruled — making accountability impossible.</div></div>
+    <div class="value-card"><div class="value-icon">🤝</div><div class="value-name">Inclusion</div><div class="value-desc">Kenya's full productive potential cannot be realised if significant portions of its population are excluded from economic, political, and social participation.</div></div>
+    <div class="value-card"><div class="value-icon">🌱</div><div class="value-name">Humility &amp; Learning</div><div class="value-desc">Treat policy as hypothesis rather than dogma. Acknowledge failure as information. Revise course when evidence demands. The most resilient systems are adaptive systems.</div></div>
+  </div>
+</section>
+<section id="ch1" class="chapter ch-corruption">
+  <div class="chapter-header">
+    <div class="chapter-num">01</div>
+    <div class="chapter-eyebrow">Chapter One &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch1)">Corruption</h1>
+    <p class="chapter-subtitle">A structural disease that starves the state and corrodes citizen trust across generations</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#1a0505,#2d0a0a);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <circle cx="300" cy="55" r="32" fill="rgba(160,40,30,0.3)" stroke="#A0281E" stroke-width="1.5"/>
+        <path d="M300 55 L160 135 M300 55 L240 135 M300 55 L300 135 M300 55 L360 135 M300 55 L440 135" stroke="rgba(160,40,30,0.4)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="160" cy="143" r="11" fill="rgba(200,150,12,0.2)" stroke="#C8960C" stroke-width="1.5"/>
+        <circle cx="240" cy="143" r="7" fill="rgba(200,150,12,0.15)" stroke="#C8960C" stroke-width="1"/>
+        <circle cx="300" cy="143" r="15" fill="rgba(200,150,12,0.35)" stroke="#C8960C" stroke-width="2"/>
+        <circle cx="360" cy="143" r="6" fill="rgba(200,150,12,0.1)" stroke="#C8960C" stroke-width="1"/>
+        <circle cx="440" cy="143" r="7" fill="rgba(200,150,12,0.12)" stroke="#C8960C" stroke-width="1"/>
+        <text x="300" y="59" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(200,150,12,0.8)" font-weight="700">KSh 400–608B ANNUAL LOSSES</text>
+        <text x="300" y="158" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(200,150,12,0.5)">resources flow to the politically connected few</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch1)">30/100</div><div class="stat-label">CPI Score 2025</div><div class="stat-src">TI, 130th of 181 nations</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch1)">KSh 22.9B</div><div class="stat-label">Assets Traced (EACC 2025)</div><div class="stat-src">KSh 3.4B recovered</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch1)">30%+</div><div class="stat-label">Bribery Incidence Rate</div><div class="stat-src">EACC Household Survey 2024</div></div>
+  </div>
+  <h2 class="section-head">Historical Roots</h2>
+  <p class="annotatable">Corruption in Kenya is not a recent phenomenon, nor is it reducible to individual moral failure. Its roots extend into the colonial encounter itself, where a racialised administration created a bifurcated civil service — one set of rules for European officials, another for African subjects — and where bribery was instrumentalised as a mechanism of social control. The Kenyatta I era (1963–1978) saw the systematic construction of patronage networks built around land allocation, import licences, and access to state credit. The Moi era institutionalised corruption at a scale that made the Goldenberg scandal — KSh 158 billion siphoned from the public treasury — not an aberration but a culmination. The Kibaki administration produced the Anglo Leasing scandal, in which fictitious security contracts worth nearly KSh 56 billion were signed with shell companies. The pattern persists into the present.</p>
+  <div class="dtw">
+    <div class="dtt">Table 1.1: East African CPI Comparative Performance, 2025</div>
+    <table><thead><tr><th>Country</th><th>CPI Score</th><th>Global Rank</th><th>5-Year Trend</th></tr></thead>
+    <tbody>
+      <tr><td>Seychelles</td><td>68</td><td>24th</td><td>Stable ↔</td></tr>
+      <tr><td>Rwanda</td><td>58</td><td>39th</td><td>Improving ↑</td></tr>
+      <tr><td>Tanzania</td><td>40</td><td>81st</td><td>Stable ↔</td></tr>
+      <tr><td><strong>Kenya</strong></td><td><strong>30</strong></td><td><strong>130th</strong></td><td><strong>Declining ↓</strong></td></tr>
+    </tbody></table>
+  </div>
+  <h2 class="section-head">How Corruption Kills Development</h2>
+  <p class="annotatable">Corruption imposes costs through four distinct channels: <strong>(1) Direct resource diversion</strong> — every shilling stolen from a procurement contract is a shilling not available for medicine, textbooks, or road maintenance. At KSh 400 billion per year, the annual corruption burden equals approximately two-thirds of Kenya's annual health budget. <strong>(2) Distorted incentives</strong> — entrepreneurs rationally allocate time to cultivating political connections rather than improving products. <strong>(3) Erosion of trust</strong> — once depleted, social trust in institutions is extraordinarily expensive to rebuild. Those who can afford private substitutes (schools, security, boreholes) exit the public system, stripping it of its most competent advocates. <strong>(4) Political contamination</strong> — when political competition is financed through the proceeds of corruption, the incentive to govern honestly is systematically undermined.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <div class="pull-quote" style="border-left-color:var(--ch2)"><p>The National Treasury launched Kenya's e-Government Procurement (e-GP) system on 7 April 2025. From 1 July 2025, all government procurement is mandated exclusively through this portal, integrated with KRA's iTax, the Business Registration Service, and IPRS to automate compliance verification and eliminate information asymmetry.</p><cite>— National Treasury Launch Statement, April 2025</cite></div>
+  <p class="annotatable">This is precisely the structural reform this manifesto prescribes. The challenge is that Parliament annulled enforcement provisions — a classic tension between regulatory ambition and political resistance to full transparency. Kenya's history with IFMIS, which digitised financial management yet in some cases facilitated fraud, is the cautionary precedent. The reform must be accompanied by enforcement teeth, restored parliamentary buy-in, and county-level rollout scorecards.</p>
+  <h2 class="section-head">Prescription: Five-Pillar Anti-Corruption Architecture</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">🏛️</span><div class="pill-text"><strong>Pillar 1 — Mandatory e-Procurement:</strong> All procurement above KSh 5M publicly accessible with contract details published within 72 hours. Parliament must restore the enforcement provisions that were annulled and extend mandatory e-GP compliance to all 47 county governments.</div></li>
+    <li class="pill-item"><span class="pill-icon">⚖️</span><div class="pill-text"><strong>Pillar 2 — EACC Independence:</strong> Transform EACC from an advisory body into a fully independent investigating and prosecuting agency through constitutional amendment, protected funding, and genuinely competitive appointment processes.</div></li>
+    <li class="pill-item"><span class="pill-icon">⏱️</span><div class="pill-text"><strong>Pillar 3 — Fast-Track Asset Forfeiture Courts:</strong> Corruption prosecutions currently take 5–15 years. Dedicated courts with expedited procedures and authority to freeze assets pending trial would dramatically shorten the consequence cycle.</div></li>
+    <li class="pill-item"><span class="pill-icon">🛡️</span><div class="pill-text"><strong>Pillar 4 — Whistleblower Protection &amp; Rewards:</strong> Financial rewards drawn from recovered assets for disclosures leading to successful prosecution. The US False Claims Act generated billions in recovered public money since its 1986 amendment.</div></li>
+    <li class="pill-item"><span class="pill-icon">📈</span><div class="pill-text"><strong>Pillar 5 — Real-Time Procurement Scorecard:</strong> Every procurement entity assessed quarterly on a public league table — e-procurement adoption rate, on-time completion %, single-source procurement frequency, and citizen satisfaction scores.</div></li>
+  </ul>
+</section>
+
+<section id="ch2" class="chapter ch-unemployment">
+  <div class="chapter-header">
+    <div class="chapter-num">02</div>
+    <div class="chapter-eyebrow">Chapter Two &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch2)">Unemployment</h1>
+    <p class="chapter-subtitle">A demographic dividend at risk of becoming a demographic burden — and the urgent choices that will decide which</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#041a08,#0a2d10);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <rect x="80" y="58" width="440" height="8" rx="4" fill="rgba(160,40,30,0.65)"/>
+        <text x="300" y="52" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(160,40,30,0.8)" font-weight="600">STRUCTURAL BARRIER — Skills Mismatch + Informal Trap</text>
+        <g id="fig"><circle cx="0" cy="0" r="7" fill="rgba(45,106,79,0.6)" stroke="#2D6A4F" stroke-width="1.5"/><line x1="0" y1="7" x2="0" y2="22" stroke="#2D6A4F" stroke-width="1.8"/><line x1="-10" y1="14" x2="10" y2="14" stroke="#2D6A4F" stroke-width="1.8"/><line x1="0" y1="22" x2="-9" y2="36" stroke="#2D6A4F" stroke-width="1.8"/><line x1="0" y1="22" x2="9" y2="36" stroke="#2D6A4F" stroke-width="1.8"/><path d="M-2 48 L0 36 L2 48" stroke="#2D6A4F" stroke-width="1.2" fill="none" stroke-opacity=".5"/></g>
+        <use href="#fig" transform="translate(100,112)"/>
+        <use href="#fig" transform="translate(160,112)"/>
+        <use href="#fig" transform="translate(220,112)"/>
+        <use href="#fig" transform="translate(280,112)"/>
+        <use href="#fig" transform="translate(340,112)"/>
+        <use href="#fig" transform="translate(400,112)"/>
+        <use href="#fig" transform="translate(460,112)"/>
+        <use href="#fig" transform="translate(520,112)"/>
+        <text x="300" y="155" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(45,106,79,0.5)">Over 1 million youth enter the labour market every year</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch2)">67%</div><div class="stat-label">Effective Youth Unemployment (15–34)</div><div class="stat-src">FKE, 2024</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch2)">20.1 yrs</div><div class="stat-label">Median Age</div><div class="stat-src">KNBS, 2024</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch2)">80–86%</div><div class="stat-label">Employment in Informal Sector</div><div class="stat-src">KNBS, 2024</div></div>
+  </div>
+  <h2 class="section-head">The Demographic Dividend: Promise and Peril</h2>
+  <p class="annotatable">With a median age of approximately 20.1 years and over sixty percent of the population below twenty-five, Kenya possesses a demographic dividend — the economic acceleration that becomes possible when a large cohort of young people enters the workforce at a time when the dependency ratio is declining. When the conditions are right, this can produce a generational surge in productivity and living standards, as it did in East Asia between the 1960s and 1990s. When conditions are not met — as in Kenya today — the demographic dividend risks becoming a demographic time bomb: a large population of young, educated, unemployed people whose frustrated aspirations express as social instability, political grievance, and in some cases, radicalisation.</p>
+  <div class="pull-quote"><p>Every year, over one million young Kenyans enter a labour market that creates fewer formal jobs than a single large factory in South Korea. This is not a crisis of the future. It is the crisis of right now.</p><cite>— Analysis based on FKE and KNBS data, 2024</cite></div>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <p class="annotatable">President Ruto launched NYOTA (National Youth Opportunities Towards Advancement) — a KSh 20 billion World Bank-co-financed initiative targeting over 800,000 youth aged 18–29 with skills training, work experience, and savings culture programmes. The Affordable Housing Programme created 428,000 jobs as of November 2025, targeting one million youth jobs by 2026 through direct TVET, NCA, and NITA linkages for Jua Kali artisans. The KSh 284.1M South Korea–Kenya Digital Media City partnership at Konza Technopolis will establish creative economy jobs, and a separate agreement will train one million youth in AI and cybersecurity.</p>
+  <h2 class="section-head">Prescription: Multi-Channel Employment Architecture</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">🎓</span><div class="pill-text"><strong>TVET Transformation:</strong> Redesign around industry-defined competency standards. National TVET Quality Agency accrediting institutions, auditing quality, and publishing comparative performance data. Build on NYOTA's platform with mandatory placement tracking at 6, 12, and 24 months post-completion.</div></li>
+    <li class="pill-item"><span class="pill-icon">🌿</span><div class="pill-text"><strong>Five High-Impact Job Clusters:</strong> (1) Digital services &amp; BPO; (2) Agribusiness value chains; (3) Green construction &amp; renewable energy installation (building on the Housing Programme); (4) Healthcare workforce expansion; (5) Creative economy — music, film, fashion, digital content.</div></li>
+    <li class="pill-item"><span class="pill-icon">💻</span><div class="pill-text"><strong>Digital Job Matching Platform:</strong> A public employment exchange integrated with TVET records, NSSF data, and employer listings — extending the Hustler Fund's digital infrastructure with skills assessment tools and career pathway guidance.</div></li>
+    <li class="pill-item"><span class="pill-icon">💡</span><div class="pill-text"><strong>Private Sector Apprenticeship Incentives:</strong> Payroll tax credit equal to 50% of trainee wage cost for first 12 months for firms employing certified apprentices, shifting the private sector from passive consumer to active co-producer of trained labour.</div></li>
+  </ul>
+</section>
+
+<section id="ch3" class="chapter ch-education">
+  <div class="chapter-header">
+    <div class="chapter-num">03</div>
+    <div class="chapter-eyebrow">Chapter Three &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch3)">A Broken Education System</h1>
+    <p class="chapter-subtitle">Access without learning — the most invisible and most consequential form of educational failure</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#010d1e,#062040);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 500 160" width="100%" height="160">
+        <path d="M250 148 Q205 112 192 75 Q180 46 250 28 Q320 46 308 75 Q295 112 250 148Z" fill="rgba(13,71,161,0.18)" stroke="#0D47A1" stroke-width="1.5"/>
+        <path d="M250 148 L208 162 L222 148 L170 170 M250 148 L292 162 L278 148 L330 170" stroke="rgba(13,71,161,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="250" cy="28" r="5" fill="rgba(200,150,12,0.4)" stroke="#C8960C" stroke-width="1"/>
+        <text x="250" y="22" text-anchor="middle" font-family="'Inter',sans-serif" font-size="8" fill="rgba(200,150,12,0.7)">Learning</text>
+        <text x="250" y="155" text-anchor="middle" font-family="'Inter',sans-serif" font-size="8" fill="rgba(13,71,161,0.6)">Opportunity</text>
+        <line x1="178" y1="95" x2="322" y2="95" stroke="rgba(200,150,12,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="140" y="91" font-family="'Inter',sans-serif" font-size="8" fill="rgba(200,150,12,0.5)">Age 10</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch3)">79%</div><div class="stat-label">Learning Poverty Rate</div><div class="stat-src">Cannot read by age 10 — World Bank 2024</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch3)">1.4M</div><div class="stat-label">KCPE Candidates 2024</div><div class="stat-src">KNEC 2024</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch3)">42:1</div><div class="stat-label">Pupil-Teacher Ratio (Public Primary)</div><div class="stat-src">MOE 2024</div></div>
+  </div>
+  <h2 class="section-head">Access Without Learning: The Fundamental Paradox</h2>
+  <p class="annotatable">Kenya's education system presents a fundamental paradox: extraordinary achievements in access coexist with a profound learning crisis. Net primary enrolment exceeds ninety percent. Secondary school enrolment has expanded dramatically. Yet roughly four out of every five children who attend primary school fail to acquire basic reading competency by the end of their third year — the benchmark that most powerfully predicts every subsequent educational and economic outcome. This quality gap is not a reflection of innate differences in student ability; it is the direct consequence of systematic differences in teacher quality, instructional time, available learning materials, and the physical condition of learning environments.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <p class="annotatable">The CBC/CBE has been rolled out through Grade 9 as of 2025, with 76,000 teachers deployed to junior secondary schools. The Ministry disbursed KSh 48 billion in capitation grants for Term 1 2025 and distributed 9.9 million textbooks to Grade 9 learners. The inaugural Kenya Junior Secondary Education Assessment (KJSEA) released its first results in December 2025, replacing KCPE with a blended grading model combining continuous assessment with a national examination. The 2025 KICD updates deepened digital literacy, sustainability, and project-based learning across all levels.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch3)"><p>The CBC/CBE reform is exactly the structural ambition this manifesto calls for. The challenge: ambition at the curriculum level is outpacing capacity at the teacher and infrastructure level. Teacher deployment is not uniform — remote and arid counties still face acute shortages. The KJSEA's blended model is progress; sustained CPD investment is the missing commitment.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Building a Learning System from First Principles</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">📖</span><div class="pill-text"><strong>Foundational Literacy First:</strong> National EGRA programme targeting all Grade 1–3 learners not yet reading fluently. Structured phonics, small-group instruction, and additional contact time have shown dramatic improvements in randomised controlled trials in Kenya, Uganda, and Tanzania.</div></li>
+    <li class="pill-item"><span class="pill-icon">👩‍🏫</span><div class="pill-text"><strong>Teacher Development Academy:</strong> 40 hours of structured, competency-based professional development per year for every primary teacher, linked to career progression and salary increments — focused on pedagogical skills, not content recall.</div></li>
+    <li class="pill-item"><span class="pill-icon">🏫</span><div class="pill-text"><strong>School Leadership Transformation:</strong> School Management Academy providing principals with structured training in instructional leadership, data use, community engagement, and financial management.</div></li>
+    <li class="pill-item"><span class="pill-icon">🌱</span><div class="pill-text"><strong>ECDE Universalisation:</strong> Universal quality ECDE for all children aged 4–5. The Perry Preschool Project shows $7–12 return per $1 invested through reduced remediation costs, increased educational attainment, and improved lifetime earnings.</div></li>
+  </ul>
+</section>
+
+<section id="ch4" class="chapter ch-healthcare">
+  <div class="chapter-header">
+    <div class="chapter-num">04</div>
+    <div class="chapter-eyebrow">Chapter Four &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch4)">Poor Healthcare</h1>
+    <p class="chapter-subtitle">Geography as destiny — the cruel lottery of where you are born in Kenya determines whether you live</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#1a0117,#2d0130);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <path d="M40 80 L100 80 L126 44 L152 116 L178 58 L204 80 L260 80 L286 32 L312 128 L338 68 L364 80 L420 80 L446 52 L472 108 L498 76 L560 80" stroke="#880E4F" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="286" cy="32" r="7" fill="rgba(136,14,79,0.4)" stroke="#880E4F" stroke-width="1.5"/>
+        <text x="286" y="24" text-anchor="middle" font-family="'Inter',sans-serif" font-size="8" fill="rgba(136,14,79,0.8)" font-weight="600">Critical Gap</text>
+        <text x="300" y="152" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(136,14,79,0.5)">24M enrolled in Taifa Care — but 58% of facilities report payment delays (RUPHA 2025)</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch4)">US$90</div><div class="stat-label">Health Spending Per Capita</div><div class="stat-src">WHO 2024 — vs $86 WHO minimum</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch4)">0.2</div><div class="stat-label">Doctors per 1,000 Population</div><div class="stat-src">vs WHO minimum of 1.0</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch4)">355</div><div class="stat-label">Maternal Deaths per 100,000</div><div class="stat-src">National avg — some counties exceed 1,000</div></div>
+  </div>
+  <h2 class="section-head">Gains and Persistent Gaps</h2>
+  <p class="annotatable">Life expectancy has risen from approximately fifty-two years in 1990 to around sixty-six years in 2023. Under-five mortality rates have declined substantially. HIV/AIDS mortality has fallen dramatically. These achievements are real. Yet the system that produced these gains is chronically under-resourced, structurally inequitable, and poorly adapted to the epidemiological challenges of the twenty-first century. Most disturbing is its geographic inequality: health outcomes in Nairobi's wealthy suburbs approach upper-middle-income country levels, while Turkana, Mandera, Wajir, and Marsabit counties approach the worst in Sub-Saharan Africa. Maternal mortality rates in some northern counties exceed 1,000 per 100,000 live births — nearly three times the national average. This is not geographic inevitability. It is the direct consequence of decades of systematic under-investment.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Taifa Care — The Most Ambitious Health Reform in a Generation</h2>
+  <p class="annotatable">As of July 2025, over 24 million Kenyans were enrolled in Taifa Care under the Social Health Authority (SHA) — more than three times the peak enrolment of the former NHIF. Service uptake is transforming lives: 4.5 million accessed free primary care; 2.2 million received specialised services including 400,000 dialysis sessions, 17,377 cancer treatments, 360,435 normal deliveries, and 116,408 caesarean sections. The fund had disbursed KSh 6.82 billion in claims to 8,336 contracted facilities, and 1.8 million informal sector workers enrolled — surpassing the entire previous NHIF informal sector enrolment by over 800,000 beneficiaries.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch4)"><p>SHA/Taifa Care is the most significant single health reform in a generation. The honest challenge: a 2025 RUPHA survey found 58% of contracted facilities received no payment for Q4 2024 claims. Only 3.33M of 19M registered have completed means-testing. Enrolment without reliable claims settlement, and ambition without funded primary care workforce expansion, risks repeating the NHIF trust deficit.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Resilient, Equitable Health System</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">🏥</span><div class="pill-text"><strong>Primary Healthcare Foundation:</strong> One Community Health Promoter per 1,000 population, with defined scope of practice, regular supervision, reliable supplies, and a sustainable incentive structure that does not depend on donor funding.</div></li>
+    <li class="pill-item"><span class="pill-icon">📱</span><div class="pill-text"><strong>Telemedicine &amp; Mobile Diagnostics:</strong> Connect community health workers at primary facilities with specialist consultation remotely — extending Kenya's limited specialist workforce to every county, leveraging the existing mobile network infrastructure.</div></li>
+    <li class="pill-item"><span class="pill-icon">🔍</span><div class="pill-text"><strong>SHIF Transparency Mandate:</strong> Quarterly publication of full benefit package statements, claims data, fund utilisation reports, and provider satisfaction surveys. An independent actuarial oversight board reviewing financial sustainability annually.</div></li>
+    <li class="pill-item"><span class="pill-icon">👨‍⚕️</span><div class="pill-text"><strong>Health Workforce Rural Distribution:</strong> Targeted rural deployment programme with salary supplements, education bursaries for children, housing allowances, and accelerated career progression for health workers serving underserved counties for 3+ years.</div></li>
+    <li class="pill-item"><span class="pill-icon">🧠</span><div class="pill-text"><strong>Mental Health Integration:</strong> ~25% of Kenyans experience mental health conditions. Integrating depression screening and basic treatment into primary healthcare — training community health workers in mental health first aid — would dramatically expand reach at low marginal cost.</div></li>
+  </ul>
+</section>
+<section id="ch5" class="chapter ch-inequality">
+  <div class="chapter-header">
+    <div class="chapter-num">05</div>
+    <div class="chapter-eyebrow">Chapter Five &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch5)">Economic Inequality</h1>
+    <p class="chapter-subtitle">Growth that does not reach the majority is not success — it is a different and more insidious kind of failure</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#1a0800,#2e1200);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 500 160" width="100%" height="160">
+        <polygon points="250,18 360,148 140,148" fill="rgba(191,54,12,0.13)" stroke="#BF360C" stroke-width="1.5"/>
+        <line x1="140" y1="95" x2="360" y2="95" stroke="rgba(191,54,12,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="160" y1="128" x2="340" y2="128" stroke="rgba(191,54,12,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="250" y="36" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(200,150,12,0.7)" font-weight="600">TOP 10% — capture most GDP growth</text>
+        <text x="250" y="110" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(191,54,12,0.6)">MIDDLE CLASS</text>
+        <text x="250" y="158" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(255,255,255,0.35)">BASE — 80–86% informal sector, no social protection</text>
+        <text x="60" y="93" font-family="'Inter',sans-serif" font-size="10" fill="rgba(200,150,12,0.5)">Gini: 38.7</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch5)">38.7</div><div class="stat-label">Gini Coefficient (2021)</div><div class="stat-src">World Bank, 2024</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch5)">&lt;20%</div><div class="stat-label">Women's Formal Land Ownership</div><div class="stat-src">KNBS, 2022</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch5)">US$19.1B</div><div class="stat-label">SME Finance Gap</div><div class="stat-src">IFC Estimate</div></div>
+  </div>
+  <h2 class="section-head">The Architecture of Exclusion</h2>
+  <p class="annotatable">Economic inequality in Kenya is not primarily the result of differential individual effort or talent. It is the product of structural conditions that systematically advantage some groups and disadvantage others in ways that compound over generations. Four structural drivers are most consequential: (1) the concentration of productive assets — particularly land — along lines of ethnicity and gender; (2) the informality trap, where 80–86% of workers are locked in low-productivity informal employment with no social protection and no pathway to the formal economy; (3) gender exclusion, where women constitute over 50% of the agricultural workforce yet access fewer than 20% of formally titled land; and (4) the education-income gradient that reproduces advantage across generations regardless of innate ability.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <p class="annotatable">The Kenyan shilling strengthened from KSh 165 to KSh 129 per dollar in 2024. Inflation fell from 9.6% in September 2022 to 2.8% in November 2024 — the lowest in nearly two decades. Foreign exchange reserves increased by US$2.4 billion to US$9.5 billion, providing five months of import cover. The Hustler Fund targeted the base-of-pyramid informal sector with micro-credit and business support. The Affordable Housing Programme cross-subsidises affordable units for lower-income households through the Housing Levy.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch5)"><p>The macroeconomic stabilisation achievements are real and should be credited. The manifesto's position is that stabilisation is necessary but not sufficient — distributional outcomes (declining Gini, income growth in the bottom two quintiles) are the ultimate measure. A government that stabilises without distributing manages inequality better rather than reducing it.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Building Shared Prosperity</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">📋</span><div class="pill-text"><strong>Formalisation Incentives:</strong> Simplified digital registration for informal businesses with no fees, combined with immediate access to micro-enterprise credit guarantee, a tax compliance grace period, and connection to Jua Kali development programmes — building on the Hustler Fund's digital infrastructure.</div></li>
+    <li class="pill-item"><span class="pill-icon">⚖️</span><div class="pill-text"><strong>Progressive Tax Reform with Social Protection Floor:</strong> Close high-net-worth tax loopholes, strengthen capital gains tax, and use the additional revenue to fund an expanded social protection floor — guaranteed minimum income package for the bottom two income quintiles.</div></li>
+    <li class="pill-item"><span class="pill-icon">👩</span><div class="pill-text"><strong>Women's Economic Inclusion Programme:</strong> Accelerate community land adjudication with women as co-owners; capitalise a women's enterprise credit guarantee fund; and invest in cooperative market linkages that enable women-led enterprises to access formal markets.</div></li>
+    <li class="pill-item"><span class="pill-icon">📊</span><div class="pill-text"><strong>Bottom Decile Income Tracking:</strong> National Treasury required to publish quarterly disaggregated income data showing trends in the bottom 10%, 20%, and 40% of the income distribution. Adopt the World Bank shared prosperity indicator as a formal national development target.</div></li>
+  </ul>
+</section>
+
+<section id="ch6" class="chapter ch-infrastructure">
+  <div class="chapter-header">
+    <div class="chapter-num">06</div>
+    <div class="chapter-eyebrow">Chapter Six &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch6)">Infrastructure &amp; Productivity</h1>
+    <p class="chapter-subtitle">Kenya's silent economic crisis — the productivity gap between what is possible and what is achieved</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#020e04,#061a08);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <circle cx="300" cy="80" r="13" fill="rgba(51,105,30,0.4)" stroke="#33691E" stroke-width="2"/>
+        <circle cx="175" cy="52" r="9" fill="rgba(51,105,30,0.25)" stroke="#33691E" stroke-width="1.5"/>
+        <circle cx="175" cy="108" r="9" fill="rgba(51,105,30,0.25)" stroke="#33691E" stroke-width="1.5"/>
+        <circle cx="425" cy="52" r="9" fill="rgba(51,105,30,0.25)" stroke="#33691E" stroke-width="1.5"/>
+        <circle cx="425" cy="108" r="9" fill="rgba(51,105,30,0.25)" stroke="#33691E" stroke-width="1.5"/>
+        <circle cx="95" cy="80" r="7" fill="rgba(51,105,30,0.2)" stroke="#33691E" stroke-width="1"/>
+        <circle cx="505" cy="80" r="7" fill="rgba(51,105,30,0.2)" stroke="#33691E" stroke-width="1"/>
+        <line x1="300" y1="67" x2="175" y2="61" stroke="rgba(51,105,30,0.5)" stroke-width="1.5"/>
+        <line x1="300" y1="93" x2="175" y2="99" stroke="rgba(51,105,30,0.5)" stroke-width="1.5"/>
+        <line x1="300" y1="67" x2="425" y2="61" stroke="rgba(51,105,30,0.5)" stroke-width="1.5"/>
+        <line x1="300" y1="93" x2="425" y2="99" stroke="rgba(51,105,30,0.5)" stroke-width="1.5"/>
+        <line x1="166" y1="80" x2="102" y2="80" stroke="rgba(51,105,30,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="434" y1="80" x2="498" y2="80" stroke="rgba(51,105,30,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="300" y="84" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7.5" fill="rgba(200,150,12,0.7)" font-weight="700">KENYA</text>
+        <text x="300" y="153" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(51,105,30,0.5)">Connected infrastructure = productive economy</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch6)">76%</div><div class="stat-label">Electricity Access (2023)</div><div class="stat-src">Sub-Saharan avg: 48%</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch6)">30–40%</div><div class="stat-label">Post-Harvest Food Loss</div><div class="stat-src">FAO estimate — cold chain failure</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch6)">US$40B+</div><div class="stat-label">Annual M-Pesa Transactions</div><div class="stat-src">Safaricom 2024</div></div>
+  </div>
+  <h2 class="section-head">The Productivity Gap</h2>
+  <p class="annotatable">Kenya faces a productivity gap: agricultural productivity averages 1.5–2.0 tonnes of maize per hectare against the 7–10 achievable under good conditions. SMEs producing goods of sufficient quality for domestic markets frequently cannot access export markets due to the inability to meet international quality standards. An estimated 30–40% of Kenya's horticultural and perishable food production is lost between farm and market due to inadequate cold storage, poor road conditions, and the absence of last-mile transport infrastructure. These post-harvest losses represent an enormous economic waste that falls disproportionately on smallholder farmers who have no individual cold storage capacity.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Konza Technopolis, Digital Superhighway &amp; eCitizen</h2>
+  <p class="annotatable">President Ruto commissioned Phase 1 of Konza Technopolis in October 2025, including Africa's first Solid Waste Collection Facility of its kind in East and Central Africa, a 120MV gas-insulated power substation, and the Silicon Savannah Intelligent Operations Centre. eCitizen now offers over 22,000 government services with 13.67 million registered users. The Affordable Housing Programme won the Certified Bronze Gigacity Award 2025 from the World Broadband Association for revising Kenya's Building Code to support gigabit connectivity. The Digital Superhighway agenda explicitly treats internet infrastructure in the same category as roads and power.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch6)"><p>Konza and the Digital Superhighway represent precisely the infrastructure-first thinking this manifesto advocates. The honest challenge: Konza is an urban innovation hub, not yet a rural productivity engine. The cold chain, feeder roads, and last-mile broadband that would transform smallholder agriculture remain the unfinished infrastructure agenda.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Infrastructure-First Productivity Agenda</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">🛣️</span><div class="pill-text"><strong>Rural Road Rehabilitation Fund:</strong> Dedicated fuel levy (ring-fenced from general revenue) to systematically rehabilitate 160,000km of rural roads connecting agricultural production areas to markets — with maintenance built into the funding model from the outset.</div></li>
+    <li class="pill-item"><span class="pill-icon">❄️</span><div class="pill-text"><strong>National Cold Chain Programme:</strong> Cold storage hubs at agricultural aggregation points; refrigerated transport accessible to cooperatives on hire-purchase; cold storage at county and urban wholesale markets — designed with agribusiness value chain actors.</div></li>
+    <li class="pill-item"><span class="pill-icon">📡</span><div class="pill-text"><strong>Universal Broadband by 2030:</strong> Legally binding target — 90% of population with mobile broadband sufficient for productive digital work by 2030, building on the Digital Superhighway's infrastructure commitment with a specific rural and arid lands access component.</div></li>
+    <li class="pill-item"><span class="pill-icon">🏆</span><div class="pill-text"><strong>SME Quality Certification Programme:</strong> Subsidised pathways to ISO 9001, HACCP, and GlobalGAP certifications for SMEs producing tradable goods — operated through KEBS in partnership with industry associations. Certification enables market access; market access drives productivity investment.</div></li>
+  </ul>
+</section>
+
+<section id="ch7" class="chapter ch-governance">
+  <div class="chapter-header">
+    <div class="chapter-num">07</div>
+    <div class="chapter-eyebrow">Chapter Seven &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch7)">Governance</h1>
+    <p class="chapter-subtitle">The meta-challenge from which all other national ills partly derive — and which reform must therefore address first</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#06020e,#10043a);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <rect x="170" y="138" width="260" height="10" rx="3" fill="rgba(49,27,146,0.4)" stroke="#311B92" stroke-width="1.5"/>
+        <rect x="196" y="78" width="7" height="60" rx="2" fill="rgba(49,27,146,0.5)" stroke="#311B92" stroke-width="1"/>
+        <rect x="250" y="65" width="7" height="73" rx="2" fill="rgba(49,27,146,0.6)" stroke="#311B92" stroke-width="1.5"/>
+        <rect x="304" y="72" width="7" height="66" rx="2" fill="rgba(49,27,146,0.5)" stroke="#311B92" stroke-width="1"/>
+        <rect x="358" y="88" width="7" height="50" rx="2" fill="rgba(49,27,146,0.4)" stroke="#311B92" stroke-width="1"/>
+        <path d="M196 75 Q220 58 253 63 Q285 67 307 70 Q336 72 360 86" stroke="rgba(200,150,12,0.22)" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+        <text x="300" y="158" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(49,27,146,0.55)">Institutions — the pillars of the republic</text>
+      </svg>
+    </div>
+  </div>
+  <div class="dtw">
+    <div class="dtt">Table 7.1: World Bank Governance Indicators — Kenya Percentile Rank, 2023</div>
+    <table><thead><tr><th>Dimension</th><th>Percentile</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>Voice &amp; Accountability</td><td>~49th</td><td>Near median — genuine political pluralism</td></tr>
+      <tr><td>Political Stability</td><td>~18th</td><td>Below average — security concerns</td></tr>
+      <tr><td>Government Effectiveness</td><td>~38th</td><td>Below median</td></tr>
+      <tr><td>Rule of Law</td><td>~40th</td><td>Below median — 60% of countries perform better</td></tr>
+      <tr><td>Control of Corruption</td><td>~30th</td><td>Significantly below median</td></tr>
+    </tbody></table>
+  </div>
+  <h2 class="section-head">The Architecture of Governance Failure</h2>
+  <p class="annotatable">Governance is the meta-challenge from which all other national ills partly derive. Without credible institutions that constrain arbitrary power, protect property rights, enforce contracts, and allocate public resources according to transparent rules, no economic policy — however well-designed — can deliver its promised outcomes. Kenya's 2017 Supreme Court nullification of the presidential election result demonstrated genuine institutional courage. Yet the judiciary faces persistent challenges: an estimated backlog of over 600,000 cases as of 2024 means that accessing formal justice frequently requires waiting 3–7 years — a delay that effectively denies justice to those who cannot afford lawyers and cannot survive without the property or income at stake.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <p class="annotatable">Executive Order No. 1 of 2025 reorganised government to optimise institutional performance and elevate public service delivery standards. County allocations increased to KSh 415 billion in 2025, up from KSh 400 billion, reflecting continued commitment to devolution funding. In his 2025 State of the Nation Address, President Ruto designated education, transport and logistics, energy, and irrigation as four national priority sectors with explicit commitments to measurable outcomes.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch7)"><p>Executive reorganisation is an enabling step, not a governance outcome. The more important questions remain: Is civil service recruitment merit-based? Are audit recommendations enforced? Are reorganised ministries publishing performance data? Institutional architecture means little without institutional culture.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Rebuilding Kenya's Governance Architecture</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">⚖️</span><div class="pill-text"><strong>Judicial Reform Package:</strong> Address independence (transparent appointments, protected funding), capacity (additional magistrates, digital case management), and access (mobile courts in rural areas, legal aid, expanded ADR mechanisms to reduce the 600,000-case backlog).</div></li>
+    <li class="pill-item"><span class="pill-icon">🏛️</span><div class="pill-text"><strong>County Accountability Infrastructure:</strong> Every county required to maintain civil society-inclusive audit committees, publish quarterly budget execution reports, and conduct annual citizen scorecards — published with full county council responses and mandatory consequence triggers for repeated non-compliance.</div></li>
+    <li class="pill-item"><span class="pill-icon">🔍</span><div class="pill-text"><strong>Independent Accountability Office:</strong> With authority to investigate executive overreach, audit constitutional mandate compliance (including the two-thirds gender rule), and refer violations to the DPP — with protected funding and a legal mandate to enforce rather than merely recommend.</div></li>
+    <li class="pill-item"><span class="pill-icon">🌐</span><div class="pill-text"><strong>Open Government Data:</strong> All government datasets published in machine-readable, open-access formats refreshed quarterly — budget execution, procurement, service delivery, environmental monitoring, and electoral data — without registration requirements, building on the eCitizen platform's digital infrastructure.</div></li>
+  </ul>
+</section>
+
+<section id="ch8" class="chapter ch-dependence">
+  <div class="chapter-header">
+    <div class="chapter-num">08</div>
+    <div class="chapter-eyebrow">Chapter Eight &middot; The Ill of</div>
+    <h1 class="chapter-title" style="color:var(--ch8)">Global Dependence</h1>
+    <p class="chapter-subtitle">True sovereignty requires the fiscal space to make choices, the productive base to sustain them, and the integrity to account for them</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#00100f,#00262a);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 500 160" width="100%" height="160">
+        <circle cx="250" cy="80" r="52" fill="rgba(0,96,100,0.13)" stroke="#006064" stroke-width="1.5"/>
+        <circle cx="250" cy="80" r="34" fill="rgba(0,96,100,0.18)" stroke="#006064" stroke-width="1"/>
+        <circle cx="250" cy="80" r="14" fill="rgba(200,150,12,0.28)" stroke="#C8960C" stroke-width="1.5"/>
+        <line x1="250" y1="28" x2="250" y2="66" stroke="rgba(139,26,26,0.55)" stroke-width="1.8"/>
+        <line x1="295" y1="48" x2="264" y2="68" stroke="rgba(139,26,26,0.45)" stroke-width="1.5"/>
+        <line x1="302" y1="80" x2="284" y2="80" stroke="rgba(139,26,26,0.45)" stroke-width="1.5"/>
+        <circle cx="250" cy="20" r="6" fill="rgba(139,26,26,0.3)" stroke="#8B1A1A" stroke-width="1"/>
+        <circle cx="304" cy="44" r="6" fill="rgba(139,26,26,0.3)" stroke="#8B1A1A" stroke-width="1"/>
+        <circle cx="310" cy="80" r="6" fill="rgba(139,26,26,0.3)" stroke="#8B1A1A" stroke-width="1"/>
+        <text x="250" y="84" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7.5" fill="rgba(200,150,12,0.8)" font-weight="700">KENYA</text>
+        <text x="250" y="153" text-anchor="middle" font-family="'Inter',sans-serif" font-size="9" fill="rgba(0,96,100,0.55)">KSh 12.3 trillion public debt — over 30% of revenue to debt service</text>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch8)">65.5%</div><div class="stat-label">Debt-to-GDP Ratio (2024)</div><div class="stat-src">CBK / World Bank</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch8)">KSh 12.3T</div><div class="stat-label">Total Public Debt (2025)</div><div class="stat-src">National Treasury</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--ch8)">&gt;30%</div><div class="stat-label">Revenue to Debt Service</div><div class="stat-src">IMF Article IV 2025</div></div>
+  </div>
+  <h2 class="section-head">The Anatomy of Dependence</h2>
+  <p class="annotatable">Global dependence constrains the policy space within which all other reforms must be implemented. A government that must dedicate more than thirty percent of its revenue to debt service has correspondingly less to spend on education, health, infrastructure, and social protection. Kenya's trade structure reveals a second dimension: the majority of its exports are primary or near-primary commodities — tea, coffee, horticultural products — whose prices are set by global markets in which Kenya is a price-taker. This structural disadvantage, documented by Prebisch and Singer in the 1950s and confirmed in the long-run data, means Kenya must export increasing volumes of primary commodities to import the same volume of manufactured goods — a treadmill of increasing physical effort for stagnant or declining purchasing power.</p>
+  <h2 class="section-head" style="color:var(--ch2)">✅ Government Steps Already Taken</h2>
+  <p class="annotatable">The Kenyan shilling strengthened from KSh 165 to KSh 129 per dollar in 2024. Inflation fell to 2.8% — the lowest in nearly two decades. Foreign exchange reserves increased by US$2.4 billion to US$9.5 billion. President Ruto's April 2025 state visit to China — the first by an African leader since FOCAC — sought better loan terms on existing Chinese bilateral debt and cooperation on green energy. Konza Technopolis is explicitly positioned as an export hub for the technology sector, and the South Korea Digital Media City partnership provides international market connectivity for Kenya's creative sector.</p>
+  <div class="pull-quote" style="border-left-color:var(--ch8)"><p>The macro stabilisation is commendable and the debt renegotiation posture with China is strategically sound. The manifesto must hold firm on the structural issue: exchange rate stability does not reduce structural trade dependence. The export value-addition agenda — processing Kenya's primary commodities before they leave the country — remains the programme gap most urgently requiring commitment.</p><cite>— Manifesto Assessment, 2025</cite></div>
+  <h2 class="section-head">Prescription: Building Strategic Autonomy</h2>
+  <ul class="pill-list">
+    <li class="pill-item"><span class="pill-icon">📋</span><div class="pill-text"><strong>Full Debt Transparency Register:</strong> Monthly publication of complete loan terms — lender, amount, rate, maturity, use of proceeds, any collateral pledged — in machine-readable format. Parliamentary approval required for all new commercial borrowing above a de minimis threshold.</div></li>
+    <li class="pill-item"><span class="pill-icon">🏭</span><div class="pill-text"><strong>Export Value-Addition Programme:</strong> Identify Kenya's ten highest-potential export categories and develop targeted interventions — infrastructure, quality standards support, trade finance — enabling Kenyan firms to capture more value before products leave the country.</div></li>
+    <li class="pill-item"><span class="pill-icon">💰</span><div class="pill-text"><strong>Domestic Revenue Mobilisation:</strong> Expand the tax base — not rates. Digitalise tax administration; extend the net to capital gains and high-value real estate; rationalise exemptions; strengthen KRA's transfer pricing capacity to prevent multinational under-taxation.</div></li>
+    <li class="pill-item"><span class="pill-icon">🌍</span><div class="pill-text"><strong>EAC and AfCFTA Integration:</strong> Champion EAC single customs territory, joint transport and energy investment, and standards harmonisation. A deeper East African market of 300M+ people would dramatically expand the market available to Kenyan manufacturers and service providers.</div></li>
+  </ul>
+</section>
+<section id="prognosis" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Prognosis</div>
+    <h1 class="chapter-title">Two Paths for Kenya</h1>
+    <p class="chapter-subtitle">Not an inevitable future — but a choice, made or unmade, by the democratic majority and those who serve it</p>
+    <div class="chapter-illus" style="background:linear-gradient(135deg,#0a0f1a,#0d2035);border-radius:16px;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 600 160" width="100%" height="160">
+        <defs>
+          <linearGradient id="good" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1B5E20"/><stop offset="100%" stop-color="#43A047"/></linearGradient>
+          <linearGradient id="bad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8B1A1A"/><stop offset="100%" stop-color="#A0281E"/></linearGradient>
+        </defs>
+        <text x="40" y="30" font-family="'Inter',sans-serif" font-size="9" fill="rgba(255,255,255,0.3)">2025</text>
+        <text x="545" y="30" font-family="'Inter',sans-serif" font-size="9" fill="rgba(255,255,255,0.3)" text-anchor="end">2040</text>
+        <path d="M60 120 Q200 115 300 100 Q400 82 540 45" stroke="url(#good)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M60 120 Q200 128 300 138 Q400 148 540 155" stroke="url(#bad)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="6,4"/>
+        <circle cx="60" cy="120" r="6" fill="rgba(200,150,12,0.5)" stroke="#C8960C" stroke-width="1.5"/>
+        <text x="64" y="116" font-family="'Inter',sans-serif" font-size="8" fill="rgba(200,150,12,0.7)">Kenya Today</text>
+        <text x="545" y="40" font-family="'Inter',sans-serif" font-size="9" fill="rgba(67,160,71,0.8)" text-anchor="end">Reform Path</text>
+        <text x="545" y="152" font-family="'Inter',sans-serif" font-size="9" fill="rgba(160,40,30,0.7)" text-anchor="end">Status Quo</text>
+        <line x1="60" y1="25" x2="60" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <line x1="540" y1="25" x2="540" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+  <div class="path-compare">
+    <div class="path-card path-bad">
+      <div class="path-label">Path One — Business as Usual</div>
+      <div class="path-head">The Slow Deterioration</div>
+      <div class="path-text">Corruption persists. Youth unemployment remains structurally unaddressed. The learning crisis deepens. Healthcare under-investment continues. Inequality widens. Productivity stagnates. Governance institutions remain weak. Debt accumulates. The youth bulge, unrealised as an economic asset, becomes a social liability — a reservoir of frustration that expresses as crime, substance abuse, political grievance, or worse.</div>
+    </div>
+    <div class="path-card path-good">
+      <div class="path-label">Path Two — The Reform Trajectory</div>
+      <div class="path-head">The Virtuous Cycle</div>
+      <div class="path-text">CPI improves from 30 toward 42. Formal employment grows above GDP. Learning poverty falls from 79% toward 60%. Universal primary care becomes reality. Gini declines measurably. Cold chain and rural roads rehabilitated. Governance indicators cross the median. Debt-to-GDP on declining trajectory. The demographic window of 2025–2040 is seized rather than squandered.</div>
+    </div>
+  </div>
+  <h2 class="section-head" style="margin-top:44px">The Governance Reform Dividend</h2>
+  <p class="annotatable">The governance reform agenda proposed in this manifesto is not merely a moral or political project — it is an economic investment with calculable returns. IMF research consistently shows that moving from the 25th to the 50th percentile on government effectiveness and control of corruption is associated with a long-run increase in GDP per capita of approximately 1.5 to 2.0 percentage points annually. For Kenya, with a current GDP of approximately US$147 billion, this improvement would translate into an additional US$2.2 to US$2.9 billion in annual economic output — enough to fund a significant expansion of healthcare, education, and infrastructure investment without additional tax revenue. Good governance is, in the truest sense, a growth strategy.</p>
+  <p class="annotatable">Furthermore, governance improvements compound. Stronger rule of law attracts more foreign direct investment. More FDI creates more formal employment. More formal employment expands the tax base. A broader tax base funds better public services. Better public services improve human capital. Improved human capital drives productivity growth. Productivity growth sustains the GDP expansion that makes continued public investment possible. The virtuous cycle of good governance and economic development is the mirror image of the vicious cycle of poor governance and development failure that Kenya has experienced in too many of its post-independence decades.</p>
+  <div class="dtw">
+    <div class="dtt">Table P.1: Projected Reform Outcomes — Kenya 2025 vs 2030 Target</div>
+    <table><thead><tr><th>Indicator</th><th>Kenya 2025</th><th>Target 2030</th><th>Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>CPI Score (0–100)</td><td>30</td><td>≥ 42</td><td>e-Procurement + EACC independence</td></tr>
+      <tr><td>Youth Unemployment (15–34)</td><td>~67%</td><td>≤ 50%</td><td>TVET reform + job cluster programme</td></tr>
+      <tr><td>Learning Poverty (%)</td><td>~79%</td><td>≤ 60%</td><td>Foundational literacy programme + ECDE</td></tr>
+      <tr><td>Taifa Care Claims Cleared</td><td>~42%</td><td>≥ 90%</td><td>SHA actuarial reform + provider finance</td></tr>
+      <tr><td>Gini Coefficient</td><td>38.7</td><td>≤ 35.0</td><td>Social protection floor + formalisation</td></tr>
+      <tr><td>Debt-to-GDP (%)</td><td>65.5%</td><td>≤ 55%</td><td>Revenue mobilisation + expenditure quality</td></tr>
+      <tr><td>Govt Effectiveness (Percentile)</td><td>38th</td><td>≥ 50th</td><td>County accountability + open data mandate</td></tr>
+    </tbody></table>
+  </div>
+  <h2 class="section-head">The Urgency of Now</h2>
+  <p class="annotatable">Kenya's recovery demands both urgency — the courage to act now — and patience — the discipline to build systems that endure beyond any single government. Urgency is about priorities and starting points: the decision to begin, to commit resources, to change direction today rather than in the next election cycle. Patience is about design: building systems whose logic is self-sustaining, whose incentives align with continued good performance, and whose accountability mechanisms survive changes in political leadership.</p>
+  <p class="annotatable">The window of opportunity is real but not unlimited. Kenya's demographic dividend will not wait indefinitely. The window of maximum potential is roughly the fifteen years between now and 2040, by which time the dependency ratio will have begun to rise again. If the structural investments needed to productively absorb this generation are made in the coming decade, the dividend can be realised. If they are deferred, the demographic window closes — and the opportunity transforms into a burden that no subsequent generation of leaders will be able to easily reverse.</p>
+  <div class="pull-quote"><p>Kenya's story is unfinished. The next chapter is ours to write — not because history is predetermined, but because the democratic majority, when it chooses to act as such, is the most powerful force in any constitutional republic.</p><cite>— Prognosis, §The Urgency of Now</cite></div>
+</section>
+
+<section id="cta" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Join Me</div>
+    <h1 class="chapter-title">A Call to National Renewal</h1>
+    <p class="chapter-subtitle">Not a promise to be fulfilled after an election — a framework for continuous, accountable governance beginning now</p>
+  </div>
+  <p class="annotatable">I have laid before you the evidence of Kenya's challenges and the architecture of its possible transformation. I have spoken plainly because the times do not permit obscurity. I have spoken with urgency because the costs of inaction are measured not in abstract statistics but in the lives of real people — the child who cannot read, the young man who cannot find work, the mother who cannot afford a consultation, the farmer whose harvest rots before it reaches the market, the citizen who cannot access justice.</p>
+  <p class="annotatable">What I ask of you now is not passive support. I ask for active, informed, and demanding partnership. A partnership that holds me — and every leader who claims to serve Kenya — to the specific, measurable commitments articulated in this manifesto. A partnership that does not dissolve after the election, but that continues through every budget cycle, every audit report, every procurement decision, and every governance choice.</p>
+  <div class="cta-section">
+    <div class="cta-title">Join me in reclaiming the promise<br>of this nation.</div>
+    <div class="cta-text">Not as a romantic gesture toward some imagined past, but as a rigorous commitment to the best version of our future. A promise that independence made and that every generation must renew: that this land and its people would govern themselves with wisdom, integrity, and compassion.</div>
+    <div class="cta-text">Join me in restoring dignity to work — where every Kenyan who brings skill and effort receives fair reward. Join me in restoring integrity to service — where public office means public obligation. Join me in restoring hope to leadership — where merit matters, institutions are trusted, and every voice counts.</div>
+    <div class="cta-text">Join me in building a Kenya that works for all — for the pastoralist in Marsabit, the smallholder in Kakamega, the teacher in Kisii, the nurse in Malindi, the entrepreneur in Kisumu, and the student in Nairobi.</div>
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:700;color:var(--gold);margin:28px 0 8px;letter-spacing:3px">ASANTE.</div>
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(14px,2.5vw,18px);color:rgba(255,255,255,0.65);margin-bottom:20px;letter-spacing:1px">THE FUTURE IS OURS TO BUILD.</div>
+    <div class="cta-sig">Dr. Ombachi Enock<br>A Declaration of Purpose and Principle<br>School of Politics, Policy &amp; Governance &middot; Kenya, 2025</div>
+  </div>
+</section>
+<section id="annex" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">Annex A</div>
+    <h1 class="chapter-title">Policy Implementation Matrix</h1>
+    <p class="chapter-subtitle">From manifesto to measurable commitment — specific agencies, timelines, milestones, and accountability triggers for every major reform</p>
+  </div>
+  <p class="annotatable">A political manifesto that offers only aspirational language cannot serve as a genuine governance framework. The reforms articulated in the preceding chapters require operational translation: specific agencies assigned primary responsibility, defined timelines, measurable outcome indicators, and explicit accountability triggers. The matrix below is structured in five columns for each reform area — the strategic objective; the primary implementing agency; the first-year milestone that signals genuine commitment rather than performative announcement; the three-year target; and the accountability mechanism through which the public can independently verify progress. This structure is modelled on the Logic Framework (Logframe) approach used in international development project management, adapted for the domestic governance context.</p>
+
+  <h2 class="section-head">A.1 Cross-Cutting Implementation Principles</h2>
+  <p class="annotatable"><strong>Sequencing:</strong> Reforms that build the enabling conditions for other reforms must be prioritised. e-Procurement is a precondition for corruption reduction across all government spending — it is a first-year priority across all agencies. EACC independence is a precondition for effective enforcement — it should be the first legislative reform tabled, not the last.</p>
+  <p class="annotatable"><strong>Adequate Resourcing:</strong> No reform commitment made in this document is credible unless accompanied by a corresponding budget line in the annual estimates. This manifesto commits to publishing, within the first ninety days of each fiscal year, a Reform Implementation Budget showing the financial provisions supporting each commitment in this matrix.</p>
+  <p class="annotatable"><strong>Adaptive Management:</strong> The matrix presented here represents the best available design given current evidence. As implementation proceeds, revisions will be required. The commitment is not to specific design choices but to the goals they are intended to achieve. Where a chosen mechanism proves ineffective, it should be revised. The matrix will be reviewed annually and updated transparently, with published explanations of any revisions made.</p>
+  <p class="annotatable"><strong>Citizens as Implementation Monitors:</strong> The public should not have to rely solely on government self-reporting to assess progress. Civil society organisations, investigative journalists, and citizen monitoring groups must have access to the data needed to independently verify progress claims. An open data commitment honoured in form but violated in practice — through formats that are technically open but practically inaccessible — is no commitment at all.</p>
+
+  <div class="dtw">
+    <div class="dtt">Table A.1: Implementation Matrix — Anti-Corruption</div>
+    <table><thead><tr><th>Objective</th><th>Primary Agency</th><th>Year 1 Milestone</th><th>Year 3 Target</th><th>Accountability Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Full e-procurement rollout</td><td>PPRA / National Treasury</td><td>e-GP platform live + county mandate enforced</td><td>80% of all procurement e-processed</td><td>EACC quarterly procurement scorecard</td></tr>
+      <tr><td>EACC constitutional independence</td><td>Parliament / EACC</td><td>Constitutional amendment bill tabled</td><td>EACC fully independent with own protected budget</td><td>Parliamentary PAC oversight</td></tr>
+      <tr><td>Asset forfeiture courts</td><td>Judiciary / AG</td><td>Court rules drafted and gazetted</td><td>30+ asset forfeiture cases per quarter resolved</td><td>Judicial Performance Directorate report</td></tr>
+      <tr><td>Whistleblower reward scheme</td><td>DPP / EACC</td><td>Legal framework enacted</td><td>50+ disclosures leading to prosecution per year</td><td>Annual EACC reward programme report</td></tr>
+      <tr><td>Real-time procurement dashboard</td><td>PPRA</td><td>Public scorecard for all MDAs operational</td><td>Single-source procurement rate below 5%</td><td>Quarterly public publication — no exemptions</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="dtw">
+    <div class="dtt">Table A.2: Implementation Matrix — Youth Employment</div>
+    <table><thead><tr><th>Objective</th><th>Primary Agency</th><th>Year 1 Milestone</th><th>Year 3 Target</th><th>Accountability Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>TVET quality overhaul</td><td>TVETA / MOE</td><td>Competency standards for 10 priority trades published</td><td>75% of TVET graduates placed within 6 months</td><td>National TVET Placement Tracker — public dashboard</td></tr>
+      <tr><td>Apprenticeship legal framework</td><td>MOL / FKE / NITA</td><td>Apprenticeship Act gazetted</td><td>10,000 formal apprenticeship contracts active</td><td>NSSF apprenticeship registration data</td></tr>
+      <tr><td>Digital job matching platform</td><td>MOICT / Ministry of Labour</td><td>Platform launched with 100,000+ profiles</td><td>1M+ active users; measurable placement outcomes</td><td>Monthly platform performance reports published</td></tr>
+      <tr><td>Five high-impact job clusters</td><td>Multiple / KEPSA</td><td>Cluster leads identified and resourced</td><td>50,000 net new formal jobs in target clusters</td><td>KNBS formal employment quarterly survey</td></tr>
+      <tr><td>Private sector apprenticeship tax credit</td><td>KRA / National Treasury</td><td>Tax credit scheme enacted in Finance Act</td><td>3,000+ firms claiming credit annually</td><td>KRA credit claim data — annual report</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="dtw">
+    <div class="dtt">Table A.3: Implementation Matrix — Education</div>
+    <table><thead><tr><th>Objective</th><th>Primary Agency</th><th>Year 1 Milestone</th><th>Year 3 Target</th><th>Accountability Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Foundational literacy programme</td><td>MOE / TSC / County Govts</td><td>EGRA baseline assessment in all 47 counties</td><td>Learning poverty reduced: 79% → 65%</td><td>Annual EGRA assessment — publicly published by county</td></tr>
+      <tr><td>Teacher Development Academy</td><td>TSC / KIE</td><td>National TDA pilot — 3 counties</td><td>100% of primary teachers: 40hrs structured CPD/year</td><td>TSC professional development register</td></tr>
+      <tr><td>School Leadership Academy</td><td>MOE / TSC</td><td>Cohort 1 of 200 principals certified</td><td>500 principals certified annually</td><td>School performance scorecards by county</td></tr>
+      <tr><td>Universal ECDE access (4–5 yr)</td><td>County Govts / MOE</td><td>ECDE infrastructure needs assessment complete</td><td>90% enrolment for all children aged 4–5</td><td>KNBS ECDE enrolment survey — annual</td></tr>
+      <tr><td>Education Investment Fund</td><td>National Treasury / MOE</td><td>EIF legal framework and governance established</td><td>KSh 15B infrastructure financed through EIF</td><td>Independent EIF board annual report</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="dtw">
+    <div class="dtt">Table A.4: Implementation Matrix — Healthcare</div>
+    <table><thead><tr><th>Objective</th><th>Primary Agency</th><th>Year 1 Milestone</th><th>Year 3 Target</th><th>Accountability Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Primary care foundation</td><td>MOH / County Govts</td><td>CHP deployment plan: 1 per 1,000 implemented</td><td>90%+ population within 30min of a CHP</td><td>Community Health Strategy annual progress report</td></tr>
+      <tr><td>Taifa Care claims clearance</td><td>SHA / MOH</td><td>Claims clearing rate above 80% by Q4 2025</td><td>≥95% of valid claims cleared within 30 days</td><td>Monthly SHA provider payment dashboard — public</td></tr>
+      <tr><td>Health workforce rural distribution</td><td>MOH / HRHIS</td><td>Rural deployment incentive scheme gazetted</td><td>50% reduction in rural health worker vacancy rate</td><td>HRIS county staffing reports — quarterly</td></tr>
+      <tr><td>Telemedicine programme</td><td>MOICT / MOH</td><td>Telemedicine pilot in 5 underserved counties</td><td>All 47 counties with functional tele-consultation</td><td>MOH digital health strategy progress report</td></tr>
+      <tr><td>Mental health integration</td><td>MOH / Counties</td><td>Mental health protocols at primary care level</td><td>1 trained mental health first aider per primary facility</td><td>MOH Mental Health Gap Action Programme report</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="dtw">
+    <div class="dtt">Table A.5: Implementation Matrix — Infrastructure, Governance &amp; Dependence</div>
+    <table><thead><tr><th>Objective</th><th>Primary Agency</th><th>Year 1 Milestone</th><th>Year 3 Target</th><th>Accountability Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Rural Road Rehabilitation Fund</td><td>KeRRA / KURA / Counties</td><td>Fund capitalised; first 5,000km tendered</td><td>20,000km rural roads rehabilitated</td><td>KeRRA road condition database — public</td></tr>
+      <tr><td>National Cold Chain Programme</td><td>MOA / AFA / Private Sector</td><td>10 cold storage hubs commissioned</td><td>Post-harvest losses below 20%</td><td>MOA post-harvest loss annual survey</td></tr>
+      <tr><td>Universal broadband 2030</td><td>CA / MOICT / USF</td><td>Universal service fund investment plan gazetted</td><td>75% mobile broadband coverage — rural areas</td><td>CA broadband coverage map — quarterly update</td></tr>
+      <tr><td>Open Government Data mandate</td><td>All MDAs / KNBS</td><td>All MDAs publishing budget execution data</td><td>Kenya Open Data Index score above 70%</td><td>Independent OGD audit — annual</td></tr>
+      <tr><td>Full debt transparency register</td><td>National Treasury</td><td>Comprehensive debt register published</td><td>100% of loans disclosed by lender, rate, maturity</td><td>Parliamentary Budget Committee quarterly review</td></tr>
+    </tbody></table>
+  </div>
+
+  <h2 class="section-head" style="margin-top:44px">Annex B: Governance Reform Comparative Scorecard</h2>
+  <p class="annotatable">Kenya is not starting from zero in its governance reform journey, and neither need it invent all of its reform approaches from scratch. The continent has produced several compelling governance transformation stories. Rwanda's anti-corruption and accountability transformation — from post-genocide institutional collapse to CPI 58 in less than three decades — was built on mandatory performance contracts (imihigo) at every level, an independent Ombudsman with enforcement authority, mandatory asset declarations, and aggressive prosecution regardless of political seniority. Botswana's resource governance model channelled diamond revenues into the Pula Fund and long-term development investment, producing one of Sub-Saharan Africa's highest per capita incomes. Ghana's democratic model has produced multiple peaceful transfers of power and an Electoral Commission respected for its independence — achieved through deliberate investment in institutional independence, legal frameworks, and civic culture.</p>
+  <div class="dtw">
+    <div class="dtt">Table B.1: Kenya vs Africa's Reform Leaders — and 2030 Targets</div>
+    <table><thead><tr><th>Governance Dimension</th><th>Kenya 2025</th><th>Rwanda</th><th>Botswana</th><th>Ghana</th><th>Kenya Target 2030</th></tr></thead>
+    <tbody>
+      <tr><td>CPI Score (0–100)</td><td>30</td><td>58</td><td>60</td><td>43</td><td>≥ 42</td></tr>
+      <tr><td>Rule of Law (Percentile)</td><td>40th</td><td>72nd</td><td>68th</td><td>55th</td><td>≥ 55th</td></tr>
+      <tr><td>Govt Effectiveness (Percentile)</td><td>38th</td><td>65th</td><td>70th</td><td>50th</td><td>≥ 50th</td></tr>
+      <tr><td>Electoral Integrity</td><td>Moderate</td><td>Moderate</td><td>High</td><td>High</td><td>High</td></tr>
+      <tr><td>Debt / GDP (%)</td><td>65.5%</td><td>62%</td><td>19%</td><td>55%</td><td>≤ 55%</td></tr>
+      <tr><td>Learning Poverty (%)</td><td>~79%</td><td>~60%</td><td>~35%</td><td>~70%</td><td>≤ 60%</td></tr>
+      <tr><td>Under-5 Mortality (per 1,000)</td><td>~39</td><td>~35</td><td>~24</td><td>~41</td><td>≤ 30</td></tr>
+    </tbody></table>
+  </div>
+  <h2 class="section-head">The Reform Dividend: What Good Governance Yields</h2>
+  <p class="annotatable">IMF research (2019) estimated that moving from the 25th to the 50th percentile on government effectiveness and control of corruption is associated with a long-run increase in GDP per capita of approximately 1.5 to 2.0 percentage points annually. For Kenya, with a current GDP of approximately US$147 billion, this would translate into an additional US$2.2 to US$2.9 billion in annual economic output — enough to fund a significant expansion of healthcare, education, and infrastructure without additional tax revenue. The virtuous cycle of good governance and economic development is the mirror image of the vicious cycle of poor governance and development failure that Kenya has experienced in too many of its post-independence decades. Good governance is, in the truest sense, a growth strategy — and the most equitable growth strategy available.</p>
+</section>
+<section id="refs" class="chapter">
+  <div class="chapter-header">
+    <div class="chapter-eyebrow">References</div>
+    <h1 class="chapter-title">Bibliography</h1>
+    <p class="chapter-subtitle">All cited works, data sources, legal instruments, and media references — in APA format</p>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section-title">Official Government &amp; Kenyan Institutional Sources</div>
+    <div class="ref-item">Central Bank of Kenya. (2025). <em>Monthly Economic Review, June 2025.</em> Nairobi: CBK. <a href="https://www.centralbank.go.ke" target="_blank" rel="noopener">centralbank.go.ke</a></div>
+    <div class="ref-item">Ethics and Anti-Corruption Commission (EACC). (2025). <em>Report of Activities and Financial Statements 2024/2025.</em> Nairobi: EACC. <a href="https://eacc.go.ke" target="_blank" rel="noopener">eacc.go.ke</a></div>
+    <div class="ref-item">Ethics and Anti-Corruption Commission (EACC). (2024). <em>National Ethics and Corruption Survey 2024.</em> EACC Research Report No. 17. Nairobi: EACC.</div>
+    <div class="ref-item">Federation of Kenya Employers (FKE). (2024). <em>Youth Employment Position Paper 2024.</em> Nairobi: FKE.</div>
+    <div class="ref-item">Kenya National Bureau of Statistics (KNBS). (2025). <em>Economic Survey 2025: Popular Version.</em> Nairobi: KNBS. <a href="https://www.knbs.or.ke" target="_blank" rel="noopener">knbs.or.ke</a></div>
+    <div class="ref-item">Kenya National Examinations Council (KNEC). (2024). <em>KCPE and KCSE 2024 Examinations Report.</em> Nairobi: KNEC.</div>
+    <div class="ref-item">Ministry of Education, Kenya. (2024). <em>Education Sector Report 2023/2024.</em> Nairobi: Ministry of Education.</div>
+    <div class="ref-item">Ministry of Education, Kenya. (2025). <em>CBC/CBE Implementation Status Report: Term 1, 2025.</em> Nairobi: Ministry of Education.</div>
+    <div class="ref-item">Ministry of Health, Kenya. (2025, July). <em>Kenya Surpasses 24 Million Enrolments in Taifa-Care under SHA.</em> Press Statement. <a href="https://www.health.go.ke" target="_blank" rel="noopener">health.go.ke</a></div>
+    <div class="ref-item">National Treasury Kenya. (2025, April 7). <em>Launch of the Electronic Government Procurement (e-GP) System.</em> Press Release. <a href="https://newsite.treasury.go.ke" target="_blank" rel="noopener">treasury.go.ke</a></div>
+    <div class="ref-item">National Treasury Kenya. (2026). <em>Draft Budget Policy Statement 2026.</em> Nairobi: National Treasury.</div>
+    <div class="ref-item">Office of the President, Kenya. (2025). <em>Executive Order No. 1 of 2025: Organization of the Government.</em> Nairobi: Government Printer.</div>
+    <div class="ref-item">President Ruto, W. (2025, November). <em>State of the Nation Address 2025.</em> Nairobi: Office of the President.</div>
+    <div class="ref-item">Social Health Authority (SHA). (2025). <em>SHA Quarterly Operations Report, Q2 2025.</em> Nairobi: SHA.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section-title">International Organisations &amp; Development Finance Institutions</div>
+    <div class="ref-item">African Development Bank (AfDB). (2024). <em>African Economic Outlook 2024.</em> Abidjan: AfDB Group. <a href="https://www.afdb.org" target="_blank" rel="noopener">afdb.org</a></div>
+    <div class="ref-item">African Union. (2001). <em>Abuja Declaration on HIV/AIDS, Tuberculosis and Other Related Infectious Diseases.</em> Addis Ababa: African Union Commission.</div>
+    <div class="ref-item">Food and Agriculture Organization (FAO). (2023). <em>The State of Food and Agriculture 2023: Revealing the True Cost of Food.</em> Rome: FAO.</div>
+    <div class="ref-item">International Monetary Fund (IMF). (2019). <em>Governance and Anti-Corruption: How to Operationalize IMF Advice.</em> Washington, D.C.: IMF Policy Paper.</div>
+    <div class="ref-item">International Monetary Fund (IMF). (2024). <em>World Economic Outlook, October 2024: Policy Pivot, Rising Threats.</em> Washington, D.C.: IMF.</div>
+    <div class="ref-item">International Monetary Fund (IMF). (2025). <em>Kenya Article IV Consultation 2025.</em> IMF Country Report. Washington, D.C.: IMF.</div>
+    <div class="ref-item">Transparency International. (2026). <em>Corruption Perceptions Index 2025.</em> Berlin: Transparency International. <a href="https://www.transparency.org/en/cpi" target="_blank" rel="noopener">transparency.org</a></div>
+    <div class="ref-item">United Nations Development Programme (UNDP). (2024). <em>Human Development Report 2023/24: Breaking the Gridlock.</em> New York: UNDP.</div>
+    <div class="ref-item">United Nations. (2015). <em>Transforming Our World: The 2030 Agenda for Sustainable Development.</em> A/RES/70/1. New York: UNGA.</div>
+    <div class="ref-item">World Bank. (2024). <em>Kenya Learning Poverty Brief 2024.</em> Washington, D.C.: World Bank Group. <a href="https://www.worldbank.org" target="_blank" rel="noopener">worldbank.org</a></div>
+    <div class="ref-item">World Bank. (2024). <em>World Development Indicators 2024.</em> Washington, D.C.: World Bank Group.</div>
+    <div class="ref-item">World Bank. (2025). <em>Kenya Economic Update, December 2025: Fiscal Pressures and Growth Prospects.</em> Washington, D.C.: World Bank.</div>
+    <div class="ref-item">World Bank. (2023). <em>Worldwide Governance Indicators 2023.</em> Washington, D.C.: World Bank Group. <a href="https://info.worldbank.org/governance/wgi/" target="_blank" rel="noopener">info.worldbank.org</a></div>
+    <div class="ref-item">World Health Organization (WHO). (2024). <em>Global Health Expenditure Database 2024.</em> Geneva: WHO. <a href="https://apps.who.int/nha/database" target="_blank" rel="noopener">apps.who.int</a></div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section-title">Academic Literature</div>
+    <div class="ref-item">Acemoglu, D., &amp; Robinson, J. A. (2012). <em>Why Nations Fail: The Origins of Power, Prosperity, and Poverty.</em> New York: Crown Publishers.</div>
+    <div class="ref-item">Chang, H.-J. (2002). <em>Kicking Away the Ladder: Development Strategy in Historical Perspective.</em> London: Anthem Press.</div>
+    <div class="ref-item">Freire, P. (1970). <em>Pedagogy of the Oppressed.</em> New York: Herder and Herder.</div>
+    <div class="ref-item">Greenleaf, R. K. (1977). <em>Servant Leadership: A Journey into the Nature of Legitimate Power and Greatness.</em> Mahwah, NJ: Paulist Press.</div>
+    <div class="ref-item">Holling, C. S., &amp; Walker, B. (2003). Resilience defined. <em>Internet Encyclopedia of Ecological Economics.</em> International Society for Ecological Economics.</div>
+    <div class="ref-item">Kahneman, D. (2011). <em>Thinking, Fast and Slow.</em> New York: Farrar, Straus and Giroux.</div>
+    <div class="ref-item">McKinsey Global Institute. (2019). <em>The Power of Parity: Advancing Women's Equality in Africa.</em> New York: McKinsey &amp; Company.</div>
+    <div class="ref-item">North, D. C. (1990). <em>Institutions, Institutional Change and Economic Performance.</em> Cambridge: Cambridge University Press.</div>
+    <div class="ref-item">Prebisch, R. (1950). <em>The Economic Development of Latin America and its Principal Problems.</em> New York: United Nations, ECLA.</div>
+    <div class="ref-item">Rawls, J. (1971). <em>A Theory of Justice.</em> Cambridge, MA: Harvard University Press.</div>
+    <div class="ref-item">Sen, A. (1999). <em>Development as Freedom.</em> New York: Alfred A. Knopf.</div>
+    <div class="ref-item">Weber, M. (1922). <em>Wirtschaft und Gesellschaft [Economy and Society].</em> Tübingen: J.C.B. Mohr.</div>
+    <div class="ref-item">World Economic Forum. (2023). <em>Future of Jobs Report 2023.</em> Geneva: WEF. <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023" target="_blank" rel="noopener">weforum.org</a></div>
+    <div class="ref-item">Yunus, M. (2007). <em>Creating a World Without Poverty: Social Business and the Future of Capitalism.</em> New York: PublicAffairs.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section-title">Kenyan Media &amp; Research Sources</div>
+    <div class="ref-item">Allafrica.com. (2026, January 6). Kenya's Debt-to-GDP Ratio to Decline Slightly to 60.6pc By 2030. <a href="https://allafrica.com/stories/202601060328.html" target="_blank" rel="noopener">allafrica.com</a></div>
+    <div class="ref-item">Capital FM Kenya. (2025, December 8). Sh22.9bn illicit wealth traced, Sh3.4bn recovered: EACC Anti-Corruption Report in numbers. Nairobi: Capital FM.</div>
+    <div class="ref-item">Cytonn Investments. (2025, July 20). <em>Review of Kenya's Public Debt 2025.</em> Nairobi: Cytonn Research. <a href="https://cytonn.com" target="_blank" rel="noopener">cytonn.com</a></div>
+    <div class="ref-item">Institute of Economic Affairs (IEA Kenya). (2025). <em>Commentary on Kenya's e-GP System Launch.</em> Nairobi: IEA Kenya.</div>
+    <div class="ref-item">Rural and Urban Private Hospitals Association (RUPHA). (2025). <em>Provider Payment Survey Q4 2024.</em> Nairobi: RUPHA.</div>
+    <div class="ref-item">Standard Media Group. (2026, February). Report ranks Kenya's corruption fight among the worst globally. Nairobi: Standard Media.</div>
+    <div class="ref-item">The Star Kenya. (2025, February 11). Kenya ranked 121 in 2024 corruption perception index. Nairobi: The Star.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section-title">Constitutional &amp; Legal Instruments</div>
+    <div class="ref-item">Republic of Kenya. (2010). <em>The Constitution of Kenya, 2010.</em> Nairobi: Government Printer.</div>
+    <div class="ref-item">Republic of Kenya. (2012). <em>Public Finance Management Act, 2012.</em> Nairobi: Government Printer.</div>
+    <div class="ref-item">Republic of Kenya. (2013). <em>County Governments Act, 2012.</em> Nairobi: Government Printer.</div>
+    <div class="ref-item">Republic of Kenya. (2016). <em>Land Laws (Amendment) Act, 2016.</em> Nairobi: Government Printer.</div>
+    <div class="ref-item">Republic of Kenya. (2022). <em>Social Health Insurance Act, 2023.</em> Nairobi: Government Printer.</div>
+  </div>
+
+  <div style="text-align:center;padding:52px 0 28px;margin-top:48px;border-top:2px solid var(--gold)">
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(16px,2.5vw,20px);color:var(--text-muted);letter-spacing:3px;margin-bottom:16px">— END OF MANIFESTO —</div>
+    <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-muted);line-height:1.8;opacity:.6">
+      A Declaration of Purpose and Principle<br>
+      Dr. Ombachi Enock &middot; School of Politics, Policy &amp; Governance &middot; Kenya, 2025<br>
+      All rights reserved. This document may be freely shared for non-commercial civic purposes with attribution.
+    </div>
+  </div>
+</section>
+
+</div><!-- /main -->
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+var sidebarOpen = window.innerWidth >= 769;
+var darkMode = false;
+var ttsActive = false;
+var ttsPlaying = false;
+var ttsParagraphs = [];
+var ttsIdx = 0;
+var ttsRate = 1;
+var searchMatches = [];
+var searchCurrent = -1;
+var annotations = [];
+var annoId = 0;
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth < 769) {
+    document.getElementById('sidebar').style.transform = 'translateX(-270px)';
+    document.getElementById('main').style.marginLeft = '0';
+    sidebarOpen = false;
+  }
+  showNotif('Welcome — use 🔊 to hear this manifesto read aloud, ✏️ to annotate');
+});
+
+// ── SIDEBAR ────────────────────────────────────────────────────────────────
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  var sb = document.getElementById('sidebar');
+  var main = document.getElementById('main');
+  if (window.innerWidth >= 769) {
+    sb.classList.toggle('collapsed', !sidebarOpen);
+    main.classList.toggle('sidebar-collapsed', !sidebarOpen);
+  } else {
+    if (sidebarOpen) {
+      sb.style.transform = 'translateX(0)';
+    } else {
+      sb.style.transform = 'translateX(-270px)';
+    }
+  }
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────────────
+function goTo(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var top = el.getBoundingClientRect().top + window.scrollY - 68;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+  if (window.innerWidth < 769 && sidebarOpen) {
+    sidebarOpen = false;
+    document.getElementById('sidebar').style.transform = 'translateX(-270px)';
+  }
+}
+
+// ── PROGRESS ───────────────────────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var pct = h > 0 ? (window.scrollY / h * 100) : 0;
+  var pf = document.getElementById('progress-fill');
+  if (pf) pf.style.width = pct.toFixed(1) + '%';
+
+  var ids = ['cover','preface','intro','values','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','prognosis','cta','annex','refs'];
+  var active = ids[0];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 80) active = id;
+  });
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    var fn = item.getAttribute('onclick') || '';
+    item.classList.toggle('active', fn.indexOf("'"+active+"'") !== -1);
+  });
+}, { passive: true });
+
+// ── DARK MODE ──────────────────────────────────────────────────────────────
+function toggleDark() {
+  darkMode = !darkMode;
+  document.body.classList.toggle('dark', darkMode);
+  document.getElementById('dark-toggle').textContent = darkMode ? '☀️' : '🌙';
+}
+
+// ── FONT SIZE ──────────────────────────────────────────────────────────────
+function setFont(scale) {
+  document.documentElement.style.setProperty('--font-scale', scale);
+  showNotif('Font size updated');
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────
+function onSearch(query) {
+  clearHL();
+  searchMatches = [];
+  searchCurrent = -1;
+  document.getElementById('search-count').textContent = '';
+  if (!query || query.length < 2) return;
+
+  var re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+  var walker = document.createTreeWalker(
+    document.getElementById('main'), NodeFilter.SHOW_TEXT, null
+  );
+  var nodes = [];
+  var node;
+  while (node = walker.nextNode()) {
+    var el = node.parentElement;
+    if (!el || el.closest('#toolbar,#sidebar,#anno-panel,#tts-bar,script,style')) continue;
+    nodes.push(node);
+  }
+  nodes.forEach(function(tn) {
+    var matches = Array.from(tn.nodeValue.matchAll(re));
+    if (!matches.length) return;
+    var frag = document.createDocumentFragment();
+    var last = 0;
+    matches.forEach(function(m) {
+      frag.appendChild(document.createTextNode(tn.nodeValue.slice(last, m.index)));
+      var sp = document.createElement('span');
+      sp.className = 'search-hl';
+      sp.textContent = m[0];
+      frag.appendChild(sp);
+      searchMatches.push(sp);
+      last = m.index + m[0].length;
+    });
+    frag.appendChild(document.createTextNode(tn.nodeValue.slice(last)));
+    tn.parentNode.replaceChild(frag, tn);
+  });
+
+  var cnt = document.getElementById('search-count');
+  cnt.textContent = searchMatches.length ? '1/' + searchMatches.length : '0';
+  if (searchMatches.length) { searchCurrent = 0; hlCurrent(); }
+}
+
+function clearHL() {
+  document.querySelectorAll('.search-hl').forEach(function(el) {
+    el.parentNode.replaceChild(document.createTextNode(el.textContent), el);
+  });
+  searchMatches = [];
+}
+
+function hlCurrent() {
+  searchMatches.forEach(function(el, i) {
+    el.classList.toggle('current', i === searchCurrent);
+  });
+  if (searchMatches[searchCurrent]) {
+    searchMatches[searchCurrent].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('search-count').textContent = (searchCurrent+1) + '/' + searchMatches.length;
+  }
+}
+
+function searchStep(dir) {
+  if (!searchMatches.length) return;
+  searchCurrent = (searchCurrent + dir + searchMatches.length) % searchMatches.length;
+  hlCurrent();
+}
+
+function searchKey(e) {
+  if (e.key === 'Enter') searchStep(e.shiftKey ? -1 : 1);
+  if (e.key === 'Escape') {
+    document.getElementById('search-inp').value = '';
+    clearHL();
+    document.getElementById('search-count').textContent = '';
+  }
+}
+
+// ── TEXT-TO-SPEECH ─────────────────────────────────────────────────────────
+function toggleTTS() {
+  ttsActive = !ttsActive;
+  var btn = document.getElementById('tts-toggle');
+  var bar = document.getElementById('tts-bar');
+  if (ttsActive) {
+    btn.classList.add('active');
+    bar.style.display = 'flex';
+    ttsParagraphs = Array.from(document.querySelectorAll('#main p'));
+    ttsIdx = 0;
+    ttsPlay();
+  } else {
+    btn.classList.remove('active');
+    bar.style.display = 'none';
+    ttsStop();
+  }
+}
+
+function ttsPlay() {
+  if (!ttsParagraphs[ttsIdx] || !window.speechSynthesis) return;
+  ttsPlaying = true;
+  document.getElementById('tts-play-btn').textContent = '⏸️';
+  var text = ttsParagraphs[ttsIdx].textContent.trim();
+  var el = ttsParagraphs[ttsIdx];
+  el.style.boxShadow = '0 0 0 2px var(--gold)';
+  el.style.borderRadius = '4px';
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('tts-text').textContent = text.slice(0, 60) + (text.length > 60 ? '…' : '');
+  window.speechSynthesis.cancel();
+  var utt = new SpeechSynthesisUtterance(text);
+  utt.rate = ttsRate;
+  utt.lang = 'en-GB';
+  utt.onend = function() {
+    el.style.boxShadow = '';
+    el.style.borderRadius = '';
+    ttsIdx++;
+    if (ttsIdx < ttsParagraphs.length && ttsPlaying) ttsPlay();
+    else {
+      ttsPlaying = false;
+      document.getElementById('tts-play-btn').textContent = '▶️';
+    }
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+function ttsPlayPause() {
+  if (!window.speechSynthesis) return;
+  if (ttsPlaying) {
+    window.speechSynthesis.pause();
+    ttsPlaying = false;
+    document.getElementById('tts-play-btn').textContent = '▶️';
+  } else {
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+      ttsPlaying = true;
+      document.getElementById('tts-play-btn').textContent = '⏸️';
+    } else {
+      ttsPlay();
+    }
+  }
+}
+
+function ttsNext() {
+  if (ttsParagraphs[ttsIdx]) {
+    ttsParagraphs[ttsIdx].style.boxShadow = '';
+    ttsParagraphs[ttsIdx].style.borderRadius = '';
+  }
+  ttsIdx = Math.min(ttsIdx + 1, ttsParagraphs.length - 1);
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (ttsPlaying) ttsPlay();
+}
+
+function ttsPrev() {
+  if (ttsParagraphs[ttsIdx]) {
+    ttsParagraphs[ttsIdx].style.boxShadow = '';
+    ttsParagraphs[ttsIdx].style.borderRadius = '';
+  }
+  ttsIdx = Math.max(ttsIdx - 1, 0);
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (ttsPlaying) ttsPlay();
+}
+
+function ttsStop() {
+  ttsPlaying = false;
+  ttsActive = false;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.getElementById('tts-play-btn').textContent = '▶️';
+  document.getElementById('tts-bar').style.display = 'none';
+  document.getElementById('tts-toggle').classList.remove('active');
+  ttsParagraphs.forEach(function(p) { p.style.boxShadow = ''; p.style.borderRadius = ''; });
+}
+
+function ttsSpeed(v) {
+  ttsRate = parseFloat(v);
+  if (ttsPlaying) { window.speechSynthesis.cancel(); ttsPlay(); }
+}
+
+// ── ANNOTATIONS ───────────────────────────────────────────────────────────
+function toggleAnno() {
+  var panel = document.getElementById('anno-panel');
+  var btn = document.getElementById('anno-toggle');
+  var isOpen = panel.style.right === '0px' || panel.classList.contains('open');
+  if (isOpen) {
+    panel.style.right = '-340px';
+    panel.classList.remove('open');
+    btn.classList.remove('active');
+  } else {
+    panel.style.right = '0px';
+    panel.classList.add('open');
+    btn.classList.add('active');
+    showNotif('Select any paragraph text, then type a note');
+  }
+}
+
+document.addEventListener('mouseup', function(e) {
+  var sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  var range = sel.getRangeAt(0);
+  var container = range.commonAncestorContainer;
+  var mainEl = document.getElementById('main');
+  if (!mainEl) return;
+  var node = container instanceof Element ? container : container.parentElement;
+  if (!mainEl.contains(node)) return;
+  var text = sel.toString().trim();
+  if (text.length < 8) { sel.removeAllRanges(); return; }
+
+  var note = prompt('Add your annotation for the selected text:', '');
+  if (!note || !note.trim()) { sel.removeAllRanges(); return; }
+
+  try {
+    var mark = document.createElement('span');
+    mark.className = 'annotation-mark';
+    mark.title = note;
+    range.surroundContents(mark);
+    sel.removeAllRanges();
+    var id = ++annoId;
+    var anno = { id: id, text: text.slice(0, 100) + (text.length > 100 ? '…' : ''), note: note, el: mark };
+    annotations.push(anno);
+    mark.addEventListener('click', function() {
+      document.getElementById('anno-panel').style.right = '0px';
+      document.getElementById('anno-panel').classList.add('open');
+      document.getElementById('anno-toggle').classList.add('active');
+      var item = document.getElementById('anno-' + id);
+      if (item) item.scrollIntoView({ behavior: 'smooth' });
+    });
+    renderAnnotations();
+    showNotif('Annotation saved (' + annotations.length + ' total)');
+  } catch(err) {
+    sel.removeAllRanges();
+    showNotif('Select a single paragraph to annotate');
+  }
+});
+
+function renderAnnotations() {
+  var list = document.getElementById('anno-list');
+  var empty = document.getElementById('anno-empty');
+  if (!annotations.length) {
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  var html = '';
+  annotations.forEach(function(a) {
+    html += '<div class="anno-item" id="anno-' + a.id + '">' +
+      '<button class="anno-del" onclick="deleteAnno(' + a.id + ')" title="Remove">&times;</button>' +
+      '<div class="anno-ref">&ldquo;' + a.text + '&rdquo;</div>' +
+      '<div class="anno-note">' + a.note + '</div>' +
+      '</div>';
+  });
+  list.innerHTML = html;
+  if (empty) empty.style.display = 'none';
+}
+
+function deleteAnno(id) {
+  var idx = annotations.findIndex(function(a) { return a.id === id; });
+  if (idx === -1) return;
+  var a = annotations[idx];
+  if (a.el && a.el.parentNode) {
+    a.el.parentNode.replaceChild(document.createTextNode(a.el.textContent), a.el);
+  }
+  annotations.splice(idx, 1);
+  renderAnnotations();
+  if (!annotations.length) {
+    var empty = document.getElementById('anno-empty');
+    if (empty) empty.style.display = 'block';
+  }
+}
+
+// ── NOTIFICATIONS ──────────────────────────────────────────────────────────
+var notifTimer;
+function showNotif(msg) {
+  var el = document.getElementById('notif');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(function() { el.classList.remove('show'); }, 2800);
+}
+
+// ── MOBILE CLOSE SIDEBAR ON OUTSIDE CLICK ─────────────────────────────────
+document.addEventListener('click', function(e) {
+  if (window.innerWidth >= 769) return;
+  var sb = document.getElementById('sidebar');
+  var btn = document.querySelector('[onclick="toggleSidebar()"]');
+  if (sidebarOpen && sb && btn && !sb.contains(e.target) && !btn.contains(e.target)) {
+    sidebarOpen = false;
+    sb.style.transform = 'translateX(-270px)';
+  }
+});
+
+// ── KEYBOARD SHORTCUTS ─────────────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === '/' ) { e.preventDefault(); document.getElementById('search-inp').focus(); }
+  if (e.key === 'd' && e.metaKey) { e.preventDefault(); toggleDark(); }
+  if (e.key === 'r' && e.altKey) { e.preventDefault(); toggleTTS(); }
+});
+</script>
+</body>
+</html>
