@@ -79,7 +79,11 @@ const LibraryProductPage = () => {
     .slice(0, 3);
   const soldOut = !product.is_digital && typeof product.stock === "number" && product.stock <= 0;
   const isFree = product.is_free || product.price_kes === 0;
-  const interactive = !!(product.html_url || product.html_file_path);
+  const interactive = !!(
+    product.html_url ||
+    product.html_file_path ||
+    product.slug === "personal-manifesto"
+  );
 
   const handleFreeDownload = async () => {
     setDownloading(true);

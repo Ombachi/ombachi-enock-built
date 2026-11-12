@@ -15,17 +15,35 @@ const LibraryViewerPage = () => {
   useEffect(() => {
     let active = true;
     (async () => {
-      const { data, error: fnError } = await supabase.functions.invoke("publication-html", {
-        body: { slug },
-      });
-      if (!active) return;
-      if (fnError || (!data?.url && !data?.html)) {
-        setError("This publication has no interactive content yet.");
+      // The manifesto is bundled as a static asset — no backend call needed.
+      if (slug === "personal-manifesto") {
+        if (!active) return;
+        setUrl("/manifesto/index.html");
+        setTitle("A Declaration of Purpose and Principle");
         return;
       }
-      if (data.html) setHtml(data.html as string);
-      else setUrl(data.url as string);
-      if (data.title) setTitle(data.title as string);
+      // Other publications: read the direct URL straight from the database.
+      const { data } = await supabase
+        .from("products")
+        .select("title, html_url, html_file_path")
+        .eq("slug", slug)
+        .maybeSingle();
+      if (!active) return;
+      const row = data as { title?: string; html_url?: string | null; html_file_path?: string | null } | null;
+      if (row?.html_url) {
+        setUrl(row.html_url);
+        if (row.title) setTitle(row.title);
+        return;
+      }
+      if (row?.html_file_path) {
+        const { data: pub } = supabase.storage.from("library-files").getPublicUrl(row.html_file_path);
+        if (pub?.publicUrl) {
+          setUrl(pub.publicUrl);
+          if (row.title) setTitle(row.title);
+          return;
+        }
+      }
+      setError("This publication has no interactive content yet.");
     })();
     return () => {
       active = false;
