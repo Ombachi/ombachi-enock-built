@@ -1,19 +1,23 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CheckCircle2, Loader2, Smartphone } from "lucide-react";
 import { toast } from "sonner";
 import { formatKES, type Product } from "@/lib/library/types";
-import { isOrderPaid, normaliseKenyanPhone, startMpesaPurchase } from "@/lib/library/mpesaCheckout";
+import { getOrderStatus, normaliseKenyanPhone, startMpesaPurchase } from "@/lib/library/mpesaCheckout";
 
 interface Props {
   product: Product;
   onPaid?: () => void;
   /** Start with the phone field visible (used in the paywall card). */
   expanded?: boolean;
+  /** Where to send the reader once payment confirms (e.g. /writing/slug). */
+  redirectTo?: string;
 }
 
 type Stage = "idle" | "form" | "sending" | "waiting" | "paid";
 
-const MpesaPayBox = ({ product, onPaid, expanded = false }: Props) => {
+const MpesaPayBox = ({ product, onPaid, expanded = false, redirectTo }: Props) => {
+  const navigate = useNavigate();
   const [stage, setStage] = useState<Stage>(expanded ? "form" : "idle");
   const [phone, setPhone] = useState("");
   const lock = useRef(false);
@@ -26,11 +30,18 @@ const MpesaPayBox = ({ product, onPaid, expanded = false }: Props) => {
     let tries = 0;
     poll.current = window.setInterval(async () => {
       tries += 1;
-      if (await isOrderPaid(orderId, token)) {
+      const status = await getOrderStatus(orderId, token);
+      if (status === "paid") {
         window.clearInterval(poll.current!);
         setStage("paid");
-        toast.success("Payment received. Enjoy the full publication.");
+        toast.success("Payment confirmed! Opening publication…");
         onPaid?.();
+        if (redirectTo) window.setTimeout(() => navigate(redirectTo), 1500);
+      } else if (status === "failed") {
+        window.clearInterval(poll.current!);
+        setStage("form");
+        lock.current = false;
+        toast.error("The M-PESA payment was cancelled or failed. Please try again.");
       } else if (tries >= 40) {
         window.clearInterval(poll.current!);
         setStage("form");
@@ -75,7 +86,7 @@ const MpesaPayBox = ({ product, onPaid, expanded = false }: Props) => {
   if (stage === "paid") {
     return (
       <p className="inline-flex items-center gap-2 text-sm font-medium text-foreground">
-        <CheckCircle2 size={16} className="text-secondary" /> Paid — unlocked on this device.
+        <CheckCircle2 size={16} className="text-secondary" /> Payment confirmed! Opening publication…
       </p>
     );
   }

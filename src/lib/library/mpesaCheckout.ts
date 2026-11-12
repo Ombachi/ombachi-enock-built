@@ -31,6 +31,20 @@ export const saveUnlock = (productId: string, u: Unlock) => {
 export const getUnlock = (productId: string): Unlock | null => readUnlocks()[productId] ?? null;
 
 /** Asks the server whether an order is paid (needs the signed access token). */
+export const getOrderStatus = async (orderId: string, token: string): Promise<string> => {
+  try {
+    const r = await fetch("/api/mpesa/status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, token }),
+    });
+    const data = await r.json().catch(() => null);
+    return data?.status ?? "unknown";
+  } catch {
+    return "unknown";
+  }
+};
+
 export const isOrderPaid = async (orderId: string, token: string): Promise<boolean> => {
   try {
     const r = await fetch("/api/mpesa/status", {

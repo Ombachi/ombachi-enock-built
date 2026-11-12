@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
+  ArrowRight,
   BookOpen,
   Download,
   Loader2,
@@ -18,6 +19,7 @@ import ProductCard from "@/components/library/ProductCard";
 import MpesaPayBox from "@/components/library/MpesaPayBox";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { getUnlock, isOrderPaid } from "@/lib/library/mpesaCheckout";
 import { loadProducts } from "@/lib/library/products";
 import { formatKES, type Product } from "@/lib/library/types";
 
@@ -25,10 +27,25 @@ const LibraryProductPage = () => {
   const { slug } = useParams();
   const [products, setProducts] = useState<Product[] | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [paid, setPaid] = useState(false);
+  const [postSlug, setPostSlug] = useState<string | null>(null);
 
   useEffect(() => {
     loadProducts().then(({ products }) => setProducts(products));
   }, []);
+
+  const current = products?.find((p) => p.slug === slug);
+  useEffect(() => {
+    setPaid(false);
+    setPostSlug(null);
+    if (!current) return;
+    if (current.post_id) {
+      supabase.from("posts").select("slug").eq("id", current.post_id).maybeSingle()
+        .then(({ data }) => setPostSlug((data as { slug?: string } | null)?.slug ?? current.slug));
+    }
+    const u = getUnlock(current.id);
+    if (u) isOrderPaid(u.orderId, u.token).then(setPaid);
+  }, [current?.id]);
 
 
   if (!products) {
@@ -197,6 +214,15 @@ const LibraryProductPage = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
+              {paid && product.post_id && (
+                <Link
+                  to={`/writing/${postSlug ?? product.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  <BookOpen size={16} /> Read Publication <ArrowRight size={16} />
+                </Link>
+              )}
+
               {interactive && (
                 <Link
                   to={`/library/${product.slug}/view`}
@@ -226,12 +252,22 @@ const LibraryProductPage = () => {
                     Download
                   </button>
                 ) : null
-              ) : (
+              ) : paid ? null : (
                 soldOut ? (
                   <span className="rounded-full border border-border px-6 py-3 text-sm text-muted-foreground">Sold out</span>
                 ) : (
                   <div className="basis-full">
-                    <MpesaPayBox product={product} />
+                    <MpesaPayBox
+                      product={product}
+                      onPaid={() => setPaid(true)}
+                      redirectTo={
+                        product.post_id
+                          ? `/writing/${postSlug ?? product.slug}`
+                          : interactive
+                            ? `/library/${product.slug}/view`
+                            : undefined
+                      }
+                    />
                   </div>
                 )
               )}
