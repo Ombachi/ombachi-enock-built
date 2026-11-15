@@ -4,7 +4,7 @@ import { isPaidProduct } from "./library/mpesaCheckout";
 
 describe("legacy urls", () => {
   it("rewrites signed storage url", () => {
-    expect(fixLegacyUrl("https://abc123.supabase.co/storage/v1/object/sign/post-images/x/a.webp?token=1")).toBe("/articles/a.webp");
+    expect(fixLegacyUrl("https://ynwpcesdspzcuemwdmnw.supabase.co/storage/v1/object/sign/post-images/x/a.webp?token=1")).toBe("/articles/a.webp");
   });
   it("rewrites inside html", () => {
     expect(fixLegacyHtml('<img src="https://ynwpcesdspzcuemwdmnw.supabase.co/storage/v1/object/public/post-images/b.png">')).toBe('<img src="/articles/b.png">');
