@@ -9,7 +9,7 @@ export const normaliseKenyanPhone = (raw: string): string | null => {
   return /^254[17]\d{8}$/.test(d) ? d : null;
 };
 
-export const isPaidProduct = (p: Pick<Product, "price_kes" | "is_free">) => p.price_kes > 0 && !p.is_free;
+export const isPaidProduct = (p: Pick<Product, "price_kes" | "is_free">) => Number(p.price_kes) > 0;
 
 const UNLOCK_KEY = "publication_unlocks";
 type Unlock = { orderId: string; token: string };

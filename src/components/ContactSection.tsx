@@ -26,9 +26,11 @@ const ContactSection = () => {
       const { error } = await supabase.from("contact_submissions").insert({ id, ...payload });
       if (error) throw error;
       // Email alerts are best-effort; a failure here must not block the visitor.
-      supabase.functions
-        .invoke("contact-submit", { body: { ...payload, subject: payload.subject ?? "", notifyOnly: true, submissionId: id } })
-        .catch((err) => console.warn("Contact notification failed:", err));
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, subject: payload.subject ?? "" }),
+      }).catch((err) => console.warn("Contact notification failed:", err));
       setForm({ name: "", email: "", subject: "", message: "" });
       navigate("/thank-you");
     } catch (err) {

@@ -40,6 +40,7 @@ const Admin = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [denied, setDenied] = useState<{ email: string; userId: string; reason: string } | null>(null);
   const [pageViews, setPageViews] = useState<PageView[]>([]);
   const [articleEngagement, setArticleEngagement] = useState<ArticleEngagement[]>([]);
   const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
@@ -53,7 +54,7 @@ const Admin = () => {
         navigate("/auth", { replace: true });
         return;
       }
-      const { data: roleData } = await supabase
+      const { data: roleData, error: roleError } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", session.user.id)
@@ -61,8 +62,12 @@ const Admin = () => {
         .maybeSingle();
 
       if (!roleData) {
-        toast({ title: "Access denied", description: "Admin only.", variant: "destructive" });
-        navigate("/", { replace: true });
+        setDenied({
+          email: session.user.email ?? "",
+          userId: session.user.id,
+          reason: roleError ? `Could not read roles: ${roleError.message}` : "This account is signed in but has no admin role.",
+        });
+        setLoading(false);
         return;
       }
       setIsAdmin(true);
@@ -203,6 +208,25 @@ const Admin = () => {
           <Loader2 className="h-8 w-8 animate-spin text-secondary" />
         </div>
       </>
+    );
+  }
+
+  if (denied) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-6">
+        <div className="max-w-xl w-full rounded-lg border border-border bg-card p-6 space-y-4">
+          <h1 className="font-serif text-2xl text-foreground">Admin access not granted</h1>
+          <p className="text-sm text-muted-foreground">{denied.reason}</p>
+          <p className="text-sm text-foreground">Signed in as <strong>{denied.email}</strong></p>
+          <p className="text-xs text-muted-foreground break-all">User ID: {denied.userId}</p>
+          <p className="text-sm text-muted-foreground">To make this account an admin, run this in your database SQL editor:</p>
+          <pre className="text-xs bg-muted text-foreground p-3 rounded overflow-x-auto whitespace-pre-wrap">{`INSERT INTO public.user_roles (user_id, role)\nVALUES ('${denied.userId}', 'admin')\nON CONFLICT DO NOTHING;`}</pre>
+          <div className="flex gap-2">
+            <Button size="sm" onClick={() => window.location.reload()}>Check again</Button>
+            <Button size="sm" variant="outline" onClick={handleSignOut}>Sign out</Button>
+          </div>
+        </div>
+      </div>
     );
   }
 

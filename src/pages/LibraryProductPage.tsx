@@ -1,3 +1,4 @@
+import { fixLegacyUrl } from "@/lib/legacyUrls";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
@@ -78,7 +79,7 @@ const LibraryProductPage = () => {
     .filter((p) => p.id !== product.id && p.category === product.category)
     .slice(0, 3);
   const soldOut = !product.is_digital && typeof product.stock === "number" && product.stock <= 0;
-  const isFree = product.is_free || product.price_kes === 0;
+  const isFree = !(Number(product.price_kes) > 0);
   const interactive = !!(
     product.html_url ||
     product.html_file_path ||
@@ -151,7 +152,7 @@ const LibraryProductPage = () => {
           <div className="flex items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-to-br from-primary/10 via-muted to-secondary/10 p-4">
             {product.cover_image_url ? (
               <img
-                src={product.cover_image_url}
+                src={fixLegacyUrl(product.cover_image_url)}
                 alt={`Cover of ${product.title}`}
                 className="block h-auto w-auto max-w-full"
               />

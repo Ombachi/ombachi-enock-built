@@ -275,7 +275,7 @@ const ProductsPanel = () => {
       price_kes: Number(draft.price_kes) || 0,
       compare_at_kes: draft.compare_at_kes ? Number(draft.compare_at_kes) : null,
       is_digital: !!draft.is_digital,
-      is_free: !!draft.is_free || Number(draft.price_kes) === 0,
+      is_free: Number(draft.price_kes) > 0 ? false : (!!draft.is_free || Number(draft.price_kes) === 0),
       stock: draft.is_digital ? null : draft.stock == null ? 0 : Number(draft.stock),
       pages: draft.pages ? Number(draft.pages) : null,
       published_year: draft.published_year ? Number(draft.published_year) : null,
@@ -552,7 +552,7 @@ const ProductsPanel = () => {
                 type="number"
                 min={0}
                 value={draft.price_kes ?? 0}
-                onChange={(e) => set("price_kes", Number(e.target.value))}
+                onChange={(e) => { const v = Number(e.target.value); setDraft((x) => ({ ...x, price_kes: v, is_free: v > 0 ? false : x.is_free })); }}
               />
             </div>
             <div>

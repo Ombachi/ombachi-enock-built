@@ -1,0 +1,20 @@
+import { describe, it, expect } from "vitest";
+import { fixLegacyUrl, fixLegacyHtml } from "./legacyUrls";
+import { isPaidProduct } from "./library/mpesaCheckout";
+
+describe("legacy urls", () => {
+  it("rewrites signed storage url", () => {
+    expect(fixLegacyUrl("https://abc123.supabase.co/storage/v1/object/sign/post-images/x/a.webp?token=1")).toBe("/articles/a.webp");
+  });
+  it("rewrites inside html", () => {
+    expect(fixLegacyHtml('<img src="https://abc.supabase.co/storage/v1/object/public/post-images/b.png">')).toBe('<img src="/articles/b.png">');
+  });
+});
+describe("pricing", () => {
+  it("price above 0 is paid even if flagged free", () => {
+    expect(isPaidProduct({ price_kes: 50, is_free: true })).toBe(true);
+  });
+  it("price 0 is free", () => {
+    expect(isPaidProduct({ price_kes: 0, is_free: false })).toBe(false);
+  });
+});

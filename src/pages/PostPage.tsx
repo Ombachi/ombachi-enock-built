@@ -1,3 +1,4 @@
+import { fixLegacyUrl, fixLegacyHtml } from "@/lib/legacyUrls";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -107,8 +108,9 @@ const PostPage = () => {
         setLoading(false);
         return;
       }
-      setPost(data as Post);
-      setProcessed(processContent(data.content));
+      const fixed = { ...data, cover_image_url: fixLegacyUrl(data.cover_image_url), content: fixLegacyHtml(data.content) };
+      setPost(fixed as Post);
+      setProcessed(processContent(fixed.content));
       // Paywall: is this essay linked to a paid publication?
       const { data: prod } = await supabase
         .from("products")

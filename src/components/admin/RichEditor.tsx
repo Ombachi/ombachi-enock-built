@@ -1,3 +1,4 @@
+import { fixLegacyHtml } from "@/lib/legacyUrls";
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -105,7 +106,7 @@ const RichEditor = ({ value, onChange }: Props) => {
       Youtube.configure({ nocookie: true, HTMLAttributes: { class: "rounded-lg my-6 aspect-video w-full" } }),
       Placeholder.configure({ placeholder: "Start writing your story…" }),
     ],
-    content: value || "",
+    content: fixLegacyHtml(value),
     editorProps: {
       attributes: {
         class: "prose prose-neutral dark:prose-invert max-w-none min-h-[420px] px-4 py-4 focus:outline-none",
@@ -117,7 +118,7 @@ const RichEditor = ({ value, onChange }: Props) => {
   // Sync external content changes (e.g. HTML import) into the editor.
   useEffect(() => {
     if (!editor) return;
-    const incoming = value || "";
+    const incoming = fixLegacyHtml(value);
     if (incoming !== editor.getHTML()) {
       editor.commands.setContent(incoming, { emitUpdate: false });
     }

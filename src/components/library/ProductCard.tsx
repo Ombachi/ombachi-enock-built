@@ -1,3 +1,4 @@
+import { fixLegacyUrl } from "@/lib/legacyUrls";
 import { Link } from "react-router-dom";
 import { BookOpen, Download, MonitorPlay, Package } from "lucide-react";
 import EditorialJacket from "@/components/library/EditorialJacket";
@@ -22,7 +23,7 @@ const ProductCard = ({ product, badgeLabel }: { product: Product; badgeLabel?: s
       <div className="relative bg-gradient-to-br from-primary/10 via-muted to-secondary/10 flex items-center justify-center p-3">
         {product.cover_image_url ? (
           <img
-            src={product.cover_image_url}
+            src={fixLegacyUrl(product.cover_image_url)}
             alt={`Cover of ${product.title}`}
             loading="lazy"
             className="block h-auto w-auto max-w-full"
@@ -33,7 +34,7 @@ const ProductCard = ({ product, badgeLabel }: { product: Product; badgeLabel?: s
         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 text-[11px] font-medium text-foreground backdrop-blur">
           <Icon size={12} /> {badgeLabel ?? (interactive ? "Interactive" : product.format)}
         </span>
-        {product.is_free && (
+        {!(Number(product.price_kes) > 0) && (
           <span className="absolute top-3 right-3 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-secondary-foreground">
             Free
           </span>
