@@ -7,7 +7,7 @@ describe("legacy urls", () => {
     expect(fixLegacyUrl("https://abc123.supabase.co/storage/v1/object/sign/post-images/x/a.webp?token=1")).toBe("/articles/a.webp");
   });
   it("rewrites inside html", () => {
-    expect(fixLegacyHtml('<img src="https://abc.supabase.co/storage/v1/object/public/post-images/b.png">')).toBe('<img src="/articles/b.png">');
+    expect(fixLegacyHtml('<img src="https://ynwpcesdspzcuemwdmnw.supabase.co/storage/v1/object/public/post-images/b.png">')).toBe('<img src="/articles/b.png">');
   });
 });
 describe("pricing", () => {
@@ -17,4 +17,11 @@ describe("pricing", () => {
   it("price 0 is free", () => {
     expect(isPaidProduct({ price_kes: 0, is_free: false })).toBe(false);
   });
+});
+
+import { fixLegacyUrl as fx } from "./legacyUrls";
+import { it as it2, expect as ex2 } from "vitest";
+it2("leaves new external storage links untouched", () => {
+  const u = "https://hctmiqucnojaidnjgaca.supabase.co/storage/v1/object/public/post-images/a.jpeg";
+  ex2(fx(u)).toBe(u);
 });
