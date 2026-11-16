@@ -18,8 +18,9 @@ import PageTransition from "@/components/PageTransition";
 import ShareButtons from "@/components/ShareButtons";
 import ProductCard from "@/components/library/ProductCard";
 import MpesaPayBox from "@/components/library/MpesaPayBox";
+import { Button } from "@/components/ui/button";
+import { hasPdf, publicationFileUrl } from "@/lib/library/documentAccess";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
 import { getUnlock, isOrderPaid } from "@/lib/library/mpesaCheckout";
 import { loadProducts } from "@/lib/library/products";
 import { formatKES, type Product } from "@/lib/library/types";
@@ -27,7 +28,6 @@ import { formatKES, type Product } from "@/lib/library/types";
 const LibraryProductPage = () => {
   const { slug } = useParams();
   const [products, setProducts] = useState<Product[] | null>(null);
-  const [downloading, setDownloading] = useState(false);
   const [paid, setPaid] = useState(false);
   const [postSlug, setPostSlug] = useState<string | null>(null);
 
@@ -80,28 +80,12 @@ const LibraryProductPage = () => {
     .slice(0, 3);
   const soldOut = !product.is_digital && typeof product.stock === "number" && product.stock <= 0;
   const isFree = !(Number(product.price_kes) > 0);
-  const interactive = !!(
+  const pdf = hasPdf(product);
+  const interactive = !pdf && !!(
     product.html_url ||
     product.html_file_path ||
     product.slug === "personal-manifesto"
   );
-
-  const handleFreeDownload = async () => {
-    setDownloading(true);
-    const { data, error } = await supabase.functions.invoke("free-download", {
-      body: { slug: product.slug },
-    });
-    setDownloading(false);
-    if (error || !data?.url) {
-      toast({
-        title: "Download unavailable",
-        description: "No file is attached to this publication yet.",
-        variant: "destructive",
-      });
-      return;
-    }
-    window.open(data.url as string, "_blank", "noopener");
-  };
 
   return (
     <PageTransition>
@@ -228,7 +212,13 @@ const LibraryProductPage = () => {
                 </Link>
               )}
 
-              {interactive && (
+              {(isFree || paid) && pdf && (
+                <Button asChild className="rounded-full">
+                  <Link to={`/library/${product.slug}/view`}><BookOpen size={16} /> Read PDF <ArrowRight size={16} /></Link>
+                </Button>
+              )}
+
+              {interactive && (isFree || paid) && (
                 <Link
                   to={`/library/${product.slug}/view`}
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
@@ -246,18 +236,15 @@ const LibraryProductPage = () => {
                 </Link>
               )}
 
-              {isFree ? (
-                product.file_path ? (
-                  <button
-                    onClick={handleFreeDownload}
-                    disabled={downloading}
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-secondary/50 hover:text-secondary disabled:opacity-60"
-                  >
-                    {downloading ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-                    Download
-                  </button>
-                ) : null
-              ) : paid ? null : (
+              {(isFree || paid) && (product.file_path || pdf) && (
+                <Button asChild variant="outline" className="rounded-full">
+                  <a href={publicationFileUrl(product, "download")} download referrerPolicy="no-referrer">
+                    <Download size={16} /> Download
+                  </a>
+                </Button>
+              )}
+
+              {!isFree && !paid && (
                 soldOut ? (
                   <span className="rounded-full border border-border px-6 py-3 text-sm text-muted-foreground">Sold out</span>
                 ) : (
@@ -268,7 +255,7 @@ const LibraryProductPage = () => {
                       redirectTo={
                         product.post_id
                           ? `/writing/${postSlug ?? product.slug}`
-                          : interactive
+                          : interactive || pdf
                             ? `/library/${product.slug}/view`
                             : undefined
                       }

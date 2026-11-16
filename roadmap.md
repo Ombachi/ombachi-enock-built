@@ -1,5 +1,11 @@
 # Roadmap — The Library (marketplace)
 
+## Current publication file delivery
+- [x] Replace missing download function with protected Vercel file delivery
+- [x] Open PDF publications in a native top-level viewer, keeping interactive HTML sandboxed
+- [x] Test file access rules and verify publication controls with test data
+- [ ] Verify an actual stored PDF on Vercel after redeployment (blocked: new routes are not deployed there yet)
+
 ## Site presentation and compliance (Sep 2026)
 - [x] Role-led hero with a single accessible H1
 - [x] Route-specific titles and descriptions
