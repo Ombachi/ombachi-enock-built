@@ -1,4 +1,3 @@
-import { supabase } from "@/integrations/supabase/client";
 import type { Product } from "./types";
 
 /** Converts 07…, 01…, 7…, +254… into 2547XXXXXXXX. Returns null if invalid. */
@@ -67,45 +66,21 @@ export const startMpesaPurchase = async (product: Product, phone: string) => {
   const msisdn = normaliseKenyanPhone(phone);
   if (!msisdn) throw new Error("Enter a valid Safaricom number (07… or 254…).");
 
-  const orderId = crypto.randomUUID();
-  const { error: oErr } = await supabase.from("orders").insert({
-    id: orderId,
-    customer_name: "M-PESA reader",
-    customer_email: `reader+${msisdn}@ombachienock.me.ke`,
-    customer_phone: msisdn,
-    subtotal_kes: product.price_kes,
-    shipping_kes: 0,
-    total_kes: product.price_kes,
-    payment_method: "mpesa",
-    status: "pending",
-  });
-  if (oErr) throw new Error("We couldn't create your order. Please try again.");
-
-  const { error: iErr } = await supabase.from("order_items").insert({
-    order_id: orderId,
-    product_id: product.id,
-    title: product.title,
-    format: product.format,
-    unit_price_kes: product.price_kes,
-    quantity: 1,
-    is_digital: product.is_digital,
-  });
-  if (iErr) throw new Error("We couldn't save your order item. Please try again.");
-
-  let res: { ok?: boolean; error?: string; message?: string; accessToken?: string } | null = null;
+  let res: { ok?: boolean; orderId?: string; error?: string; message?: string; accessToken?: string } | null = null;
   try {
     const r = await fetch("/api/mpesa/stk-push", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orderId, phone: msisdn }),
+      body: JSON.stringify({ productId: product.id, phone: msisdn }),
     });
     res = await r.json().catch(() => null);
   } catch {
     res = null;
   }
-  if (!res?.ok || !res.accessToken) {
+  if (!res?.ok || !res.accessToken || !res.orderId) {
     throw new Error(res?.error || res?.message || "M-PESA could not send the prompt. Please try again.");
   }
+  const orderId = res.orderId;
   saveUnlock(product.id, { orderId, token: res.accessToken });
   return { orderId, token: res.accessToken, message: res.message };
 };
