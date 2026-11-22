@@ -1,5 +1,11 @@
 # Roadmap — The Library (marketplace)
 
+## Social share correction (Nov 2026)
+- [x] Create and verify the 1200×630 editorial banner with the exact name and subtitle
+- [x] Synchronize homepage and static social metadata with absolute versioned image URLs
+- [x] Verify share tags and provide deployment/crawler refresh steps
+- [ ] Refresh social crawlers after Vercel deployment (blocked: deployment and the user's social-platform debugger submission)
+
 ## Current publication file delivery
 - [x] Replace missing download function with protected Vercel file delivery
 - [x] Open PDF publications in a native top-level viewer, keeping interactive HTML sandboxed
